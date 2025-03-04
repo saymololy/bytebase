@@ -7,7 +7,6 @@ import (
 	"fmt"
 	"log/slog"
 	"strings"
-	"time"
 
 	"github.com/pkg/errors"
 
@@ -123,8 +122,7 @@ func (exec *DatabaseCreateExecutor) RunOnce(ctx context.Context, driverCtx conte
 		InstanceID:    instance.ResourceID,
 		DatabaseName:  payload.DatabaseName,
 		EnvironmentID: payload.EnvironmentId,
-		SyncState:     api.NotFound,
-		SyncAt:        time.Now(),
+		Deleted:       true,
 		Metadata: &storepb.DatabaseMetadata{
 			Labels: labels,
 		},
@@ -161,11 +159,11 @@ func (exec *DatabaseCreateExecutor) RunOnce(ctx context.Context, driverCtx conte
 		return true, nil, err
 	}
 
-	syncStatus := api.OK
+	d := false
 	if _, err := exec.store.UpdateDatabase(ctx, &store.UpdateDatabaseMessage{
 		InstanceID:   instance.ResourceID,
 		DatabaseName: payload.DatabaseName,
-		SyncState:    &syncStatus,
+		Deleted:      &d,
 	}); err != nil {
 		return true, nil, err
 	}

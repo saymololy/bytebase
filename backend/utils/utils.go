@@ -152,7 +152,7 @@ func GetDatabaseMatrixFromDeploymentSchedule(schedule *storepb.Schedule, databas
 				continue
 			}
 			// Skip if the database is not found.
-			if database.SyncState == api.NotFound {
+			if database.Deleted {
 				continue
 			}
 
@@ -375,15 +375,11 @@ func RenderStatement(templateStatement string, secrets map[string]string) string
 
 // GetSecretMapFromDatabaseMessage extracts the secret map from the given database message.
 func GetSecretMapFromDatabaseMessage(databaseMessage *store.DatabaseMessage) map[string]string {
-	materials := make(map[string]string)
-	if databaseMessage.Secrets == nil || len(databaseMessage.Secrets.Items) == 0 {
-		return materials
+	secrets := make(map[string]string)
+	for _, v := range databaseMessage.Metadata.GetSecrets() {
+		secrets[v.Name] = v.Value
 	}
-
-	for _, item := range databaseMessage.Secrets.Items {
-		materials[item.Name] = item.Value
-	}
-	return materials
+	return secrets
 }
 
 // GetMatchedAndUnmatchedDatabasesInDatabaseGroup returns the matched and unmatched databases in the given database group.

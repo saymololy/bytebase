@@ -59,7 +59,6 @@
     - [DeleteInstanceRequest](#bytebase-v1-DeleteInstanceRequest)
     - [GetInstanceRequest](#bytebase-v1-GetInstanceRequest)
     - [Instance](#bytebase-v1-Instance)
-    - [InstanceOptions](#bytebase-v1-InstanceOptions)
     - [InstanceResource](#bytebase-v1-InstanceResource)
     - [KerberosConfig](#bytebase-v1-KerberosConfig)
     - [ListInstanceDatabaseRequest](#bytebase-v1-ListInstanceDatabaseRequest)
@@ -1469,22 +1468,7 @@ This value should be 4-63 characters, and valid characters are /[a-z][0-9]-/. |
 | data_sources | [DataSource](#bytebase-v1-DataSource) | repeated |  |
 | environment | [string](#string) |  | The environment resource. Format: environments/prod where prod is the environment resource ID. |
 | activation | [bool](#bool) |  |  |
-| options | [InstanceOptions](#bytebase-v1-InstanceOptions) |  |  |
 | roles | [InstanceRole](#bytebase-v1-InstanceRole) | repeated |  |
-
-
-
-
-
-
-<a name="bytebase-v1-InstanceOptions"></a>
-
-### InstanceOptions
-InstanceOptions is the option for instances.
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
 | sync_interval | [google.protobuf.Duration](#google-protobuf-Duration) |  | How often the instance is synced. |
 | maximum_connections | [int32](#int32) |  | The maximum number of connections. The default is 10 if the value is unset or zero. |
 | sync_databases | [string](#string) | repeated | Enable sync for following databases. Default empty, means sync all schemas &amp; databases. |
@@ -2128,7 +2112,7 @@ ColumnMetadata is the metadata for columns.
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | The name of the database. Format: instances/{instance}/databases/{database} {database} is the database name in the instance. |
-| sync_state | [State](#bytebase-v1-State) |  | The existence of a database on latest sync. |
+| state | [State](#bytebase-v1-State) |  | The existence of a database. |
 | successful_sync_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | The latest synchronization time. |
 | project | [string](#string) |  | The project for a database. Format: projects/{project} |
 | schema_version | [string](#string) |  | The version of database schema. |

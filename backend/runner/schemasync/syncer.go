@@ -14,6 +14,7 @@ import (
 	"github.com/pkg/errors"
 	"github.com/sourcegraph/conc/pool"
 	"google.golang.org/protobuf/encoding/protojson"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/timestamppb"
 
 	"github.com/bytebase/bytebase/backend/common"
@@ -115,7 +116,7 @@ func (s *Syncer) Run(ctx context.Context, wg *sync.WaitGroup) {
 							log.BBError(err))
 						return true
 					}
-					if s.stateCfg.InstanceOutstandingConnections.Increment(instance.ResourceID, int(instance.Options.GetMaximumConnections())) {
+					if s.stateCfg.InstanceOutstandingConnections.Increment(instance.ResourceID, int(instance.Metadata.GetMaximumConnections())) {
 						return true
 					}
 
@@ -198,7 +199,7 @@ func (s *Syncer) trySyncAll(ctx context.Context) {
 	}
 	for _, database := range databases {
 		database := database
-		if database.SyncState != api.OK {
+		if database.Deleted {
 			continue
 		}
 		instance, ok := instancesMap[database.InstanceID]
@@ -236,7 +237,7 @@ func (s *Syncer) SyncAllDatabases(ctx context.Context, instance *store.InstanceM
 
 	for _, database := range databases {
 		// Skip deleted databases.
-		if database.SyncState != api.OK {
+		if database.Deleted {
 			continue
 		}
 		s.databaseSyncMap.Store(database.String(), database)
@@ -246,7 +247,7 @@ func (s *Syncer) SyncAllDatabases(ctx context.Context, instance *store.InstanceM
 func (s *Syncer) SyncDatabasesAsync(databases []*store.DatabaseMessage) {
 	for _, database := range databases {
 		// Skip deleted databases.
-		if database.SyncState != api.OK {
+		if database.Deleted {
 			continue
 		}
 		s.databaseSyncMap.Store(database.String(), database)
@@ -287,10 +288,17 @@ func (s *Syncer) SyncInstance(ctx context.Context, instance *store.InstanceMessa
 	if err != nil {
 		return nil, nil, nil, err
 	}
+	metadata, ok := proto.Clone(instance.Metadata).(*storepb.InstanceMetadata)
+	if !ok {
+		return nil, nil, nil, errors.Errorf("failed to convert instance metadata type")
+	}
+	metadata.LastSyncTime = instanceMeta.Metadata.LastSyncTime
+	metadata.MysqlLowerCaseTableNames = instanceMeta.Metadata.MysqlLowerCaseTableNames
+	metadata.Roles = instanceMeta.Metadata.Roles
 
 	updateInstance := &store.UpdateInstanceMessage{
 		ResourceID: instance.ResourceID,
-		Metadata:   instanceMeta.Metadata,
+		Metadata:   metadata,
 	}
 	if instanceMeta.Version != instance.EngineVersion {
 		updateInstance.EngineVersion = &instanceMeta.Version
@@ -308,7 +316,7 @@ func (s *Syncer) SyncInstance(ctx context.Context, instance *store.InstanceMessa
 	var filteredDatabaseMetadatas []*storepb.DatabaseSchemaMetadata
 
 	for _, databaseMetadata := range instanceMeta.Databases {
-		if len(instance.Options.GetSyncDatabases()) > 0 && !slices.Contains(instance.Options.GetSyncDatabases(), databaseMetadata.Name) {
+		if len(instance.Metadata.GetSyncDatabases()) > 0 && !slices.Contains(instance.Metadata.GetSyncDatabases(), databaseMetadata.Name) {
 			continue
 		}
 		filteredDatabaseMetadatas = append(filteredDatabaseMetadatas, databaseMetadata)
@@ -319,8 +327,6 @@ func (s *Syncer) SyncInstance(ctx context.Context, instance *store.InstanceMessa
 			newDatabase, err := s.store.CreateDatabaseDefault(ctx, &store.DatabaseMessage{
 				InstanceID:   instance.ResourceID,
 				DatabaseName: databaseMetadata.Name,
-				DataShare:    databaseMetadata.Datashare,
-				ServiceName:  databaseMetadata.ServiceName,
 				ProjectID:    api.DefaultProjectID,
 			})
 			if err != nil {
@@ -335,11 +341,11 @@ func (s *Syncer) SyncInstance(ctx context.Context, instance *store.InstanceMessa
 	for _, database := range databases {
 		idx := slices.IndexFunc(filteredDatabaseMetadatas, func(db *storepb.DatabaseSchemaMetadata) bool { return db.Name == database.DatabaseName })
 		if idx < 0 {
-			syncStatus := api.NotFound
+			d := true
 			if _, err := s.store.UpdateDatabase(ctx, &store.UpdateDatabaseMessage{
 				InstanceID:   instance.ResourceID,
 				DatabaseName: database.DatabaseName,
-				SyncState:    &syncStatus,
+				Deleted:      &d,
 			}); err != nil {
 				return nil, nil, nil, errors.Errorf("failed to update database %q for instance %q", database.DatabaseName, instance.ResourceID)
 			}
@@ -410,17 +416,19 @@ func (s *Syncer) SyncDatabaseSchemaToHistory(ctx context.Context, database *stor
 		setClassificationAndUserCommentFromComment(databaseMetadata, dbModelConfig, classificationConfig)
 	}
 
-	syncStatus := api.OK
-	ts := time.Now()
+	d := false
+	metadata, ok := proto.Clone(database.Metadata).(*storepb.DatabaseMetadata)
+	if !ok {
+		return 0, errors.Errorf("failed to convert database metadata type")
+	}
+	metadata.LastSyncTime = timestamppb.New(time.Now())
+	metadata.BackupAvailable = s.hasBackupSchema(ctx, instance, databaseMetadata)
+	metadata.Datashare = databaseMetadata.Datashare
 	if _, err := s.store.UpdateDatabase(ctx, &store.UpdateDatabaseMessage{
 		InstanceID:   database.InstanceID,
 		DatabaseName: database.DatabaseName,
-		SyncState:    &syncStatus,
-		SyncAt:       &ts,
-		MetadataUpsert: &storepb.DatabaseMetadata{
-			LastSyncTime:    timestamppb.New(ts),
-			BackupAvailable: s.hasBackupSchema(ctx, instance, databaseMetadata),
-		},
+		Deleted:      &d,
+		Metadata:     metadata,
 	}); err != nil {
 		return 0, errors.Wrapf(err, "failed to update database %q for instance %q", database.DatabaseName, database.InstanceID)
 	}
@@ -516,17 +524,19 @@ func (s *Syncer) SyncDatabaseSchema(ctx context.Context, database *store.Databas
 		setClassificationAndUserCommentFromComment(databaseMetadata, dbModelConfig, classificationConfig)
 	}
 
-	syncStatus := api.OK
-	ts := time.Now()
+	d := false
+	metadata, ok := proto.Clone(database.Metadata).(*storepb.DatabaseMetadata)
+	if !ok {
+		return errors.Errorf("failed to convert database metadata type")
+	}
+	metadata.LastSyncTime = timestamppb.New(time.Now())
+	metadata.BackupAvailable = s.hasBackupSchema(ctx, instance, databaseMetadata)
+	metadata.Datashare = databaseMetadata.Datashare
 	if _, err := s.store.UpdateDatabase(ctx, &store.UpdateDatabaseMessage{
 		InstanceID:   database.InstanceID,
 		DatabaseName: database.DatabaseName,
-		SyncState:    &syncStatus,
-		SyncAt:       &ts,
-		MetadataUpsert: &storepb.DatabaseMetadata{
-			LastSyncTime:    timestamppb.New(ts),
-			BackupAvailable: s.hasBackupSchema(ctx, instance, databaseMetadata),
-		},
+		Deleted:      &d,
+		Metadata:     metadata,
 	}); err != nil {
 		return errors.Wrapf(err, "failed to update database %q for instance %q", database.DatabaseName, database.InstanceID)
 	}
@@ -730,13 +740,13 @@ func getOrDefaultSyncInterval(instance *store.InstanceMessage) time.Duration {
 	if !instance.Activation {
 		return defaultSyncInterval
 	}
-	if !instance.Options.SyncInterval.IsValid() {
+	if !instance.Metadata.GetSyncInterval().IsValid() {
 		return defaultSyncInterval
 	}
-	if instance.Options.SyncInterval.GetSeconds() == 0 && instance.Options.SyncInterval.GetNanos() == 0 {
+	if instance.Metadata.GetSyncInterval().GetSeconds() == 0 && instance.Metadata.GetSyncInterval().GetNanos() == 0 {
 		return defaultSyncInterval
 	}
-	return instance.Options.SyncInterval.AsDuration()
+	return instance.Metadata.GetSyncInterval().AsDuration()
 }
 
 func getOrDefaultLastSyncTime(t *timestamppb.Timestamp) time.Time {

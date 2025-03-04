@@ -122,7 +122,6 @@ CREATE TABLE instance (
     resource_id text NOT NULL,
     -- activation should set to be TRUE if users assign license to this instance.
     activation boolean NOT NULL DEFAULT false,
-    options jsonb NOT NULL DEFAULT '{}',
     metadata jsonb NOT NULL DEFAULT '{}'
 );
 
@@ -134,17 +133,11 @@ ALTER SEQUENCE instance_id_seq RESTART WITH 101;
 -- data is synced periodically from the instance
 CREATE TABLE db (
     id serial PRIMARY KEY,
+    deleted boolean NOT NULL DEFAULT FALSE,
     project text NOT NULL REFERENCES project(resource_id),
     instance text NOT NULL REFERENCES instance(resource_id),
     name text NOT NULL,
     environment text REFERENCES environment(resource_id),
-    sync_status text NOT NULL CHECK (sync_status IN ('OK', 'NOT_FOUND')),
-    sync_at timestamptz NOT NULL DEFAULT now(),
-    schema_version text NOT NULL,
-    secrets jsonb NOT NULL DEFAULT '{}',
-    datashare boolean NOT NULL DEFAULT FALSE,
-    -- service_name is the Oracle specific field.
-    service_name text NOT NULL DEFAULT '',
     metadata jsonb NOT NULL DEFAULT '{}'
 );
 

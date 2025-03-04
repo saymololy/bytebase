@@ -9,6 +9,7 @@ import (
 	"go.uber.org/multierr"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
+	"google.golang.org/protobuf/proto"
 	"google.golang.org/protobuf/types/known/emptypb"
 
 	"github.com/bytebase/bytebase/backend/common"
@@ -262,35 +263,37 @@ func (s *InstanceService) UpdateInstance(ctx context.Context, request *v1pb.Upda
 		return nil, status.Errorf(codes.NotFound, "instance %q has been deleted", request.Instance.Name)
 	}
 
+	metadata, ok := proto.Clone(instance.Metadata).(*storepb.InstanceMetadata)
+	if !ok {
+		return nil, status.Errorf(codes.Internal, "failed to convert instance metadata type")
+	}
 	patch := &store.UpdateInstanceMessage{
 		ResourceID: instance.ResourceID,
+		Metadata:   metadata,
 	}
 	for _, path := range request.UpdateMask.Paths {
 		switch path {
 		case "title":
 			patch.Title = &request.Instance.Title
 		case "environment":
-			patch.UpdateEnvironmentID = true
-			if request.Instance.Environment != "" {
-				environmentID, err := common.GetEnvironmentID(request.Instance.Environment)
-				if err != nil {
-					return nil, status.Error(codes.InvalidArgument, err.Error())
-				}
-				environment, err := s.store.GetEnvironmentV2(ctx, &store.FindEnvironmentMessage{
-					ResourceID:  &environmentID,
-					ShowDeleted: true,
-				})
-				if err != nil {
-					return nil, status.Error(codes.Internal, err.Error())
-				}
-				if environment == nil {
-					return nil, status.Errorf(codes.NotFound, "environment %q not found", environmentID)
-				}
-				if environment.Deleted {
-					return nil, status.Errorf(codes.FailedPrecondition, "environment %q is deleted", environmentID)
-				}
-				patch.EnvironmentID = environment.ResourceID
+			environmentID, err := common.GetEnvironmentID(request.Instance.Environment)
+			if err != nil {
+				return nil, status.Error(codes.InvalidArgument, err.Error())
 			}
+			environment, err := s.store.GetEnvironmentV2(ctx, &store.FindEnvironmentMessage{
+				ResourceID:  &environmentID,
+				ShowDeleted: true,
+			})
+			if err != nil {
+				return nil, status.Error(codes.Internal, err.Error())
+			}
+			if environment == nil {
+				return nil, status.Errorf(codes.NotFound, "environment %q not found", environmentID)
+			}
+			if environment.Deleted {
+				return nil, status.Errorf(codes.FailedPrecondition, "environment %q is deleted", environmentID)
+			}
+			patch.EnvironmentID = &environment.ResourceID
 		case "external_link":
 			patch.ExternalLink = &request.Instance.ExternalLink
 		case "data_sources":
@@ -306,30 +309,21 @@ func (s *InstanceService) UpdateInstance(ctx context.Context, request *v1pb.Upda
 			if request.Instance.Activation != instance.Activation {
 				patch.Activation = &request.Instance.Activation
 			}
-		case "options.sync_interval":
+		case "sync_interval":
 			if err := s.licenseService.IsFeatureEnabledForInstance(api.FeatureCustomInstanceSynchronization, instance); err != nil {
 				return nil, status.Error(codes.PermissionDenied, err.Error())
 			}
-			if patch.OptionsUpsert == nil {
-				patch.OptionsUpsert = instance.Options
-			}
-			patch.OptionsUpsert.SyncInterval = request.Instance.Options.GetSyncInterval()
-		case "options.maximum_connections":
+			patch.Metadata.SyncInterval = request.Instance.SyncInterval
+		case "maximum_connections":
 			if err := s.licenseService.IsFeatureEnabledForInstance(api.FeatureCustomInstanceSynchronization, instance); err != nil {
 				return nil, status.Error(codes.PermissionDenied, err.Error())
 			}
-			if patch.OptionsUpsert == nil {
-				patch.OptionsUpsert = instance.Options
-			}
-			patch.OptionsUpsert.MaximumConnections = request.Instance.Options.GetMaximumConnections()
-		case "options.sync_databases":
+			patch.Metadata.MaximumConnections = request.Instance.MaximumConnections
+		case "sync_databases":
 			if err := s.licenseService.IsFeatureEnabledForInstance(api.FeatureCustomInstanceSynchronization, instance); err != nil {
 				return nil, status.Error(codes.PermissionDenied, err.Error())
 			}
-			if patch.OptionsUpsert == nil {
-				patch.OptionsUpsert = instance.Options
-			}
-			patch.OptionsUpsert.SyncDatabases = request.Instance.Options.GetSyncDatabases()
+			patch.Metadata.SyncDatabases = request.Instance.SyncDatabases
 		default:
 			return nil, status.Errorf(codes.InvalidArgument, `unsupported update_mask "%s"`, path)
 		}
@@ -408,7 +402,7 @@ func (s *InstanceService) syncSlowQueriesImpl(ctx context.Context, project *stor
 
 		enabled := false
 		for _, database := range databases {
-			if database.SyncState != api.OK {
+			if database.Deleted {
 				continue
 			}
 			if pgparser.IsSystemDatabase(database.DatabaseName) {
@@ -1028,17 +1022,19 @@ func convertToInstance(instance *store.InstanceMessage) (*v1pb.Instance, error) 
 	}
 
 	return &v1pb.Instance{
-		Name:          buildInstanceName(instance.ResourceID),
-		Title:         instance.Title,
-		Engine:        engine,
-		EngineVersion: instance.EngineVersion,
-		ExternalLink:  instance.ExternalLink,
-		DataSources:   dataSourceList,
-		State:         convertDeletedToState(instance.Deleted),
-		Environment:   buildEnvironmentName(instance.EnvironmentID),
-		Activation:    instance.Activation,
-		Options:       convertToInstanceOptions(instance.Options),
-		Roles:         convertToInstanceRoles(instance, instance.Metadata.GetRoles()),
+		Name:               buildInstanceName(instance.ResourceID),
+		Title:              instance.Title,
+		Engine:             engine,
+		EngineVersion:      instance.EngineVersion,
+		ExternalLink:       instance.ExternalLink,
+		DataSources:        dataSourceList,
+		State:              convertDeletedToState(instance.Deleted),
+		Environment:        buildEnvironmentName(instance.EnvironmentID),
+		Activation:         instance.Activation,
+		SyncInterval:       instance.Metadata.GetSyncInterval(),
+		MaximumConnections: instance.Metadata.GetMaximumConnections(),
+		SyncDatabases:      instance.Metadata.GetSyncDatabases(),
+		Roles:              convertToInstanceRoles(instance, instance.Metadata.GetRoles()),
 	}, nil
 }
 
@@ -1088,7 +1084,11 @@ func (s *InstanceService) convertToInstanceMessage(instanceID string, instance *
 		DataSources:   datasources,
 		EnvironmentID: environmentID,
 		Activation:    instance.Activation,
-		Options:       convertInstanceOptions(instance.Options),
+		Metadata: &storepb.InstanceMetadata{
+			SyncInterval:       instance.GetSyncInterval(),
+			MaximumConnections: instance.GetMaximumConnections(),
+			SyncDatabases:      instance.GetSyncDatabases(),
+		},
 	}, nil
 }
 
@@ -1474,28 +1474,4 @@ func convertDataSourceTp(tp v1pb.DataSourceType) (api.DataSourceType, error) {
 		return "", errors.Errorf("invalid data source type %v", tp)
 	}
 	return dsType, nil
-}
-
-func convertToInstanceOptions(options *storepb.InstanceOptions) *v1pb.InstanceOptions {
-	if options == nil {
-		return &v1pb.InstanceOptions{}
-	}
-
-	return &v1pb.InstanceOptions{
-		SyncInterval:       options.SyncInterval,
-		MaximumConnections: options.MaximumConnections,
-		SyncDatabases:      options.GetSyncDatabases(),
-	}
-}
-
-func convertInstanceOptions(options *v1pb.InstanceOptions) *storepb.InstanceOptions {
-	if options == nil {
-		return &storepb.InstanceOptions{}
-	}
-
-	return &storepb.InstanceOptions{
-		SyncInterval:       options.SyncInterval,
-		MaximumConnections: options.MaximumConnections,
-		SyncDatabases:      options.GetSyncDatabases(),
-	}
 }
