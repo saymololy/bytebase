@@ -38,4 +38,4 @@ frontend/public/monaco-workers/
 frontend/src/types/plan.yaml
 frontend/src/types/iam/*.yaml
 scripts/.air.toml.local
-
+vendor
