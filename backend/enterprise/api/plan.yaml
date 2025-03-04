@@ -62,7 +62,7 @@ planList:
     trialPrice: 0
     freeSeatCount: -1
     freeInstanceCount: 0
-    maximumInstanceCount: -1
+    maximumInstanceCount: 9999
     maximumSeatCount: -1
     maximumTaskCount: -1
     maximumEnvironmentCount: -1
