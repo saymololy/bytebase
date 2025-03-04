@@ -42,8 +42,9 @@ jobs:
       - name: Login to DockerHub
         uses: docker/login-action@v3
         with:
-          username: ${{ secrets.DOCKERHUB_USERNAME }}
-          password: ${{ secrets.DOCKERHUB_TOKEN }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
       - uses: depot/setup-action@v1
       - name: Build and push
         id: bytebase_build
@@ -56,7 +57,7 @@ jobs:
           platforms: linux/amd64,linux/arm64
           push: true
           tags: |
-            saymololy/bytebase:${{ env.RELEASE_VERSION }}
+            ghcr.io/${{ secrets.DOCKERHUB_USERNAME }}/bytebase:${{ env.RELEASE_VERSION }}
           build-args: |
             VERSION=${{ env.RELEASE_VERSION }}
             GIT_COMMIT=${{ env.GIT_COMMIT }}
