@@ -54,7 +54,7 @@ jobs:
           project: ${{ secrets.DEPOT_PROJECT}}
           token: ${{ secrets.DEPOT_TOKEN }}
           file: scripts/Dockerfile.depot
-          platforms: linux/amd64,linux/arm64
+          platforms: linux/amd64
           push: true
           tags: |
             ghcr.io/saymololy/bytebase:${{ env.RELEASE_VERSION }}
