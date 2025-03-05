@@ -240,17 +240,17 @@ func (s *IdentityProviderService) checkFeatureAvailable(ssoType v1pb.IdentityPro
 	if err := s.licenseService.IsFeatureEnabled(api.FeatureSSO); err != nil {
 		return status.Error(codes.PermissionDenied, err.Error())
 	}
-	plan := s.licenseService.GetEffectivePlan()
-	switch plan {
-	case api.FREE:
-		return status.Error(codes.PermissionDenied, "feature is not available for free plan")
-	case api.ENTERPRISE:
-		return nil
-	case api.TEAM:
-		if ssoType != v1pb.IdentityProviderType_OAUTH2 {
-			return status.Error(codes.PermissionDenied, "only oauth type is available")
-		}
-	}
+	// plan := s.licenseService.GetEffectivePlan()
+	// switch plan {
+	// case api.FREE:
+	// 	return status.Error(codes.PermissionDenied, "feature is not available for free plan")
+	// case api.ENTERPRISE:
+	// 	return nil
+	// case api.TEAM:
+	// 	if ssoType != v1pb.IdentityProviderType_OAUTH2 {
+	// 		return status.Error(codes.PermissionDenied, "only oauth type is available")
+	// 	}
+	// }
 	return nil
 }
 
