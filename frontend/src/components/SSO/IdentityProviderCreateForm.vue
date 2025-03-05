@@ -794,15 +794,15 @@ const identityProviderTypeList = computed(() => {
   return [
     {
       type: IdentityProviderType.OAUTH2,
-      minimumRequiredPlan: PlanType.TEAM,
+      minimumRequiredPlan: PlanType.FREE,
     },
     {
       type: IdentityProviderType.OIDC,
-      minimumRequiredPlan: PlanType.ENTERPRISE,
+      minimumRequiredPlan: PlanType.FREE,
     },
     {
       type: IdentityProviderType.LDAP,
-      minimumRequiredPlan: PlanType.ENTERPRISE,
+      minimumRequiredPlan: PlanType.FREE,
     },
   ];
 });
@@ -852,7 +852,7 @@ const identityProviderTemplateList = computed(
         name: "",
         domain: "google.com",
         type: IdentityProviderType.OAUTH2,
-        minimumRequiredPlan: PlanType.TEAM,
+        minimumRequiredPlan: PlanType.FREE,
         config: {
           clientId: "",
           clientSecret: "",
@@ -878,7 +878,7 @@ const identityProviderTemplateList = computed(
         name: "",
         domain: "github.com",
         type: IdentityProviderType.OAUTH2,
-        minimumRequiredPlan: PlanType.TEAM,
+        minimumRequiredPlan: PlanType.FREE,
         config: {
           clientId: "",
           clientSecret: "",
@@ -901,7 +901,7 @@ const identityProviderTemplateList = computed(
         name: "",
         domain: "gitlab.com",
         type: IdentityProviderType.OAUTH2,
-        minimumRequiredPlan: PlanType.ENTERPRISE,
+        minimumRequiredPlan: PlanType.FREE,
         config: {
           clientId: "",
           clientSecret: "",
@@ -924,7 +924,7 @@ const identityProviderTemplateList = computed(
         name: "",
         domain: "",
         type: IdentityProviderType.OAUTH2,
-        minimumRequiredPlan: PlanType.ENTERPRISE,
+        minimumRequiredPlan: PlanType.FREE,
         config: {
           clientId: "",
           clientSecret: "",
@@ -949,7 +949,7 @@ const identityProviderTemplateList = computed(
         name: "",
         domain: "",
         type: IdentityProviderType.OAUTH2,
-        minimumRequiredPlan: PlanType.ENTERPRISE,
+        minimumRequiredPlan:PlanType.FREE,
         config: {
           clientId: "",
           clientSecret: "",
