@@ -205,13 +205,14 @@ export const useSubscriptionV1Store = defineStore("subscription_v1", {
       instance: Instance | InstanceResource | undefined = undefined
     ) {
       // TODO(ed) refresh instance before check license:
-      if (!instanceLimitFeature.has(type)) {
-        return false;
-      }
-      if (!instance) {
-        return false;
-      }
-      return hasFeature(type) && !instance.activation;
+      // if (!instanceLimitFeature.has(type)) {
+      //   return false;
+      // }
+      // if (!instance) {
+      //   return false;
+      // }
+      // return hasFeature(type) && !instance.activation;
+      return false;
     },
     currentPlanGTE(plan: PlanType): boolean {
       return planTypeToNumber(this.currentPlan) >= planTypeToNumber(plan);
