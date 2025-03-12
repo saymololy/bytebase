@@ -3,7 +3,7 @@
     <template #trigger>
       <NSwitch
         :value="checked"
-        :disabled="!allowChange"
+        :disabled="false"
         :loading="isUpdating"
         class="bb-ghost-switch"
         @update:value="toggleChecked"
