@@ -1,0 +1,79 @@
+<template>
+  <form class="w-full space-y-4 mx-auto">
+    <p class="text-lg font-medium leading-7 text-main">
+      {{ $t("common.general") }}
+    </p>
+    <div class="flex justify-start items-start gap-6">
+      <dl class="">
+        <dt class="text-sm font-medium text-control-light">
+          {{ $t("common.name") }} <span class="text-red-600">*</span>
+        </dt>
+        <dd class="mt-1 text-sm text-main">
+          <NInput
+            id="projectName"
+            v-model:value="state.title"
+            :disabled="!allowEdit"
+            required
+          />
+        </dd>
+        <div class="mt-1">
+          <ResourceIdField
+            resource-type="project"
+            :value="extractProjectResourceName(project.name)"
+            :readonly="true"
+          />
+        </div>
+      </dl>
+    </div>
+  </form>
+</template>
+
+<script lang="ts" setup>
+import { cloneDeep, isEmpty } from "lodash-es";
+import { NInput } from "naive-ui";
+import { computed, reactive } from "vue";
+import ResourceIdField from "@/components/v2/Form/ResourceIdField.vue";
+import { useProjectV1Store } from "@/store";
+import { DEFAULT_PROJECT_NAME } from "@/types";
+import type { Project } from "@/types/proto/v1/project_service";
+import { extractProjectResourceName } from "@/utils";
+
+interface LocalState {
+  title: string;
+}
+
+const props = defineProps<{
+  project: Project;
+  allowEdit: boolean;
+}>();
+
+const projectV1Store = useProjectV1Store();
+
+const state = reactive<LocalState>({
+  title: props.project.title,
+});
+
+const allowSave = computed((): boolean => {
+  return (
+    props.project.name !== DEFAULT_PROJECT_NAME &&
+    !isEmpty(state.title) &&
+    state.title !== props.project.title
+  );
+});
+
+const onUpdate = async () => {
+  const projectPatch = cloneDeep(props.project);
+  if (state.title !== props.project.title) {
+    projectPatch.title = state.title;
+    await projectV1Store.updateProject(projectPatch, ["title"]);
+  }
+};
+
+defineExpose({
+  isDirty: allowSave,
+  update: onUpdate,
+  revert: () => {
+    state.title = props.project.title;
+  },
+});
+</script>
