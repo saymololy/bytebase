@@ -5,23 +5,20 @@
       "name": "Debug Dev Binary",
       "type": "go",
       "request": "launch",
-      "mode": "exec",
-      "program": "${workspaceFolder}/.air/bytebase",
+      "mode": "auto",
+      "program": "backend/bin/server/main.go",
       "args": [
         "--port",
         "8080",
         "--external-url",
         "http://localhost:3000",
         "--data",
-        "${workspaceFolder}/.air"
-      ]
-    },
-    {
-      "name": "Attach to Process",
-      "type": "go",
-      "request": "attach",
-      "mode": "local",
-      "processId": 0
+        "${workspaceFolder}",
+        "--debug"
+      ],
+      "env": {
+        "PG_URL":"postgresql://root:password@127.0.0.1:5432/dev"
+      }
     }
   ]
 }
