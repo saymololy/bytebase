@@ -1,10 +1,10 @@
-FROM golang:1.24.0 as backend
+FROM artifacts.iflytek.com/docker-private/cloudnative/golang:1.24.1-alpine as backend
 ADD go.mod go.sum /
 RUN go mod download
 
 ARG VERSION="development"
 ARG VERSION_SUFFIX=""
-ARG GO_VERSION="1.24.0"
+ARG GO_VERSION="1.24.1"
 ARG GIT_COMMIT="unknown"
 ARG BUILD_TIME="unknown"
 ARG BUILD_USER="unknown"
@@ -35,7 +35,7 @@ RUN if [ "$TARGETARCH" = "arm64" ]; then \
     ./backend/bin/server/main.go
 
 # Use debian to decompress tar files.
-FROM debian:bookworm-slim as decompressor
+FROM artifacts.iflytek.com/docker-private/cloudnative/debian:bookworm-slim as decompressor
 
 ARG TARGETARCH
 
@@ -51,7 +51,7 @@ RUN tar -Jxf /tmp/bytebase/resources/postgres/postgres-linux-${TARGETARCH}.txz -
 
 
 # Use debian because mysql requires glibc.
-FROM debian:bookworm-slim as monolithic
+FROM artifacts.iflytek.com/docker-private/cloudnative/debian:bookworm-slim as monolithic
 
 ARG TARGETARCH
 ARG VERSION="development"
