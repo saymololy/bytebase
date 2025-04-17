@@ -13,6 +13,8 @@ WORKDIR /backend-build
 
 COPY . .
 
+RUN export PATH=/usr/bin/gcc:$PATH
+
 ENV GOPROXY https://goproxy.cn,direct
 # -ldflags="-w -s" means omit DWARF symbol table and the symbol table and debug information
 # go-sqlite3 requires CGO_ENABLED
