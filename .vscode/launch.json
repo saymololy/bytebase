@@ -17,7 +17,7 @@
         "--debug"
       ],
       "env": {
-        "PG_URL":"postgresql://root:Ifl"
+        "PG_URL":"postgresql://root:Iflytek0$@172.30.214.21:30432/dev"
       }
     }
   ]

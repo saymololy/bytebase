@@ -9,14 +9,6 @@ ARG BUILD_USER="unknown"
 
 ARG RELEASE="release"
 
-# Need gcc for CGO_ENABLED=1
-RUN if [ "$TARGETARCH" = "arm64" ]; then \
-    apt-get install -y gcc-aarch64-linux-gnu; \
-    else \
-    apt-get install -y gcc ;\
-    fi
-RUN apt-get update && apt-get install -y libkrb5-dev
-
 WORKDIR /backend-build
 
 COPY . .
@@ -24,16 +16,12 @@ COPY . .
 ENV GOPROXY https://goproxy.cn,direct
 # -ldflags="-w -s" means omit DWARF symbol table and the symbol table and debug information
 # go-sqlite3 requires CGO_ENABLED
-RUN if [ "$TARGETARCH" = "arm64" ]; then \
-    CC=aarch64-linux-gnu-gcc && CC_FOR_TARGET=gcc-aarch64-linux-gnu; \
-    fi && \
-    VERSION=`cat ./scripts/VERSION`${VERSION_SUFFIX} && CGO_ENABLED=1 GOOS=linux GOARCH=$TARGETARCH CC=$CC CC_FOR_TARGET=$CC_FOR_TARGET go build \
+RUN VERSION=`cat ./scripts/VERSION`${VERSION_SUFFIX} && CGO_ENABLED=1 GOOS=linux GOARCH=$TARGETARCH CC=$CC CC_FOR_TARGET=$CC_FOR_TARGET go build \
     --tags "${RELEASE},docker" \
     -ldflags="-w -s -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.version=${VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.goversion=${GO_VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.gitcommit=${GIT_COMMIT}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.buildtime=${BUILD_TIME}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.builduser=${BUILD_USER}'" \
     -mod vendor \
     -o bytebase \
     ./backend/bin/server/main.go
-
 # Use debian to decompress tar files.
 FROM artifacts.iflytek.com/docker-private/cloudnative/debian:bookworm-slim as decompressor
 
