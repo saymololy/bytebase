@@ -1,9 +1,7 @@
 FROM artifacts.iflytek.com/docker-private/cloudnative/golang:1.24.1-alpine as backend
 ENV GOPROXY https://goproxy.cn,direct
-ADD go.mod go.sum /
-RUN go mod download
 
-RUN apk add --no-cache gcc musl-dev
+RUN apk add --no-cache gcc musl-dev libkrb5-dev
 
 ARG VERSION="development"
 ARG VERSION_SUFFIX=""
@@ -23,7 +21,7 @@ COPY . .
 RUN VERSION=`cat ./scripts/VERSION`${VERSION_SUFFIX} && CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build \
     --tags "${RELEASE},docker" \
     -ldflags="-w -s -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.version=${VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.goversion=${GO_VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.gitcommit=${GIT_COMMIT}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.buildtime=${BUILD_TIME}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.builduser=${BUILD_USER}'" \
-    -o bytebase \
+    -mod vendor -trimpath -a -o bytebase \
     ./backend/bin/server/main.go
 # Use debian to decompress tar files.
 FROM artifacts.iflytek.com/docker-private/cloudnative/debian:bookworm-slim as decompressor
