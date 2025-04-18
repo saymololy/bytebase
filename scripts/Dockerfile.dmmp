@@ -1,29 +1,3 @@
-FROM artifacts.iflytek.com/docker-private/cloudnative/golang:1.24.1-alpine as backend
-ENV GOPROXY https://goproxy.cn,direct
-
-RUN apk add --no-cache gcc musl-dev krb5-pkinit krb5-dev krb5
-
-ARG VERSION="development"
-ARG VERSION_SUFFIX=""
-ARG GO_VERSION="1.24.1"
-ARG GIT_COMMIT="unknown"
-ARG BUILD_TIME="unknown"
-ARG BUILD_USER="unknown"
-
-ARG RELEASE="release"
-
-WORKDIR /backend-build
-
-COPY . .
-
-# -ldflags="-w -s" means omit DWARF symbol table and the symbol table and debug information
-# go-sqlite3 requires CGO_ENABLED
-RUN VERSION=`cat ./scripts/VERSION`${VERSION_SUFFIX} && CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build \
-    --tags "${RELEASE},docker" \
-    -ldflags="-w -s -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.version=${VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.goversion=${GO_VERSION}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.gitcommit=${GIT_COMMIT}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.buildtime=${BUILD_TIME}' -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.builduser=${BUILD_USER}'" \
-    -mod vendor -trimpath -a -o bytebase \
-    ./backend/bin/server/main.go
-# Use debian to decompress tar files.
 FROM artifacts.iflytek.com/docker-private/cloudnative/debian:bookworm-slim as decompressor
 
 ARG TARGETARCH
@@ -74,8 +48,8 @@ COPY ./scripts /usr/local/bin/
 COPY ./scripts/.psqlrc /root/.psqlrc
 # The file indicates running in docker environment.
 RUN touch /etc/bb.env
-COPY --from=backend /backend-build/bytebase /usr/local/bin/
-COPY --from=backend /etc/ssl/certs /etc/ssl/certs
+COPY ./backend-build/bytebase /usr/local/bin/
+COPY ./etc/ssl/certs /etc/ssl/certs
 COPY --from=decompressor /var/opt/bytebase/resources /bytebase/resources
 
 ENV OPENSSL_CONF /etc/ssl/

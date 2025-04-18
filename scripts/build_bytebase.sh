@@ -13,6 +13,8 @@ cd "$(dirname "$0")/../"
 OUTPUT_DIR=$(mkdir_output "$1")
 OUTPUT_BINARY=$OUTPUT_DIR/bytebase
 
+echo "${OUTPUT_BINARY}"
+
 TARGET_GO_VERSION="1.24.0"
 GO_VERSION=`go version | { read _ _ v _; echo ${v#go}; }`
 if [ "$(version ${GO_VERSION})" -lt "$(version $TARGET_GO_VERSION)" ];
@@ -35,15 +37,15 @@ fi
 # Step 2 - Build the monolithic app by building backend release version together with the backend/server/dist.
 echo "Start building Bytebase monolithic ${VERSION}..."
 
-echo ""
-echo "Step 1 - building Bytebase frontend..."
+# echo ""
+# echo "Step 1 - building Bytebase frontend..."
 
-rm -rf ./backend/server/dist
+# rm -rf ./backend/server/dist
 
-export BB_GIT_COMMIT_ID_FE=$(git rev-parse HEAD)
-pnpm --dir ./frontend i && pnpm --dir ./frontend release
+# export BB_GIT_COMMIT_ID_FE=$(git rev-parse HEAD)
+# pnpm --dir ./frontend i && pnpm --dir ./frontend release
 
-echo "Completed building Bytebase frontend."
+# echo "Completed building Bytebase frontend."
 
 echo ""
 echo "Step 2 - building Bytebase backend..."
@@ -54,7 +56,7 @@ flags="-X 'github.com/bytebase/bytebase/backend/bin/server/cmd.version=${VERSION
 -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.buildtime=$(date -u +"%Y-%m-%dT%H:%M:%SZ")'
 -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.builduser=$(id -u -n)'"
 
-CGO_ENABLED=1 go build -p=8 --tags "release,embed_frontend" -ldflags "-w -s $flags" -o ${OUTPUT_BINARY} ./backend/bin/server/main.go
+CGO_ENABLED=1 go build -p=8 --tags "release" -ldflags "-w -s $flags" -o ${OUTPUT_BINARY} ./backend/bin/server/main.go
 
 echo "Completed building Bytebase backend."
 
