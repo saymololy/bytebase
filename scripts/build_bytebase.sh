@@ -22,33 +22,10 @@ then
    echo "${RED}Precheck failed.${NC} Require go version >= $TARGET_GO_VERSION. Current version ${GO_VERSION}."; exit 1;
 fi
 
-NODE_VERSION=`node -v | { read v; echo ${v#v}; }`
-if [ "$(version ${NODE_VERSION})" -lt "$(version 22.13.0)" ];
-then
-   echo "${RED}Precheck failed.${NC} Require node.js version >= 22.13.0. Current version ${NODE_VERSION}."; exit 1;
-fi
-
-if ! command -v npm > /dev/null
-then
-   echo "${RED}Precheck failed.${NC} npm is not installed."; exit 1;
-fi
-
-# Step 1 - Build the frontend release version into the backend/server/dist folder
-# Step 2 - Build the monolithic app by building backend release version together with the backend/server/dist.
 echo "Start building Bytebase monolithic ${VERSION}..."
 
-# echo ""
-# echo "Step 1 - building Bytebase frontend..."
-
-# rm -rf ./backend/server/dist
-
-# export BB_GIT_COMMIT_ID_FE=$(git rev-parse HEAD)
-# pnpm --dir ./frontend i && pnpm --dir ./frontend release
-
-# echo "Completed building Bytebase frontend."
-
 echo ""
-echo "Step 2 - building Bytebase backend..."
+echo "Step 1 - building Bytebase backend..."
 
 flags="-X 'github.com/bytebase/bytebase/backend/bin/server/cmd.version=${VERSION}'
 -X 'github.com/bytebase/bytebase/backend/bin/server/cmd.goversion=$(go version)'
@@ -61,7 +38,7 @@ CGO_ENABLED=1 go build -p=8 --tags "release" -ldflags "-w -s $flags" -o ${OUTPUT
 echo "Completed building Bytebase backend."
 
 echo ""
-echo "Step 3 - printing version..."
+echo "Step 2 - printing version..."
 
 ${OUTPUT_BINARY} version
 
