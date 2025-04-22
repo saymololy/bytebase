@@ -54,7 +54,7 @@ func (m *GatewayResponseModifier) processMetadata(ctx context.Context, md runtim
 	}
 
 	// Set cookie.
-	sameSite := http.SameSiteNoneMode
+	sameSite := http.SameSiteStrictMode
 	if isHTTPS {
 		sameSite = http.SameSiteNoneMode
 	}

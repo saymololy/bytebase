@@ -18,26 +18,22 @@ COPY . .
 RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o bytebase ./backend/bin/server/main.go
 
 
-ARG TARGETARCH
 FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as decompressor
-
-ARG TARGETARCH
 
 RUN apt-get update && apt-get install -y xz-utils
 COPY ./backend/resources /tmp/bytebase/resources/
 # These paths must match the paths in backened/resources/utils/utils_dir.go.
 # The real resource dir is decided by the backend at runtime. But we can only extract these at build time. 
 # we extract resources to a specific dir here and the backend will create symlinks at runtime.
-RUN mkdir -p /var/opt/bytebase/resources/mongoutil-1.6.1-linux-${TARGETARCH}/
-RUN tar -Jxf /tmp/bytebase/resources/mongoutil/mongoutil-1.6.1-linux-${TARGETARCH}.txz -C /var/opt/bytebase/resources/mongoutil-1.6.1-linux-${TARGETARCH}/
-RUN mkdir -p /var/opt/bytebase/resources/postgres-linux-${TARGETARCH}-16
-RUN tar -Jxf /tmp/bytebase/resources/postgres/postgres-linux-${TARGETARCH}.txz -C /var/opt/bytebase/resources/postgres-linux-${TARGETARCH}-16/
+RUN mkdir -p /var/opt/bytebase/resources/mongoutil-1.6.1-linux-amd64/
+RUN tar -Jxf /tmp/bytebase/resources/mongoutil/mongoutil-1.6.1-linux-amd64.txz -C /var/opt/bytebase/resources/mongoutil-1.6.1-linux-amd64/
+RUN mkdir -p /var/opt/bytebase/resources/postgres-linux-amd64-16
+RUN tar -Jxf /tmp/bytebase/resources/postgres/postgres-linux-amd64.txz -C /var/opt/bytebase/resources/postgres-linux-amd64-16/
 
 
 # Use debian because mysql requires glibc.
 FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as monolithic
 
-ARG TARGETARCH
 ARG VERSION="development"
 ARG GIT_COMMIT="unknown"
 ARG BUILD_TIME="unknown"
@@ -61,7 +57,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales 
 # Generate en_US.UTF-8 locale which is needed to start postgres server.
 # Fix the posgres server issue (invalid value for parameter "lc_messages": "en_US.UTF-8").
 RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
-ENV PATH="${PATH}:/var/opt/bytebase/resources/postgres-linux-${TARGETARCH}-16/bin"
+ENV PATH="${PATH}:/var/opt/bytebase/resources/postgres-linux-amd64-16/bin"
 
 # Copy utility scripts, we have
 # - Demo script to launch Bytebase in readonly demo mode
