@@ -31,7 +31,7 @@ func (m *GatewayResponseModifier) Modify(ctx context.Context, response http.Resp
 			isHTTPS = true
 		}
 	}
-	m.processMetadata(ctx, md, GatewayMetadataAccessTokenKey, AccessTokenCookieName, true /* httpOnly */, isHTTPS, response)
+	m.processMetadata(ctx, md, GatewayMetadataAccessTokenKey, AccessTokenCookieName, false /* httpOnly */, isHTTPS, response)
 	m.processMetadata(ctx, md, GatewayMetadataUserIDKey, UserIDCookieName, false /* httpOnly */, isHTTPS, response)
 	return nil
 }
@@ -54,7 +54,7 @@ func (m *GatewayResponseModifier) processMetadata(ctx context.Context, md runtim
 	}
 
 	// Set cookie.
-	sameSite := http.SameSiteStrictMode
+	sameSite := http.SameSiteNoneMode
 	if isHTTPS {
 		sameSite = http.SameSiteNoneMode
 	}
