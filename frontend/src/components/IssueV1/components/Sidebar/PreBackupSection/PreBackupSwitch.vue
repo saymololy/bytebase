@@ -5,7 +5,6 @@
         <NSwitch
           :value="preBackupEnabled"
           class="bb-pre-backup-switch"
-          :disabled="!allowPreBackup"
           @update:value="togglePreBackup"
         >
           <template #checked>

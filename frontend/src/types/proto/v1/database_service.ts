@@ -3,7 +3,6 @@
 //   protoc-gen-ts_proto  v2.3.0
 //   protoc               unknown
 // source: v1/database_service.proto
-
 /* eslint-disable */
 import { BinaryReader, BinaryWriter } from "@bufbuild/protobuf/wire";
 import Long from "long";
@@ -11,7 +10,13 @@ import { Duration } from "../google/protobuf/duration";
 import { Empty } from "../google/protobuf/empty";
 import { FieldMask } from "../google/protobuf/field_mask";
 import { Timestamp } from "../google/protobuf/timestamp";
-import { Range, State, stateFromJSON, stateToJSON, stateToNumber } from "./common";
+import {
+  Range,
+  State,
+  stateFromJSON,
+  stateToJSON,
+  stateToNumber,
+} from "./common";
 import { InstanceResource } from "./instance_service";
 
 export const protobufPackage = "bytebase.v1";
@@ -32,7 +37,9 @@ export enum DatabaseMetadataView {
   UNRECOGNIZED = "UNRECOGNIZED",
 }
 
-export function databaseMetadataViewFromJSON(object: any): DatabaseMetadataView {
+export function databaseMetadataViewFromJSON(
+  object: any
+): DatabaseMetadataView {
   switch (object) {
     case 0:
     case "DATABASE_METADATA_VIEW_UNSPECIFIED":
@@ -50,7 +57,9 @@ export function databaseMetadataViewFromJSON(object: any): DatabaseMetadataView 
   }
 }
 
-export function databaseMetadataViewToJSON(object: DatabaseMetadataView): string {
+export function databaseMetadataViewToJSON(
+  object: DatabaseMetadataView
+): string {
   switch (object) {
     case DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED:
       return "DATABASE_METADATA_VIEW_UNSPECIFIED";
@@ -64,7 +73,9 @@ export function databaseMetadataViewToJSON(object: DatabaseMetadataView): string
   }
 }
 
-export function databaseMetadataViewToNumber(object: DatabaseMetadataView): number {
+export function databaseMetadataViewToNumber(
+  object: DatabaseMetadataView
+): number {
   switch (object) {
     case DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED:
       return 0;
@@ -221,9 +232,7 @@ export interface UpdateDatabaseRequest {
    * The database's `name` field is used to identify the database to update.
    * Format: instances/{instance}/databases/{database}
    */
-  database:
-    | Database
-    | undefined;
+  database: Database | undefined;
   /** The list of fields to update. */
   updateMask: string[] | undefined;
 }
@@ -256,8 +265,7 @@ export interface SyncDatabaseRequest {
   name: string;
 }
 
-export interface SyncDatabaseResponse {
-}
+export interface SyncDatabaseResponse {}
 
 export interface GetDatabaseMetadataRequest {
   /**
@@ -294,17 +302,13 @@ export interface DiffSchemaRequest {
    */
   name: string;
   /** The target schema. */
-  schema?:
-    | string
-    | undefined;
+  schema?: string | undefined;
   /**
    * The resource name of the changelog
    * Format:
    * instances/{instance}/databases/{database}/changelogs/{changelog}
    */
-  changelog?:
-    | string
-    | undefined;
+  changelog?: string | undefined;
   /** Format the schema dump into SDL format. */
   sdlFormat: boolean;
 }
@@ -323,9 +327,7 @@ export interface Database {
   /** The existence of a database. */
   state: State;
   /** The latest synchronization time. */
-  successfulSyncTime:
-    | Timestamp
-    | undefined;
+  successfulSyncTime: Timestamp | undefined;
   /**
    * The project for a database.
    * Format: projects/{project}
@@ -347,9 +349,7 @@ export interface Database {
   /** Labels will be used for deployment and policy control. */
   labels: { [key: string]: string };
   /** The instance resource. */
-  instanceResource:
-    | InstanceResource
-    | undefined;
+  instanceResource: InstanceResource | undefined;
   /** The database is available for DML prior backup. */
   backupAvailable: boolean;
 }
@@ -617,7 +617,9 @@ export enum TablePartitionMetadata_Type {
   UNRECOGNIZED = "UNRECOGNIZED",
 }
 
-export function tablePartitionMetadata_TypeFromJSON(object: any): TablePartitionMetadata_Type {
+export function tablePartitionMetadata_TypeFromJSON(
+  object: any
+): TablePartitionMetadata_Type {
   switch (object) {
     case 0:
     case "TYPE_UNSPECIFIED":
@@ -653,7 +655,9 @@ export function tablePartitionMetadata_TypeFromJSON(object: any): TablePartition
   }
 }
 
-export function tablePartitionMetadata_TypeToJSON(object: TablePartitionMetadata_Type): string {
+export function tablePartitionMetadata_TypeToJSON(
+  object: TablePartitionMetadata_Type
+): string {
   switch (object) {
     case TablePartitionMetadata_Type.TYPE_UNSPECIFIED:
       return "TYPE_UNSPECIFIED";
@@ -679,7 +683,9 @@ export function tablePartitionMetadata_TypeToJSON(object: TablePartitionMetadata
   }
 }
 
-export function tablePartitionMetadata_TypeToNumber(object: TablePartitionMetadata_Type): number {
+export function tablePartitionMetadata_TypeToNumber(
+  object: TablePartitionMetadata_Type
+): number {
   switch (object) {
     case TablePartitionMetadata_Type.TYPE_UNSPECIFIED:
       return 0;
@@ -714,9 +720,7 @@ export interface ColumnMetadata {
   hasDefault: boolean;
   defaultNull?: boolean | undefined;
   defaultString?: string | undefined;
-  defaultExpression?:
-    | string
-    | undefined;
+  defaultExpression?: string | undefined;
   /**
    * The on_update is the on update action of a column.
    * For MySQL like databases, it's only supported for TIMESTAMP columns with
@@ -739,9 +743,7 @@ export interface ColumnMetadata {
   /** The user_comment is the user comment of a column parsed from the comment. */
   userComment: string;
   /** The generation is the generation of a column. */
-  generation:
-    | GenerationMetadata
-    | undefined;
+  generation: GenerationMetadata | undefined;
   /** The identity_generation is for identity columns, PG only. */
   identityGeneration: ColumnMetadata_IdentityGeneration;
 }
@@ -753,7 +755,9 @@ export enum ColumnMetadata_IdentityGeneration {
   UNRECOGNIZED = "UNRECOGNIZED",
 }
 
-export function columnMetadata_IdentityGenerationFromJSON(object: any): ColumnMetadata_IdentityGeneration {
+export function columnMetadata_IdentityGenerationFromJSON(
+  object: any
+): ColumnMetadata_IdentityGeneration {
   switch (object) {
     case 0:
     case "IDENTITY_GENERATION_UNSPECIFIED":
@@ -771,7 +775,9 @@ export function columnMetadata_IdentityGenerationFromJSON(object: any): ColumnMe
   }
 }
 
-export function columnMetadata_IdentityGenerationToJSON(object: ColumnMetadata_IdentityGeneration): string {
+export function columnMetadata_IdentityGenerationToJSON(
+  object: ColumnMetadata_IdentityGeneration
+): string {
   switch (object) {
     case ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED:
       return "IDENTITY_GENERATION_UNSPECIFIED";
@@ -785,7 +791,9 @@ export function columnMetadata_IdentityGenerationToJSON(object: ColumnMetadata_I
   }
 }
 
-export function columnMetadata_IdentityGenerationToNumber(object: ColumnMetadata_IdentityGeneration): number {
+export function columnMetadata_IdentityGenerationToNumber(
+  object: ColumnMetadata_IdentityGeneration
+): number {
   switch (object) {
     case ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED:
       return 0;
@@ -811,7 +819,9 @@ export enum GenerationMetadata_Type {
   UNRECOGNIZED = "UNRECOGNIZED",
 }
 
-export function generationMetadata_TypeFromJSON(object: any): GenerationMetadata_Type {
+export function generationMetadata_TypeFromJSON(
+  object: any
+): GenerationMetadata_Type {
   switch (object) {
     case 0:
     case "TYPE_UNSPECIFIED":
@@ -829,7 +839,9 @@ export function generationMetadata_TypeFromJSON(object: any): GenerationMetadata
   }
 }
 
-export function generationMetadata_TypeToJSON(object: GenerationMetadata_Type): string {
+export function generationMetadata_TypeToJSON(
+  object: GenerationMetadata_Type
+): string {
   switch (object) {
     case GenerationMetadata_Type.TYPE_UNSPECIFIED:
       return "TYPE_UNSPECIFIED";
@@ -843,7 +855,9 @@ export function generationMetadata_TypeToJSON(object: GenerationMetadata_Type): 
   }
 }
 
-export function generationMetadata_TypeToNumber(object: GenerationMetadata_Type): number {
+export function generationMetadata_TypeToNumber(
+  object: GenerationMetadata_Type
+): number {
   switch (object) {
     case GenerationMetadata_Type.TYPE_UNSPECIFIED:
       return 0;
@@ -1094,7 +1108,9 @@ export function streamMetadata_TypeToJSON(object: StreamMetadata_Type): string {
   }
 }
 
-export function streamMetadata_TypeToNumber(object: StreamMetadata_Type): number {
+export function streamMetadata_TypeToNumber(
+  object: StreamMetadata_Type
+): number {
   switch (object) {
     case StreamMetadata_Type.TYPE_UNSPECIFIED:
       return 0;
@@ -1151,7 +1167,9 @@ export function streamMetadata_ModeToJSON(object: StreamMetadata_Mode): string {
   }
 }
 
-export function streamMetadata_ModeToNumber(object: StreamMetadata_Mode): number {
+export function streamMetadata_ModeToNumber(
+  object: StreamMetadata_Mode
+): number {
   switch (object) {
     case StreamMetadata_Mode.MODE_UNSPECIFIED:
       return 0;
@@ -1315,17 +1333,11 @@ export interface SlowQueryStatistics {
   /** The count of the slow query log. */
   count: Long;
   /** The latest log time of the slow query log. */
-  latestLogTime:
-    | Timestamp
-    | undefined;
+  latestLogTime: Timestamp | undefined;
   /** The average query time of the slow query log. */
-  averageQueryTime:
-    | Duration
-    | undefined;
+  averageQueryTime: Duration | undefined;
   /** The maximum query time of the slow query log. */
-  maximumQueryTime:
-    | Duration
-    | undefined;
+  maximumQueryTime: Duration | undefined;
   /** The average rows sent of the slow query log. */
   averageRowsSent: Long;
   /** The maximum rows sent of the slow query log. */
@@ -1348,17 +1360,11 @@ export interface SlowQueryStatistics {
 /** SlowQueryDetails is the details of the slow query log. */
 export interface SlowQueryDetails {
   /** The start time of the slow query log. */
-  startTime:
-    | Timestamp
-    | undefined;
+  startTime: Timestamp | undefined;
   /** The query time of the slow query log. */
-  queryTime:
-    | Duration
-    | undefined;
+  queryTime: Duration | undefined;
   /** The lock time of the slow query log. */
-  lockTime:
-    | Duration
-    | undefined;
+  lockTime: Duration | undefined;
   /** The rows sent of the slow query log. */
   rowsSent: Long;
   /** The rows examined of the slow query log. */
@@ -1404,13 +1410,9 @@ export interface ListSecretsResponse {
 
 export interface UpdateSecretRequest {
   /** The secret to be created or updated. */
-  secret:
-    | Secret
-    | undefined;
+  secret: Secret | undefined;
   /** The mask of the fields to be updated. */
-  updateMask:
-    | string[]
-    | undefined;
+  updateMask: string[] | undefined;
   /** If true, the secret will be created if it does not exist. */
   allowMissing: boolean;
 }
@@ -1433,13 +1435,9 @@ export interface Secret {
    */
   name: string;
   /** Not used. The timestamp when the secret resource was created initially. */
-  createdTime:
-    | Timestamp
-    | undefined;
+  createdTime: Timestamp | undefined;
   /** Not used. The timestamp when the secret resource was updated. */
-  updatedTime:
-    | Timestamp
-    | undefined;
+  updatedTime: Timestamp | undefined;
   /** The value of the secret. */
   value: string;
   /** The description of the secret. */
@@ -1568,18 +1566,14 @@ export interface Revision {
    * Can be empty.
    */
   release: string;
-  createTime:
-    | Timestamp
-    | undefined;
+  createTime: Timestamp | undefined;
   /**
    * Format: users/hello@world.com
    * Can be empty.
    */
   deleter: string;
   /** Can be empty. */
-  deleteTime:
-    | Timestamp
-    | undefined;
+  deleteTime: Timestamp | undefined;
   /**
    * Format: projects/{project}/releases/{release}/files/{id}
    * Can be empty.
@@ -1863,15 +1857,22 @@ function createBaseGetDatabaseRequest(): GetDatabaseRequest {
 }
 
 export const GetDatabaseRequest: MessageFns<GetDatabaseRequest> = {
-  encode(message: GetDatabaseRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetDatabaseRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetDatabaseRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): GetDatabaseRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetDatabaseRequest();
     while (reader.pos < end) {
@@ -1920,194 +1921,228 @@ function createBaseListInstanceDatabasesRequest(): ListInstanceDatabasesRequest 
   return { parent: "", pageSize: 0, pageToken: "", filter: "" };
 }
 
-export const ListInstanceDatabasesRequest: MessageFns<ListInstanceDatabasesRequest> = {
-  encode(message: ListInstanceDatabasesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.parent !== "") {
-      writer.uint32(10).string(message.parent);
-    }
-    if (message.pageSize !== 0) {
-      writer.uint32(16).int32(message.pageSize);
-    }
-    if (message.pageToken !== "") {
-      writer.uint32(26).string(message.pageToken);
-    }
-    if (message.filter !== "") {
-      writer.uint32(34).string(message.filter);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): ListInstanceDatabasesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListInstanceDatabasesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.parent = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.pageSize = reader.int32();
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.pageToken = reader.string();
-          continue;
-        }
-        case 4: {
-          if (tag !== 34) {
-            break;
-          }
-
-          message.filter = reader.string();
-          continue;
-        }
+export const ListInstanceDatabasesRequest: MessageFns<ListInstanceDatabasesRequest> =
+  {
+    encode(
+      message: ListInstanceDatabasesRequest,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.parent !== "") {
+        writer.uint32(10).string(message.parent);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.pageSize !== 0) {
+        writer.uint32(16).int32(message.pageSize);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.pageToken !== "") {
+        writer.uint32(26).string(message.pageToken);
+      }
+      if (message.filter !== "") {
+        writer.uint32(34).string(message.filter);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): ListInstanceDatabasesRequest {
-    return {
-      parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
-      pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
-      filter: isSet(object.filter) ? globalThis.String(object.filter) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): ListInstanceDatabasesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListInstanceDatabasesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ListInstanceDatabasesRequest): unknown {
-    const obj: any = {};
-    if (message.parent !== "") {
-      obj.parent = message.parent;
-    }
-    if (message.pageSize !== 0) {
-      obj.pageSize = Math.round(message.pageSize);
-    }
-    if (message.pageToken !== "") {
-      obj.pageToken = message.pageToken;
-    }
-    if (message.filter !== "") {
-      obj.filter = message.filter;
-    }
-    return obj;
-  },
+            message.parent = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create(base?: DeepPartial<ListInstanceDatabasesRequest>): ListInstanceDatabasesRequest {
-    return ListInstanceDatabasesRequest.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<ListInstanceDatabasesRequest>): ListInstanceDatabasesRequest {
-    const message = createBaseListInstanceDatabasesRequest();
-    message.parent = object.parent ?? "";
-    message.pageSize = object.pageSize ?? 0;
-    message.pageToken = object.pageToken ?? "";
-    message.filter = object.filter ?? "";
-    return message;
-  },
-};
+            message.pageSize = reader.int32();
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.pageToken = reader.string();
+            continue;
+          }
+          case 4: {
+            if (tag !== 34) {
+              break;
+            }
+
+            message.filter = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ListInstanceDatabasesRequest {
+      return {
+        parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
+        pageSize: isSet(object.pageSize)
+          ? globalThis.Number(object.pageSize)
+          : 0,
+        pageToken: isSet(object.pageToken)
+          ? globalThis.String(object.pageToken)
+          : "",
+        filter: isSet(object.filter) ? globalThis.String(object.filter) : "",
+      };
+    },
+
+    toJSON(message: ListInstanceDatabasesRequest): unknown {
+      const obj: any = {};
+      if (message.parent !== "") {
+        obj.parent = message.parent;
+      }
+      if (message.pageSize !== 0) {
+        obj.pageSize = Math.round(message.pageSize);
+      }
+      if (message.pageToken !== "") {
+        obj.pageToken = message.pageToken;
+      }
+      if (message.filter !== "") {
+        obj.filter = message.filter;
+      }
+      return obj;
+    },
+
+    create(
+      base?: DeepPartial<ListInstanceDatabasesRequest>
+    ): ListInstanceDatabasesRequest {
+      return ListInstanceDatabasesRequest.fromPartial(base ?? {});
+    },
+    fromPartial(
+      object: DeepPartial<ListInstanceDatabasesRequest>
+    ): ListInstanceDatabasesRequest {
+      const message = createBaseListInstanceDatabasesRequest();
+      message.parent = object.parent ?? "";
+      message.pageSize = object.pageSize ?? 0;
+      message.pageToken = object.pageToken ?? "";
+      message.filter = object.filter ?? "";
+      return message;
+    },
+  };
 
 function createBaseListInstanceDatabasesResponse(): ListInstanceDatabasesResponse {
   return { databases: [], nextPageToken: "" };
 }
 
-export const ListInstanceDatabasesResponse: MessageFns<ListInstanceDatabasesResponse> = {
-  encode(message: ListInstanceDatabasesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.databases) {
-      Database.encode(v!, writer.uint32(10).fork()).join();
-    }
-    if (message.nextPageToken !== "") {
-      writer.uint32(18).string(message.nextPageToken);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): ListInstanceDatabasesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseListInstanceDatabasesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.databases.push(Database.decode(reader, reader.uint32()));
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.nextPageToken = reader.string();
-          continue;
-        }
+export const ListInstanceDatabasesResponse: MessageFns<ListInstanceDatabasesResponse> =
+  {
+    encode(
+      message: ListInstanceDatabasesResponse,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      for (const v of message.databases) {
+        Database.encode(v!, writer.uint32(10).fork()).join();
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (message.nextPageToken !== "") {
+        writer.uint32(18).string(message.nextPageToken);
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): ListInstanceDatabasesResponse {
-    return {
-      databases: globalThis.Array.isArray(object?.databases)
-        ? object.databases.map((e: any) => Database.fromJSON(e))
-        : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): ListInstanceDatabasesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseListInstanceDatabasesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: ListInstanceDatabasesResponse): unknown {
-    const obj: any = {};
-    if (message.databases?.length) {
-      obj.databases = message.databases.map((e) => Database.toJSON(e));
-    }
-    if (message.nextPageToken !== "") {
-      obj.nextPageToken = message.nextPageToken;
-    }
-    return obj;
-  },
+            message.databases.push(Database.decode(reader, reader.uint32()));
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create(base?: DeepPartial<ListInstanceDatabasesResponse>): ListInstanceDatabasesResponse {
-    return ListInstanceDatabasesResponse.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<ListInstanceDatabasesResponse>): ListInstanceDatabasesResponse {
-    const message = createBaseListInstanceDatabasesResponse();
-    message.databases = object.databases?.map((e) => Database.fromPartial(e)) || [];
-    message.nextPageToken = object.nextPageToken ?? "";
-    return message;
-  },
-};
+            message.nextPageToken = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): ListInstanceDatabasesResponse {
+      return {
+        databases: globalThis.Array.isArray(object?.databases)
+          ? object.databases.map((e: any) => Database.fromJSON(e))
+          : [],
+        nextPageToken: isSet(object.nextPageToken)
+          ? globalThis.String(object.nextPageToken)
+          : "",
+      };
+    },
+
+    toJSON(message: ListInstanceDatabasesResponse): unknown {
+      const obj: any = {};
+      if (message.databases?.length) {
+        obj.databases = message.databases.map((e) => Database.toJSON(e));
+      }
+      if (message.nextPageToken !== "") {
+        obj.nextPageToken = message.nextPageToken;
+      }
+      return obj;
+    },
+
+    create(
+      base?: DeepPartial<ListInstanceDatabasesResponse>
+    ): ListInstanceDatabasesResponse {
+      return ListInstanceDatabasesResponse.fromPartial(base ?? {});
+    },
+    fromPartial(
+      object: DeepPartial<ListInstanceDatabasesResponse>
+    ): ListInstanceDatabasesResponse {
+      const message = createBaseListInstanceDatabasesResponse();
+      message.databases =
+        object.databases?.map((e) => Database.fromPartial(e)) || [];
+      message.nextPageToken = object.nextPageToken ?? "";
+      return message;
+    },
+  };
 
 function createBaseListDatabasesRequest(): ListDatabasesRequest {
   return { parent: "", pageSize: 0, pageToken: "" };
 }
 
 export const ListDatabasesRequest: MessageFns<ListDatabasesRequest> = {
-  encode(message: ListDatabasesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListDatabasesRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -2120,8 +2155,12 @@ export const ListDatabasesRequest: MessageFns<ListDatabasesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListDatabasesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListDatabasesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListDatabasesRequest();
     while (reader.pos < end) {
@@ -2164,7 +2203,9 @@ export const ListDatabasesRequest: MessageFns<ListDatabasesRequest> = {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
+      pageToken: isSet(object.pageToken)
+        ? globalThis.String(object.pageToken)
+        : "",
     };
   },
 
@@ -2199,7 +2240,10 @@ function createBaseListDatabasesResponse(): ListDatabasesResponse {
 }
 
 export const ListDatabasesResponse: MessageFns<ListDatabasesResponse> = {
-  encode(message: ListDatabasesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListDatabasesResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.databases) {
       Database.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -2209,8 +2253,12 @@ export const ListDatabasesResponse: MessageFns<ListDatabasesResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListDatabasesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListDatabasesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListDatabasesResponse();
     while (reader.pos < end) {
@@ -2246,7 +2294,9 @@ export const ListDatabasesResponse: MessageFns<ListDatabasesResponse> = {
       databases: globalThis.Array.isArray(object?.databases)
         ? object.databases.map((e: any) => Database.fromJSON(e))
         : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
+      nextPageToken: isSet(object.nextPageToken)
+        ? globalThis.String(object.nextPageToken)
+        : "",
     };
   },
 
@@ -2264,9 +2314,12 @@ export const ListDatabasesResponse: MessageFns<ListDatabasesResponse> = {
   create(base?: DeepPartial<ListDatabasesResponse>): ListDatabasesResponse {
     return ListDatabasesResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListDatabasesResponse>): ListDatabasesResponse {
+  fromPartial(
+    object: DeepPartial<ListDatabasesResponse>
+  ): ListDatabasesResponse {
     const message = createBaseListDatabasesResponse();
-    message.databases = object.databases?.map((e) => Database.fromPartial(e)) || [];
+    message.databases =
+      object.databases?.map((e) => Database.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
@@ -2277,18 +2330,28 @@ function createBaseUpdateDatabaseRequest(): UpdateDatabaseRequest {
 }
 
 export const UpdateDatabaseRequest: MessageFns<UpdateDatabaseRequest> = {
-  encode(message: UpdateDatabaseRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: UpdateDatabaseRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.database !== undefined) {
       Database.encode(message.database, writer.uint32(10).fork()).join();
     }
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(18).fork()).join();
+      FieldMask.encode(
+        FieldMask.wrap(message.updateMask),
+        writer.uint32(18).fork()
+      ).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateDatabaseRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): UpdateDatabaseRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateDatabaseRequest();
     while (reader.pos < end) {
@@ -2307,7 +2370,9 @@ export const UpdateDatabaseRequest: MessageFns<UpdateDatabaseRequest> = {
             break;
           }
 
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.unwrap(
+            FieldMask.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -2321,8 +2386,12 @@ export const UpdateDatabaseRequest: MessageFns<UpdateDatabaseRequest> = {
 
   fromJSON(object: any): UpdateDatabaseRequest {
     return {
-      database: isSet(object.database) ? Database.fromJSON(object.database) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined,
+      database: isSet(object.database)
+        ? Database.fromJSON(object.database)
+        : undefined,
+      updateMask: isSet(object.updateMask)
+        ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask))
+        : undefined,
     };
   },
 
@@ -2340,11 +2409,14 @@ export const UpdateDatabaseRequest: MessageFns<UpdateDatabaseRequest> = {
   create(base?: DeepPartial<UpdateDatabaseRequest>): UpdateDatabaseRequest {
     return UpdateDatabaseRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<UpdateDatabaseRequest>): UpdateDatabaseRequest {
+  fromPartial(
+    object: DeepPartial<UpdateDatabaseRequest>
+  ): UpdateDatabaseRequest {
     const message = createBaseUpdateDatabaseRequest();
-    message.database = (object.database !== undefined && object.database !== null)
-      ? Database.fromPartial(object.database)
-      : undefined;
+    message.database =
+      object.database !== undefined && object.database !== null
+        ? Database.fromPartial(object.database)
+        : undefined;
     message.updateMask = object.updateMask ?? undefined;
     return message;
   },
@@ -2354,156 +2426,193 @@ function createBaseBatchUpdateDatabasesRequest(): BatchUpdateDatabasesRequest {
   return { parent: "", requests: [] };
 }
 
-export const BatchUpdateDatabasesRequest: MessageFns<BatchUpdateDatabasesRequest> = {
-  encode(message: BatchUpdateDatabasesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.parent !== "") {
-      writer.uint32(10).string(message.parent);
-    }
-    for (const v of message.requests) {
-      UpdateDatabaseRequest.encode(v!, writer.uint32(18).fork()).join();
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchUpdateDatabasesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchUpdateDatabasesRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.parent = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 18) {
-            break;
-          }
-
-          message.requests.push(UpdateDatabaseRequest.decode(reader, reader.uint32()));
-          continue;
-        }
+export const BatchUpdateDatabasesRequest: MessageFns<BatchUpdateDatabasesRequest> =
+  {
+    encode(
+      message: BatchUpdateDatabasesRequest,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.parent !== "") {
+        writer.uint32(10).string(message.parent);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      for (const v of message.requests) {
+        UpdateDatabaseRequest.encode(v!, writer.uint32(18).fork()).join();
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return writer;
+    },
 
-  fromJSON(object: any): BatchUpdateDatabasesRequest {
-    return {
-      parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
-      requests: globalThis.Array.isArray(object?.requests)
-        ? object.requests.map((e: any) => UpdateDatabaseRequest.fromJSON(e))
-        : [],
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): BatchUpdateDatabasesRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchUpdateDatabasesRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: BatchUpdateDatabasesRequest): unknown {
-    const obj: any = {};
-    if (message.parent !== "") {
-      obj.parent = message.parent;
-    }
-    if (message.requests?.length) {
-      obj.requests = message.requests.map((e) => UpdateDatabaseRequest.toJSON(e));
-    }
-    return obj;
-  },
+            message.parent = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 18) {
+              break;
+            }
 
-  create(base?: DeepPartial<BatchUpdateDatabasesRequest>): BatchUpdateDatabasesRequest {
-    return BatchUpdateDatabasesRequest.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<BatchUpdateDatabasesRequest>): BatchUpdateDatabasesRequest {
-    const message = createBaseBatchUpdateDatabasesRequest();
-    message.parent = object.parent ?? "";
-    message.requests = object.requests?.map((e) => UpdateDatabaseRequest.fromPartial(e)) || [];
-    return message;
-  },
-};
+            message.requests.push(
+              UpdateDatabaseRequest.decode(reader, reader.uint32())
+            );
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): BatchUpdateDatabasesRequest {
+      return {
+        parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
+        requests: globalThis.Array.isArray(object?.requests)
+          ? object.requests.map((e: any) => UpdateDatabaseRequest.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: BatchUpdateDatabasesRequest): unknown {
+      const obj: any = {};
+      if (message.parent !== "") {
+        obj.parent = message.parent;
+      }
+      if (message.requests?.length) {
+        obj.requests = message.requests.map((e) =>
+          UpdateDatabaseRequest.toJSON(e)
+        );
+      }
+      return obj;
+    },
+
+    create(
+      base?: DeepPartial<BatchUpdateDatabasesRequest>
+    ): BatchUpdateDatabasesRequest {
+      return BatchUpdateDatabasesRequest.fromPartial(base ?? {});
+    },
+    fromPartial(
+      object: DeepPartial<BatchUpdateDatabasesRequest>
+    ): BatchUpdateDatabasesRequest {
+      const message = createBaseBatchUpdateDatabasesRequest();
+      message.parent = object.parent ?? "";
+      message.requests =
+        object.requests?.map((e) => UpdateDatabaseRequest.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseBatchUpdateDatabasesResponse(): BatchUpdateDatabasesResponse {
   return { databases: [] };
 }
 
-export const BatchUpdateDatabasesResponse: MessageFns<BatchUpdateDatabasesResponse> = {
-  encode(message: BatchUpdateDatabasesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    for (const v of message.databases) {
-      Database.encode(v!, writer.uint32(10).fork()).join();
-    }
-    return writer;
-  },
+export const BatchUpdateDatabasesResponse: MessageFns<BatchUpdateDatabasesResponse> =
+  {
+    encode(
+      message: BatchUpdateDatabasesResponse,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      for (const v of message.databases) {
+        Database.encode(v!, writer.uint32(10).fork()).join();
+      }
+      return writer;
+    },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): BatchUpdateDatabasesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseBatchUpdateDatabasesResponse();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): BatchUpdateDatabasesResponse {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseBatchUpdateDatabasesResponse();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
+
+            message.databases.push(Database.decode(reader, reader.uint32()));
+            continue;
           }
-
-          message.databases.push(Database.decode(reader, reader.uint32()));
-          continue;
         }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      return message;
+    },
+
+    fromJSON(object: any): BatchUpdateDatabasesResponse {
+      return {
+        databases: globalThis.Array.isArray(object?.databases)
+          ? object.databases.map((e: any) => Database.fromJSON(e))
+          : [],
+      };
+    },
+
+    toJSON(message: BatchUpdateDatabasesResponse): unknown {
+      const obj: any = {};
+      if (message.databases?.length) {
+        obj.databases = message.databases.map((e) => Database.toJSON(e));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      return obj;
+    },
 
-  fromJSON(object: any): BatchUpdateDatabasesResponse {
-    return {
-      databases: globalThis.Array.isArray(object?.databases)
-        ? object.databases.map((e: any) => Database.fromJSON(e))
-        : [],
-    };
-  },
-
-  toJSON(message: BatchUpdateDatabasesResponse): unknown {
-    const obj: any = {};
-    if (message.databases?.length) {
-      obj.databases = message.databases.map((e) => Database.toJSON(e));
-    }
-    return obj;
-  },
-
-  create(base?: DeepPartial<BatchUpdateDatabasesResponse>): BatchUpdateDatabasesResponse {
-    return BatchUpdateDatabasesResponse.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<BatchUpdateDatabasesResponse>): BatchUpdateDatabasesResponse {
-    const message = createBaseBatchUpdateDatabasesResponse();
-    message.databases = object.databases?.map((e) => Database.fromPartial(e)) || [];
-    return message;
-  },
-};
+    create(
+      base?: DeepPartial<BatchUpdateDatabasesResponse>
+    ): BatchUpdateDatabasesResponse {
+      return BatchUpdateDatabasesResponse.fromPartial(base ?? {});
+    },
+    fromPartial(
+      object: DeepPartial<BatchUpdateDatabasesResponse>
+    ): BatchUpdateDatabasesResponse {
+      const message = createBaseBatchUpdateDatabasesResponse();
+      message.databases =
+        object.databases?.map((e) => Database.fromPartial(e)) || [];
+      return message;
+    },
+  };
 
 function createBaseSyncDatabaseRequest(): SyncDatabaseRequest {
   return { name: "" };
 }
 
 export const SyncDatabaseRequest: MessageFns<SyncDatabaseRequest> = {
-  encode(message: SyncDatabaseRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SyncDatabaseRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SyncDatabaseRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SyncDatabaseRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyncDatabaseRequest();
     while (reader.pos < end) {
@@ -2553,12 +2662,19 @@ function createBaseSyncDatabaseResponse(): SyncDatabaseResponse {
 }
 
 export const SyncDatabaseResponse: MessageFns<SyncDatabaseResponse> = {
-  encode(_: SyncDatabaseResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    _: SyncDatabaseResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SyncDatabaseResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SyncDatabaseResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSyncDatabaseResponse();
     while (reader.pos < end) {
@@ -2592,105 +2708,129 @@ export const SyncDatabaseResponse: MessageFns<SyncDatabaseResponse> = {
 };
 
 function createBaseGetDatabaseMetadataRequest(): GetDatabaseMetadataRequest {
-  return { name: "", view: DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED, filter: "" };
+  return {
+    name: "",
+    view: DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED,
+    filter: "",
+  };
 }
 
-export const GetDatabaseMetadataRequest: MessageFns<GetDatabaseMetadataRequest> = {
-  encode(message: GetDatabaseMetadataRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
-    if (message.name !== "") {
-      writer.uint32(10).string(message.name);
-    }
-    if (message.view !== DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED) {
-      writer.uint32(16).int32(databaseMetadataViewToNumber(message.view));
-    }
-    if (message.filter !== "") {
-      writer.uint32(26).string(message.filter);
-    }
-    return writer;
-  },
-
-  decode(input: BinaryReader | Uint8Array, length?: number): GetDatabaseMetadataRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
-    let end = length === undefined ? reader.len : reader.pos + length;
-    const message = createBaseGetDatabaseMetadataRequest();
-    while (reader.pos < end) {
-      const tag = reader.uint32();
-      switch (tag >>> 3) {
-        case 1: {
-          if (tag !== 10) {
-            break;
-          }
-
-          message.name = reader.string();
-          continue;
-        }
-        case 2: {
-          if (tag !== 16) {
-            break;
-          }
-
-          message.view = databaseMetadataViewFromJSON(reader.int32());
-          continue;
-        }
-        case 3: {
-          if (tag !== 26) {
-            break;
-          }
-
-          message.filter = reader.string();
-          continue;
-        }
+export const GetDatabaseMetadataRequest: MessageFns<GetDatabaseMetadataRequest> =
+  {
+    encode(
+      message: GetDatabaseMetadataRequest,
+      writer: BinaryWriter = new BinaryWriter()
+    ): BinaryWriter {
+      if (message.name !== "") {
+        writer.uint32(10).string(message.name);
       }
-      if ((tag & 7) === 4 || tag === 0) {
-        break;
+      if (
+        message.view !== DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED
+      ) {
+        writer.uint32(16).int32(databaseMetadataViewToNumber(message.view));
       }
-      reader.skip(tag & 7);
-    }
-    return message;
-  },
+      if (message.filter !== "") {
+        writer.uint32(26).string(message.filter);
+      }
+      return writer;
+    },
 
-  fromJSON(object: any): GetDatabaseMetadataRequest {
-    return {
-      name: isSet(object.name) ? globalThis.String(object.name) : "",
-      view: isSet(object.view)
-        ? databaseMetadataViewFromJSON(object.view)
-        : DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED,
-      filter: isSet(object.filter) ? globalThis.String(object.filter) : "",
-    };
-  },
+    decode(
+      input: BinaryReader | Uint8Array,
+      length?: number
+    ): GetDatabaseMetadataRequest {
+      const reader =
+        input instanceof BinaryReader ? input : new BinaryReader(input);
+      let end = length === undefined ? reader.len : reader.pos + length;
+      const message = createBaseGetDatabaseMetadataRequest();
+      while (reader.pos < end) {
+        const tag = reader.uint32();
+        switch (tag >>> 3) {
+          case 1: {
+            if (tag !== 10) {
+              break;
+            }
 
-  toJSON(message: GetDatabaseMetadataRequest): unknown {
-    const obj: any = {};
-    if (message.name !== "") {
-      obj.name = message.name;
-    }
-    if (message.view !== DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED) {
-      obj.view = databaseMetadataViewToJSON(message.view);
-    }
-    if (message.filter !== "") {
-      obj.filter = message.filter;
-    }
-    return obj;
-  },
+            message.name = reader.string();
+            continue;
+          }
+          case 2: {
+            if (tag !== 16) {
+              break;
+            }
 
-  create(base?: DeepPartial<GetDatabaseMetadataRequest>): GetDatabaseMetadataRequest {
-    return GetDatabaseMetadataRequest.fromPartial(base ?? {});
-  },
-  fromPartial(object: DeepPartial<GetDatabaseMetadataRequest>): GetDatabaseMetadataRequest {
-    const message = createBaseGetDatabaseMetadataRequest();
-    message.name = object.name ?? "";
-    message.view = object.view ?? DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED;
-    message.filter = object.filter ?? "";
-    return message;
-  },
-};
+            message.view = databaseMetadataViewFromJSON(reader.int32());
+            continue;
+          }
+          case 3: {
+            if (tag !== 26) {
+              break;
+            }
+
+            message.filter = reader.string();
+            continue;
+          }
+        }
+        if ((tag & 7) === 4 || tag === 0) {
+          break;
+        }
+        reader.skip(tag & 7);
+      }
+      return message;
+    },
+
+    fromJSON(object: any): GetDatabaseMetadataRequest {
+      return {
+        name: isSet(object.name) ? globalThis.String(object.name) : "",
+        view: isSet(object.view)
+          ? databaseMetadataViewFromJSON(object.view)
+          : DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED,
+        filter: isSet(object.filter) ? globalThis.String(object.filter) : "",
+      };
+    },
+
+    toJSON(message: GetDatabaseMetadataRequest): unknown {
+      const obj: any = {};
+      if (message.name !== "") {
+        obj.name = message.name;
+      }
+      if (
+        message.view !== DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED
+      ) {
+        obj.view = databaseMetadataViewToJSON(message.view);
+      }
+      if (message.filter !== "") {
+        obj.filter = message.filter;
+      }
+      return obj;
+    },
+
+    create(
+      base?: DeepPartial<GetDatabaseMetadataRequest>
+    ): GetDatabaseMetadataRequest {
+      return GetDatabaseMetadataRequest.fromPartial(base ?? {});
+    },
+    fromPartial(
+      object: DeepPartial<GetDatabaseMetadataRequest>
+    ): GetDatabaseMetadataRequest {
+      const message = createBaseGetDatabaseMetadataRequest();
+      message.name = object.name ?? "";
+      message.view =
+        object.view ?? DatabaseMetadataView.DATABASE_METADATA_VIEW_UNSPECIFIED;
+      message.filter = object.filter ?? "";
+      return message;
+    },
+  };
 
 function createBaseGetDatabaseSchemaRequest(): GetDatabaseSchemaRequest {
   return { name: "", sdlFormat: false };
 }
 
 export const GetDatabaseSchemaRequest: MessageFns<GetDatabaseSchemaRequest> = {
-  encode(message: GetDatabaseSchemaRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetDatabaseSchemaRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2700,8 +2840,12 @@ export const GetDatabaseSchemaRequest: MessageFns<GetDatabaseSchemaRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetDatabaseSchemaRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): GetDatabaseSchemaRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetDatabaseSchemaRequest();
     while (reader.pos < end) {
@@ -2735,7 +2879,9 @@ export const GetDatabaseSchemaRequest: MessageFns<GetDatabaseSchemaRequest> = {
   fromJSON(object: any): GetDatabaseSchemaRequest {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      sdlFormat: isSet(object.sdlFormat) ? globalThis.Boolean(object.sdlFormat) : false,
+      sdlFormat: isSet(object.sdlFormat)
+        ? globalThis.Boolean(object.sdlFormat)
+        : false,
     };
   },
 
@@ -2750,10 +2896,14 @@ export const GetDatabaseSchemaRequest: MessageFns<GetDatabaseSchemaRequest> = {
     return obj;
   },
 
-  create(base?: DeepPartial<GetDatabaseSchemaRequest>): GetDatabaseSchemaRequest {
+  create(
+    base?: DeepPartial<GetDatabaseSchemaRequest>
+  ): GetDatabaseSchemaRequest {
     return GetDatabaseSchemaRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<GetDatabaseSchemaRequest>): GetDatabaseSchemaRequest {
+  fromPartial(
+    object: DeepPartial<GetDatabaseSchemaRequest>
+  ): GetDatabaseSchemaRequest {
     const message = createBaseGetDatabaseSchemaRequest();
     message.name = object.name ?? "";
     message.sdlFormat = object.sdlFormat ?? false;
@@ -2762,11 +2912,19 @@ export const GetDatabaseSchemaRequest: MessageFns<GetDatabaseSchemaRequest> = {
 };
 
 function createBaseDiffSchemaRequest(): DiffSchemaRequest {
-  return { name: "", schema: undefined, changelog: undefined, sdlFormat: false };
+  return {
+    name: "",
+    schema: undefined,
+    changelog: undefined,
+    sdlFormat: false,
+  };
 }
 
 export const DiffSchemaRequest: MessageFns<DiffSchemaRequest> = {
-  encode(message: DiffSchemaRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DiffSchemaRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2783,7 +2941,8 @@ export const DiffSchemaRequest: MessageFns<DiffSchemaRequest> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DiffSchemaRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDiffSchemaRequest();
     while (reader.pos < end) {
@@ -2833,9 +2992,15 @@ export const DiffSchemaRequest: MessageFns<DiffSchemaRequest> = {
   fromJSON(object: any): DiffSchemaRequest {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      schema: isSet(object.schema) ? globalThis.String(object.schema) : undefined,
-      changelog: isSet(object.changelog) ? globalThis.String(object.changelog) : undefined,
-      sdlFormat: isSet(object.sdlFormat) ? globalThis.Boolean(object.sdlFormat) : false,
+      schema: isSet(object.schema)
+        ? globalThis.String(object.schema)
+        : undefined,
+      changelog: isSet(object.changelog)
+        ? globalThis.String(object.changelog)
+        : undefined,
+      sdlFormat: isSet(object.sdlFormat)
+        ? globalThis.Boolean(object.sdlFormat)
+        : false,
     };
   },
 
@@ -2874,15 +3039,22 @@ function createBaseDiffSchemaResponse(): DiffSchemaResponse {
 }
 
 export const DiffSchemaResponse: MessageFns<DiffSchemaResponse> = {
-  encode(message: DiffSchemaResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DiffSchemaResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.diff !== "") {
       writer.uint32(10).string(message.diff);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DiffSchemaResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): DiffSchemaResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDiffSchemaResponse();
     while (reader.pos < end) {
@@ -2938,12 +3110,15 @@ function createBaseDatabase(): Database {
     effectiveEnvironment: "",
     labels: {},
     instanceResource: undefined,
-    backupAvailable: false,
+    backupAvailable: true,
   };
 }
 
 export const Database: MessageFns<Database> = {
-  encode(message: Database, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Database,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -2951,7 +3126,10 @@ export const Database: MessageFns<Database> = {
       writer.uint32(24).int32(stateToNumber(message.state));
     }
     if (message.successfulSyncTime !== undefined) {
-      Timestamp.encode(message.successfulSyncTime, writer.uint32(34).fork()).join();
+      Timestamp.encode(
+        message.successfulSyncTime,
+        writer.uint32(34).fork()
+      ).join();
     }
     if (message.project !== "") {
       writer.uint32(42).string(message.project);
@@ -2966,10 +3144,16 @@ export const Database: MessageFns<Database> = {
       writer.uint32(66).string(message.effectiveEnvironment);
     }
     Object.entries(message.labels).forEach(([key, value]) => {
-      Database_LabelsEntry.encode({ key: key as any, value }, writer.uint32(74).fork()).join();
+      Database_LabelsEntry.encode(
+        { key: key as any, value },
+        writer.uint32(74).fork()
+      ).join();
     });
     if (message.instanceResource !== undefined) {
-      InstanceResource.encode(message.instanceResource, writer.uint32(82).fork()).join();
+      InstanceResource.encode(
+        message.instanceResource,
+        writer.uint32(82).fork()
+      ).join();
     }
     if (message.backupAvailable !== false) {
       writer.uint32(88).bool(message.backupAvailable);
@@ -2978,7 +3162,8 @@ export const Database: MessageFns<Database> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Database {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDatabase();
     while (reader.pos < end) {
@@ -3005,7 +3190,10 @@ export const Database: MessageFns<Database> = {
             break;
           }
 
-          message.successfulSyncTime = Timestamp.decode(reader, reader.uint32());
+          message.successfulSyncTime = Timestamp.decode(
+            reader,
+            reader.uint32()
+          );
           continue;
         }
         case 5: {
@@ -3056,7 +3244,10 @@ export const Database: MessageFns<Database> = {
             break;
           }
 
-          message.instanceResource = InstanceResource.decode(reader, reader.uint32());
+          message.instanceResource = InstanceResource.decode(
+            reader,
+            reader.uint32()
+          );
           continue;
         }
         case 11: {
@@ -3079,20 +3270,37 @@ export const Database: MessageFns<Database> = {
   fromJSON(object: any): Database {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      state: isSet(object.state) ? stateFromJSON(object.state) : State.STATE_UNSPECIFIED,
-      successfulSyncTime: isSet(object.successfulSyncTime) ? fromJsonTimestamp(object.successfulSyncTime) : undefined,
+      state: isSet(object.state)
+        ? stateFromJSON(object.state)
+        : State.STATE_UNSPECIFIED,
+      successfulSyncTime: isSet(object.successfulSyncTime)
+        ? fromJsonTimestamp(object.successfulSyncTime)
+        : undefined,
       project: isSet(object.project) ? globalThis.String(object.project) : "",
-      schemaVersion: isSet(object.schemaVersion) ? globalThis.String(object.schemaVersion) : "",
-      environment: isSet(object.environment) ? globalThis.String(object.environment) : "",
-      effectiveEnvironment: isSet(object.effectiveEnvironment) ? globalThis.String(object.effectiveEnvironment) : "",
+      schemaVersion: isSet(object.schemaVersion)
+        ? globalThis.String(object.schemaVersion)
+        : "",
+      environment: isSet(object.environment)
+        ? globalThis.String(object.environment)
+        : "",
+      effectiveEnvironment: isSet(object.effectiveEnvironment)
+        ? globalThis.String(object.effectiveEnvironment)
+        : "",
       labels: isObject(object.labels)
-        ? Object.entries(object.labels).reduce<{ [key: string]: string }>((acc, [key, value]) => {
-          acc[key] = String(value);
-          return acc;
-        }, {})
+        ? Object.entries(object.labels).reduce<{ [key: string]: string }>(
+            (acc, [key, value]) => {
+              acc[key] = String(value);
+              return acc;
+            },
+            {}
+          )
         : {},
-      instanceResource: isSet(object.instanceResource) ? InstanceResource.fromJSON(object.instanceResource) : undefined,
-      backupAvailable: isSet(object.backupAvailable) ? globalThis.Boolean(object.backupAvailable) : false,
+      instanceResource: isSet(object.instanceResource)
+        ? InstanceResource.fromJSON(object.instanceResource)
+        : undefined,
+      backupAvailable: isSet(object.backupAvailable)
+        ? globalThis.Boolean(object.backupAvailable)
+        : false,
     };
   },
 
@@ -3105,7 +3313,9 @@ export const Database: MessageFns<Database> = {
       obj.state = stateToJSON(message.state);
     }
     if (message.successfulSyncTime !== undefined) {
-      obj.successfulSyncTime = fromTimestamp(message.successfulSyncTime).toISOString();
+      obj.successfulSyncTime = fromTimestamp(
+        message.successfulSyncTime
+      ).toISOString();
     }
     if (message.project !== "") {
       obj.project = message.project;
@@ -3144,22 +3354,27 @@ export const Database: MessageFns<Database> = {
     const message = createBaseDatabase();
     message.name = object.name ?? "";
     message.state = object.state ?? State.STATE_UNSPECIFIED;
-    message.successfulSyncTime = (object.successfulSyncTime !== undefined && object.successfulSyncTime !== null)
-      ? Timestamp.fromPartial(object.successfulSyncTime)
-      : undefined;
+    message.successfulSyncTime =
+      object.successfulSyncTime !== undefined &&
+      object.successfulSyncTime !== null
+        ? Timestamp.fromPartial(object.successfulSyncTime)
+        : undefined;
     message.project = object.project ?? "";
     message.schemaVersion = object.schemaVersion ?? "";
     message.environment = object.environment ?? "";
     message.effectiveEnvironment = object.effectiveEnvironment ?? "";
-    message.labels = Object.entries(object.labels ?? {}).reduce<{ [key: string]: string }>((acc, [key, value]) => {
+    message.labels = Object.entries(object.labels ?? {}).reduce<{
+      [key: string]: string;
+    }>((acc, [key, value]) => {
       if (value !== undefined) {
         acc[key] = globalThis.String(value);
       }
       return acc;
     }, {});
-    message.instanceResource = (object.instanceResource !== undefined && object.instanceResource !== null)
-      ? InstanceResource.fromPartial(object.instanceResource)
-      : undefined;
+    message.instanceResource =
+      object.instanceResource !== undefined && object.instanceResource !== null
+        ? InstanceResource.fromPartial(object.instanceResource)
+        : undefined;
     message.backupAvailable = object.backupAvailable ?? false;
     return message;
   },
@@ -3170,7 +3385,10 @@ function createBaseDatabase_LabelsEntry(): Database_LabelsEntry {
 }
 
 export const Database_LabelsEntry: MessageFns<Database_LabelsEntry> = {
-  encode(message: Database_LabelsEntry, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Database_LabelsEntry,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.key !== "") {
       writer.uint32(10).string(message.key);
     }
@@ -3180,8 +3398,12 @@ export const Database_LabelsEntry: MessageFns<Database_LabelsEntry> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): Database_LabelsEntry {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): Database_LabelsEntry {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDatabase_LabelsEntry();
     while (reader.pos < end) {
@@ -3242,11 +3464,21 @@ export const Database_LabelsEntry: MessageFns<Database_LabelsEntry> = {
 };
 
 function createBaseDatabaseMetadata(): DatabaseMetadata {
-  return { name: "", schemas: [], characterSet: "", collation: "", extensions: [], owner: "" };
+  return {
+    name: "",
+    schemas: [],
+    characterSet: "",
+    collation: "",
+    extensions: [],
+    owner: "",
+  };
 }
 
 export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
-  encode(message: DatabaseMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DatabaseMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3269,7 +3501,8 @@ export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DatabaseMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDatabaseMetadata();
     while (reader.pos < end) {
@@ -3312,7 +3545,9 @@ export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
             break;
           }
 
-          message.extensions.push(ExtensionMetadata.decode(reader, reader.uint32()));
+          message.extensions.push(
+            ExtensionMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 7: {
@@ -3338,8 +3573,12 @@ export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
       schemas: globalThis.Array.isArray(object?.schemas)
         ? object.schemas.map((e: any) => SchemaMetadata.fromJSON(e))
         : [],
-      characterSet: isSet(object.characterSet) ? globalThis.String(object.characterSet) : "",
-      collation: isSet(object.collation) ? globalThis.String(object.collation) : "",
+      characterSet: isSet(object.characterSet)
+        ? globalThis.String(object.characterSet)
+        : "",
+      collation: isSet(object.collation)
+        ? globalThis.String(object.collation)
+        : "",
       extensions: globalThis.Array.isArray(object?.extensions)
         ? object.extensions.map((e: any) => ExtensionMetadata.fromJSON(e))
         : [],
@@ -3362,7 +3601,9 @@ export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
       obj.collation = message.collation;
     }
     if (message.extensions?.length) {
-      obj.extensions = message.extensions.map((e) => ExtensionMetadata.toJSON(e));
+      obj.extensions = message.extensions.map((e) =>
+        ExtensionMetadata.toJSON(e)
+      );
     }
     if (message.owner !== "") {
       obj.owner = message.owner;
@@ -3376,10 +3617,12 @@ export const DatabaseMetadata: MessageFns<DatabaseMetadata> = {
   fromPartial(object: DeepPartial<DatabaseMetadata>): DatabaseMetadata {
     const message = createBaseDatabaseMetadata();
     message.name = object.name ?? "";
-    message.schemas = object.schemas?.map((e) => SchemaMetadata.fromPartial(e)) || [];
+    message.schemas =
+      object.schemas?.map((e) => SchemaMetadata.fromPartial(e)) || [];
     message.characterSet = object.characterSet ?? "";
     message.collation = object.collation ?? "";
-    message.extensions = object.extensions?.map((e) => ExtensionMetadata.fromPartial(e)) || [];
+    message.extensions =
+      object.extensions?.map((e) => ExtensionMetadata.fromPartial(e)) || [];
     message.owner = object.owner ?? "";
     return message;
   },
@@ -3406,7 +3649,10 @@ function createBaseSchemaMetadata(): SchemaMetadata {
 }
 
 export const SchemaMetadata: MessageFns<SchemaMetadata> = {
-  encode(message: SchemaMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SchemaMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3456,7 +3702,8 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SchemaMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSchemaMetadata();
     while (reader.pos < end) {
@@ -3483,7 +3730,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.externalTables.push(ExternalTableMetadata.decode(reader, reader.uint32()));
+          message.externalTables.push(
+            ExternalTableMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 4: {
@@ -3499,7 +3748,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.functions.push(FunctionMetadata.decode(reader, reader.uint32()));
+          message.functions.push(
+            FunctionMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 6: {
@@ -3507,7 +3758,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.procedures.push(ProcedureMetadata.decode(reader, reader.uint32()));
+          message.procedures.push(
+            ProcedureMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 7: {
@@ -3531,7 +3784,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.materializedViews.push(MaterializedViewMetadata.decode(reader, reader.uint32()));
+          message.materializedViews.push(
+            MaterializedViewMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 10: {
@@ -3539,7 +3794,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.packages.push(PackageMetadata.decode(reader, reader.uint32()));
+          message.packages.push(
+            PackageMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 11: {
@@ -3555,7 +3812,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.sequences.push(SequenceMetadata.decode(reader, reader.uint32()));
+          message.sequences.push(
+            SequenceMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 14: {
@@ -3571,7 +3830,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
             break;
           }
 
-          message.enumTypes.push(EnumTypeMetadata.decode(reader, reader.uint32()));
+          message.enumTypes.push(
+            EnumTypeMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 16: {
@@ -3594,11 +3855,17 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
   fromJSON(object: any): SchemaMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      tables: globalThis.Array.isArray(object?.tables) ? object.tables.map((e: any) => TableMetadata.fromJSON(e)) : [],
-      externalTables: globalThis.Array.isArray(object?.externalTables)
-        ? object.externalTables.map((e: any) => ExternalTableMetadata.fromJSON(e))
+      tables: globalThis.Array.isArray(object?.tables)
+        ? object.tables.map((e: any) => TableMetadata.fromJSON(e))
         : [],
-      views: globalThis.Array.isArray(object?.views) ? object.views.map((e: any) => ViewMetadata.fromJSON(e)) : [],
+      externalTables: globalThis.Array.isArray(object?.externalTables)
+        ? object.externalTables.map((e: any) =>
+            ExternalTableMetadata.fromJSON(e)
+          )
+        : [],
+      views: globalThis.Array.isArray(object?.views)
+        ? object.views.map((e: any) => ViewMetadata.fromJSON(e))
+        : [],
       functions: globalThis.Array.isArray(object?.functions)
         ? object.functions.map((e: any) => FunctionMetadata.fromJSON(e))
         : [],
@@ -3608,9 +3875,13 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
       streams: globalThis.Array.isArray(object?.streams)
         ? object.streams.map((e: any) => StreamMetadata.fromJSON(e))
         : [],
-      tasks: globalThis.Array.isArray(object?.tasks) ? object.tasks.map((e: any) => TaskMetadata.fromJSON(e)) : [],
+      tasks: globalThis.Array.isArray(object?.tasks)
+        ? object.tasks.map((e: any) => TaskMetadata.fromJSON(e))
+        : [],
       materializedViews: globalThis.Array.isArray(object?.materializedViews)
-        ? object.materializedViews.map((e: any) => MaterializedViewMetadata.fromJSON(e))
+        ? object.materializedViews.map((e: any) =>
+            MaterializedViewMetadata.fromJSON(e)
+          )
         : [],
       packages: globalThis.Array.isArray(object?.packages)
         ? object.packages.map((e: any) => PackageMetadata.fromJSON(e))
@@ -3619,11 +3890,15 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
       sequences: globalThis.Array.isArray(object?.sequences)
         ? object.sequences.map((e: any) => SequenceMetadata.fromJSON(e))
         : [],
-      events: globalThis.Array.isArray(object?.events) ? object.events.map((e: any) => EventMetadata.fromJSON(e)) : [],
+      events: globalThis.Array.isArray(object?.events)
+        ? object.events.map((e: any) => EventMetadata.fromJSON(e))
+        : [],
       enumTypes: globalThis.Array.isArray(object?.enumTypes)
         ? object.enumTypes.map((e: any) => EnumTypeMetadata.fromJSON(e))
         : [],
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -3636,7 +3911,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
       obj.tables = message.tables.map((e) => TableMetadata.toJSON(e));
     }
     if (message.externalTables?.length) {
-      obj.externalTables = message.externalTables.map((e) => ExternalTableMetadata.toJSON(e));
+      obj.externalTables = message.externalTables.map((e) =>
+        ExternalTableMetadata.toJSON(e)
+      );
     }
     if (message.views?.length) {
       obj.views = message.views.map((e) => ViewMetadata.toJSON(e));
@@ -3645,7 +3922,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
       obj.functions = message.functions.map((e) => FunctionMetadata.toJSON(e));
     }
     if (message.procedures?.length) {
-      obj.procedures = message.procedures.map((e) => ProcedureMetadata.toJSON(e));
+      obj.procedures = message.procedures.map((e) =>
+        ProcedureMetadata.toJSON(e)
+      );
     }
     if (message.streams?.length) {
       obj.streams = message.streams.map((e) => StreamMetadata.toJSON(e));
@@ -3654,7 +3933,9 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
       obj.tasks = message.tasks.map((e) => TaskMetadata.toJSON(e));
     }
     if (message.materializedViews?.length) {
-      obj.materializedViews = message.materializedViews.map((e) => MaterializedViewMetadata.toJSON(e));
+      obj.materializedViews = message.materializedViews.map((e) =>
+        MaterializedViewMetadata.toJSON(e)
+      );
     }
     if (message.packages?.length) {
       obj.packages = message.packages.map((e) => PackageMetadata.toJSON(e));
@@ -3683,19 +3964,32 @@ export const SchemaMetadata: MessageFns<SchemaMetadata> = {
   fromPartial(object: DeepPartial<SchemaMetadata>): SchemaMetadata {
     const message = createBaseSchemaMetadata();
     message.name = object.name ?? "";
-    message.tables = object.tables?.map((e) => TableMetadata.fromPartial(e)) || [];
-    message.externalTables = object.externalTables?.map((e) => ExternalTableMetadata.fromPartial(e)) || [];
+    message.tables =
+      object.tables?.map((e) => TableMetadata.fromPartial(e)) || [];
+    message.externalTables =
+      object.externalTables?.map((e) => ExternalTableMetadata.fromPartial(e)) ||
+      [];
     message.views = object.views?.map((e) => ViewMetadata.fromPartial(e)) || [];
-    message.functions = object.functions?.map((e) => FunctionMetadata.fromPartial(e)) || [];
-    message.procedures = object.procedures?.map((e) => ProcedureMetadata.fromPartial(e)) || [];
-    message.streams = object.streams?.map((e) => StreamMetadata.fromPartial(e)) || [];
+    message.functions =
+      object.functions?.map((e) => FunctionMetadata.fromPartial(e)) || [];
+    message.procedures =
+      object.procedures?.map((e) => ProcedureMetadata.fromPartial(e)) || [];
+    message.streams =
+      object.streams?.map((e) => StreamMetadata.fromPartial(e)) || [];
     message.tasks = object.tasks?.map((e) => TaskMetadata.fromPartial(e)) || [];
-    message.materializedViews = object.materializedViews?.map((e) => MaterializedViewMetadata.fromPartial(e)) || [];
-    message.packages = object.packages?.map((e) => PackageMetadata.fromPartial(e)) || [];
+    message.materializedViews =
+      object.materializedViews?.map((e) =>
+        MaterializedViewMetadata.fromPartial(e)
+      ) || [];
+    message.packages =
+      object.packages?.map((e) => PackageMetadata.fromPartial(e)) || [];
     message.owner = object.owner ?? "";
-    message.sequences = object.sequences?.map((e) => SequenceMetadata.fromPartial(e)) || [];
-    message.events = object.events?.map((e) => EventMetadata.fromPartial(e)) || [];
-    message.enumTypes = object.enumTypes?.map((e) => EnumTypeMetadata.fromPartial(e)) || [];
+    message.sequences =
+      object.sequences?.map((e) => SequenceMetadata.fromPartial(e)) || [];
+    message.events =
+      object.events?.map((e) => EventMetadata.fromPartial(e)) || [];
+    message.enumTypes =
+      object.enumTypes?.map((e) => EnumTypeMetadata.fromPartial(e)) || [];
     message.skipDump = object.skipDump ?? false;
     return message;
   },
@@ -3706,7 +4000,10 @@ function createBaseEnumTypeMetadata(): EnumTypeMetadata {
 }
 
 export const EnumTypeMetadata: MessageFns<EnumTypeMetadata> = {
-  encode(message: EnumTypeMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: EnumTypeMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3723,7 +4020,8 @@ export const EnumTypeMetadata: MessageFns<EnumTypeMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): EnumTypeMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEnumTypeMetadata();
     while (reader.pos < end) {
@@ -3773,9 +4071,13 @@ export const EnumTypeMetadata: MessageFns<EnumTypeMetadata> = {
   fromJSON(object: any): EnumTypeMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      values: globalThis.Array.isArray(object?.values) ? object.values.map((e: any) => globalThis.String(e)) : [],
+      values: globalThis.Array.isArray(object?.values)
+        ? object.values.map((e: any) => globalThis.String(e))
+        : [],
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -3810,11 +4112,21 @@ export const EnumTypeMetadata: MessageFns<EnumTypeMetadata> = {
 };
 
 function createBaseEventMetadata(): EventMetadata {
-  return { name: "", definition: "", timeZone: "", sqlMode: "", characterSetClient: "", collationConnection: "" };
+  return {
+    name: "",
+    definition: "",
+    timeZone: "",
+    sqlMode: "",
+    characterSetClient: "",
+    collationConnection: "",
+  };
 }
 
 export const EventMetadata: MessageFns<EventMetadata> = {
-  encode(message: EventMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: EventMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -3837,7 +4149,8 @@ export const EventMetadata: MessageFns<EventMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): EventMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseEventMetadata();
     while (reader.pos < end) {
@@ -3903,11 +4216,19 @@ export const EventMetadata: MessageFns<EventMetadata> = {
   fromJSON(object: any): EventMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
-      timeZone: isSet(object.timeZone) ? globalThis.String(object.timeZone) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
+      timeZone: isSet(object.timeZone)
+        ? globalThis.String(object.timeZone)
+        : "",
       sqlMode: isSet(object.sqlMode) ? globalThis.String(object.sqlMode) : "",
-      characterSetClient: isSet(object.characterSetClient) ? globalThis.String(object.characterSetClient) : "",
-      collationConnection: isSet(object.collationConnection) ? globalThis.String(object.collationConnection) : "",
+      characterSetClient: isSet(object.characterSetClient)
+        ? globalThis.String(object.characterSetClient)
+        : "",
+      collationConnection: isSet(object.collationConnection)
+        ? globalThis.String(object.collationConnection)
+        : "",
     };
   },
 
@@ -3968,7 +4289,10 @@ function createBaseSequenceMetadata(): SequenceMetadata {
 }
 
 export const SequenceMetadata: MessageFns<SequenceMetadata> = {
-  encode(message: SequenceMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SequenceMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4012,7 +4336,8 @@ export const SequenceMetadata: MessageFns<SequenceMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SequenceMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSequenceMetadata();
     while (reader.pos < end) {
@@ -4134,18 +4459,36 @@ export const SequenceMetadata: MessageFns<SequenceMetadata> = {
   fromJSON(object: any): SequenceMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      dataType: isSet(object.dataType) ? globalThis.String(object.dataType) : "",
+      dataType: isSet(object.dataType)
+        ? globalThis.String(object.dataType)
+        : "",
       start: isSet(object.start) ? globalThis.String(object.start) : "",
-      minValue: isSet(object.minValue) ? globalThis.String(object.minValue) : "",
-      maxValue: isSet(object.maxValue) ? globalThis.String(object.maxValue) : "",
-      increment: isSet(object.increment) ? globalThis.String(object.increment) : "",
+      minValue: isSet(object.minValue)
+        ? globalThis.String(object.minValue)
+        : "",
+      maxValue: isSet(object.maxValue)
+        ? globalThis.String(object.maxValue)
+        : "",
+      increment: isSet(object.increment)
+        ? globalThis.String(object.increment)
+        : "",
       cycle: isSet(object.cycle) ? globalThis.Boolean(object.cycle) : false,
-      cacheSize: isSet(object.cacheSize) ? globalThis.String(object.cacheSize) : "",
-      lastValue: isSet(object.lastValue) ? globalThis.String(object.lastValue) : "",
-      ownerTable: isSet(object.ownerTable) ? globalThis.String(object.ownerTable) : "",
-      ownerColumn: isSet(object.ownerColumn) ? globalThis.String(object.ownerColumn) : "",
+      cacheSize: isSet(object.cacheSize)
+        ? globalThis.String(object.cacheSize)
+        : "",
+      lastValue: isSet(object.lastValue)
+        ? globalThis.String(object.lastValue)
+        : "",
+      ownerTable: isSet(object.ownerTable)
+        ? globalThis.String(object.ownerTable)
+        : "",
+      ownerColumn: isSet(object.ownerColumn)
+        ? globalThis.String(object.ownerColumn)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -4230,7 +4573,10 @@ function createBaseTriggerMetadata(): TriggerMetadata {
 }
 
 export const TriggerMetadata: MessageFns<TriggerMetadata> = {
-  encode(message: TriggerMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TriggerMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4262,7 +4608,8 @@ export const TriggerMetadata: MessageFns<TriggerMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TriggerMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTriggerMetadata();
     while (reader.pos < end) {
@@ -4356,10 +4703,16 @@ export const TriggerMetadata: MessageFns<TriggerMetadata> = {
       timing: isSet(object.timing) ? globalThis.String(object.timing) : "",
       body: isSet(object.body) ? globalThis.String(object.body) : "",
       sqlMode: isSet(object.sqlMode) ? globalThis.String(object.sqlMode) : "",
-      characterSetClient: isSet(object.characterSetClient) ? globalThis.String(object.characterSetClient) : "",
-      collationConnection: isSet(object.collationConnection) ? globalThis.String(object.collationConnection) : "",
+      characterSetClient: isSet(object.characterSetClient)
+        ? globalThis.String(object.characterSetClient)
+        : "",
+      collationConnection: isSet(object.collationConnection)
+        ? globalThis.String(object.collationConnection)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -4414,11 +4767,19 @@ export const TriggerMetadata: MessageFns<TriggerMetadata> = {
 };
 
 function createBaseExternalTableMetadata(): ExternalTableMetadata {
-  return { name: "", externalServerName: "", externalDatabaseName: "", columns: [] };
+  return {
+    name: "",
+    externalServerName: "",
+    externalDatabaseName: "",
+    columns: [],
+  };
 }
 
 export const ExternalTableMetadata: MessageFns<ExternalTableMetadata> = {
-  encode(message: ExternalTableMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExternalTableMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4434,8 +4795,12 @@ export const ExternalTableMetadata: MessageFns<ExternalTableMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ExternalTableMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ExternalTableMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExternalTableMetadata();
     while (reader.pos < end) {
@@ -4485,8 +4850,12 @@ export const ExternalTableMetadata: MessageFns<ExternalTableMetadata> = {
   fromJSON(object: any): ExternalTableMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      externalServerName: isSet(object.externalServerName) ? globalThis.String(object.externalServerName) : "",
-      externalDatabaseName: isSet(object.externalDatabaseName) ? globalThis.String(object.externalDatabaseName) : "",
+      externalServerName: isSet(object.externalServerName)
+        ? globalThis.String(object.externalServerName)
+        : "",
+      externalDatabaseName: isSet(object.externalDatabaseName)
+        ? globalThis.String(object.externalDatabaseName)
+        : "",
       columns: globalThis.Array.isArray(object?.columns)
         ? object.columns.map((e: any) => ColumnMetadata.fromJSON(e))
         : [],
@@ -4513,12 +4882,15 @@ export const ExternalTableMetadata: MessageFns<ExternalTableMetadata> = {
   create(base?: DeepPartial<ExternalTableMetadata>): ExternalTableMetadata {
     return ExternalTableMetadata.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ExternalTableMetadata>): ExternalTableMetadata {
+  fromPartial(
+    object: DeepPartial<ExternalTableMetadata>
+  ): ExternalTableMetadata {
     const message = createBaseExternalTableMetadata();
     message.name = object.name ?? "";
     message.externalServerName = object.externalServerName ?? "";
     message.externalDatabaseName = object.externalDatabaseName ?? "";
-    message.columns = object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
+    message.columns =
+      object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
     return message;
   },
 };
@@ -4549,7 +4921,10 @@ function createBaseTableMetadata(): TableMetadata {
 }
 
 export const TableMetadata: MessageFns<TableMetadata> = {
-  encode(message: TableMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TableMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4614,7 +4989,8 @@ export const TableMetadata: MessageFns<TableMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TableMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTableMetadata();
     while (reader.pos < end) {
@@ -4729,7 +5105,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
             break;
           }
 
-          message.foreignKeys.push(ForeignKeyMetadata.decode(reader, reader.uint32()));
+          message.foreignKeys.push(
+            ForeignKeyMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 15: {
@@ -4737,7 +5115,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
             break;
           }
 
-          message.partitions.push(TablePartitionMetadata.decode(reader, reader.uint32()));
+          message.partitions.push(
+            TablePartitionMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 16: {
@@ -4745,7 +5125,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
             break;
           }
 
-          message.checkConstraints.push(CheckConstraintMetadata.decode(reader, reader.uint32()));
+          message.checkConstraints.push(
+            CheckConstraintMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 18: {
@@ -4769,7 +5151,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
             break;
           }
 
-          message.triggers.push(TriggerMetadata.decode(reader, reader.uint32()));
+          message.triggers.push(
+            TriggerMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 21: {
@@ -4799,15 +5183,29 @@ export const TableMetadata: MessageFns<TableMetadata> = {
         ? object.indexes.map((e: any) => IndexMetadata.fromJSON(e))
         : [],
       engine: isSet(object.engine) ? globalThis.String(object.engine) : "",
-      collation: isSet(object.collation) ? globalThis.String(object.collation) : "",
+      collation: isSet(object.collation)
+        ? globalThis.String(object.collation)
+        : "",
       charset: isSet(object.charset) ? globalThis.String(object.charset) : "",
-      rowCount: isSet(object.rowCount) ? Long.fromValue(object.rowCount) : Long.ZERO,
-      dataSize: isSet(object.dataSize) ? Long.fromValue(object.dataSize) : Long.ZERO,
-      indexSize: isSet(object.indexSize) ? Long.fromValue(object.indexSize) : Long.ZERO,
-      dataFree: isSet(object.dataFree) ? Long.fromValue(object.dataFree) : Long.ZERO,
-      createOptions: isSet(object.createOptions) ? globalThis.String(object.createOptions) : "",
+      rowCount: isSet(object.rowCount)
+        ? Long.fromValue(object.rowCount)
+        : Long.ZERO,
+      dataSize: isSet(object.dataSize)
+        ? Long.fromValue(object.dataSize)
+        : Long.ZERO,
+      indexSize: isSet(object.indexSize)
+        ? Long.fromValue(object.indexSize)
+        : Long.ZERO,
+      dataFree: isSet(object.dataFree)
+        ? Long.fromValue(object.dataFree)
+        : Long.ZERO,
+      createOptions: isSet(object.createOptions)
+        ? globalThis.String(object.createOptions)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      userComment: isSet(object.userComment) ? globalThis.String(object.userComment) : "",
+      userComment: isSet(object.userComment)
+        ? globalThis.String(object.userComment)
+        : "",
       foreignKeys: globalThis.Array.isArray(object?.foreignKeys)
         ? object.foreignKeys.map((e: any) => ForeignKeyMetadata.fromJSON(e))
         : [],
@@ -4815,7 +5213,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
         ? object.partitions.map((e: any) => TablePartitionMetadata.fromJSON(e))
         : [],
       checkConstraints: globalThis.Array.isArray(object?.checkConstraints)
-        ? object.checkConstraints.map((e: any) => CheckConstraintMetadata.fromJSON(e))
+        ? object.checkConstraints.map((e: any) =>
+            CheckConstraintMetadata.fromJSON(e)
+          )
         : [],
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       sortingKeys: globalThis.Array.isArray(object?.sortingKeys)
@@ -4824,7 +5224,9 @@ export const TableMetadata: MessageFns<TableMetadata> = {
       triggers: globalThis.Array.isArray(object?.triggers)
         ? object.triggers.map((e: any) => TriggerMetadata.fromJSON(e))
         : [],
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -4870,13 +5272,19 @@ export const TableMetadata: MessageFns<TableMetadata> = {
       obj.userComment = message.userComment;
     }
     if (message.foreignKeys?.length) {
-      obj.foreignKeys = message.foreignKeys.map((e) => ForeignKeyMetadata.toJSON(e));
+      obj.foreignKeys = message.foreignKeys.map((e) =>
+        ForeignKeyMetadata.toJSON(e)
+      );
     }
     if (message.partitions?.length) {
-      obj.partitions = message.partitions.map((e) => TablePartitionMetadata.toJSON(e));
+      obj.partitions = message.partitions.map((e) =>
+        TablePartitionMetadata.toJSON(e)
+      );
     }
     if (message.checkConstraints?.length) {
-      obj.checkConstraints = message.checkConstraints.map((e) => CheckConstraintMetadata.toJSON(e));
+      obj.checkConstraints = message.checkConstraints.map((e) =>
+        CheckConstraintMetadata.toJSON(e)
+      );
     }
     if (message.owner !== "") {
       obj.owner = message.owner;
@@ -4899,32 +5307,45 @@ export const TableMetadata: MessageFns<TableMetadata> = {
   fromPartial(object: DeepPartial<TableMetadata>): TableMetadata {
     const message = createBaseTableMetadata();
     message.name = object.name ?? "";
-    message.columns = object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
-    message.indexes = object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
+    message.columns =
+      object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
+    message.indexes =
+      object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
     message.engine = object.engine ?? "";
     message.collation = object.collation ?? "";
     message.charset = object.charset ?? "";
-    message.rowCount = (object.rowCount !== undefined && object.rowCount !== null)
-      ? Long.fromValue(object.rowCount)
-      : Long.ZERO;
-    message.dataSize = (object.dataSize !== undefined && object.dataSize !== null)
-      ? Long.fromValue(object.dataSize)
-      : Long.ZERO;
-    message.indexSize = (object.indexSize !== undefined && object.indexSize !== null)
-      ? Long.fromValue(object.indexSize)
-      : Long.ZERO;
-    message.dataFree = (object.dataFree !== undefined && object.dataFree !== null)
-      ? Long.fromValue(object.dataFree)
-      : Long.ZERO;
+    message.rowCount =
+      object.rowCount !== undefined && object.rowCount !== null
+        ? Long.fromValue(object.rowCount)
+        : Long.ZERO;
+    message.dataSize =
+      object.dataSize !== undefined && object.dataSize !== null
+        ? Long.fromValue(object.dataSize)
+        : Long.ZERO;
+    message.indexSize =
+      object.indexSize !== undefined && object.indexSize !== null
+        ? Long.fromValue(object.indexSize)
+        : Long.ZERO;
+    message.dataFree =
+      object.dataFree !== undefined && object.dataFree !== null
+        ? Long.fromValue(object.dataFree)
+        : Long.ZERO;
     message.createOptions = object.createOptions ?? "";
     message.comment = object.comment ?? "";
     message.userComment = object.userComment ?? "";
-    message.foreignKeys = object.foreignKeys?.map((e) => ForeignKeyMetadata.fromPartial(e)) || [];
-    message.partitions = object.partitions?.map((e) => TablePartitionMetadata.fromPartial(e)) || [];
-    message.checkConstraints = object.checkConstraints?.map((e) => CheckConstraintMetadata.fromPartial(e)) || [];
+    message.foreignKeys =
+      object.foreignKeys?.map((e) => ForeignKeyMetadata.fromPartial(e)) || [];
+    message.partitions =
+      object.partitions?.map((e) => TablePartitionMetadata.fromPartial(e)) ||
+      [];
+    message.checkConstraints =
+      object.checkConstraints?.map((e) =>
+        CheckConstraintMetadata.fromPartial(e)
+      ) || [];
     message.owner = object.owner ?? "";
     message.sortingKeys = object.sortingKeys?.map((e) => e) || [];
-    message.triggers = object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
+    message.triggers =
+      object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
     message.skipDump = object.skipDump ?? false;
     return message;
   },
@@ -4935,7 +5356,10 @@ function createBaseCheckConstraintMetadata(): CheckConstraintMetadata {
 }
 
 export const CheckConstraintMetadata: MessageFns<CheckConstraintMetadata> = {
-  encode(message: CheckConstraintMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CheckConstraintMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -4945,8 +5369,12 @@ export const CheckConstraintMetadata: MessageFns<CheckConstraintMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): CheckConstraintMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): CheckConstraintMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCheckConstraintMetadata();
     while (reader.pos < end) {
@@ -4980,7 +5408,9 @@ export const CheckConstraintMetadata: MessageFns<CheckConstraintMetadata> = {
   fromJSON(object: any): CheckConstraintMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      expression: isSet(object.expression) ? globalThis.String(object.expression) : "",
+      expression: isSet(object.expression)
+        ? globalThis.String(object.expression)
+        : "",
     };
   },
 
@@ -4998,7 +5428,9 @@ export const CheckConstraintMetadata: MessageFns<CheckConstraintMetadata> = {
   create(base?: DeepPartial<CheckConstraintMetadata>): CheckConstraintMetadata {
     return CheckConstraintMetadata.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<CheckConstraintMetadata>): CheckConstraintMetadata {
+  fromPartial(
+    object: DeepPartial<CheckConstraintMetadata>
+  ): CheckConstraintMetadata {
     const message = createBaseCheckConstraintMetadata();
     message.name = object.name ?? "";
     message.expression = object.expression ?? "";
@@ -5019,12 +5451,17 @@ function createBaseTablePartitionMetadata(): TablePartitionMetadata {
 }
 
 export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
-  encode(message: TablePartitionMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TablePartitionMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     if (message.type !== TablePartitionMetadata_Type.TYPE_UNSPECIFIED) {
-      writer.uint32(16).int32(tablePartitionMetadata_TypeToNumber(message.type));
+      writer
+        .uint32(16)
+        .int32(tablePartitionMetadata_TypeToNumber(message.type));
     }
     if (message.expression !== "") {
       writer.uint32(26).string(message.expression);
@@ -5044,8 +5481,12 @@ export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): TablePartitionMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): TablePartitionMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTablePartitionMetadata();
     while (reader.pos < end) {
@@ -5096,7 +5537,9 @@ export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
             break;
           }
 
-          message.subpartitions.push(TablePartitionMetadata.decode(reader, reader.uint32()));
+          message.subpartitions.push(
+            TablePartitionMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 7: {
@@ -5122,11 +5565,17 @@ export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
       type: isSet(object.type)
         ? tablePartitionMetadata_TypeFromJSON(object.type)
         : TablePartitionMetadata_Type.TYPE_UNSPECIFIED,
-      expression: isSet(object.expression) ? globalThis.String(object.expression) : "",
+      expression: isSet(object.expression)
+        ? globalThis.String(object.expression)
+        : "",
       value: isSet(object.value) ? globalThis.String(object.value) : "",
-      useDefault: isSet(object.useDefault) ? globalThis.String(object.useDefault) : "",
+      useDefault: isSet(object.useDefault)
+        ? globalThis.String(object.useDefault)
+        : "",
       subpartitions: globalThis.Array.isArray(object?.subpartitions)
-        ? object.subpartitions.map((e: any) => TablePartitionMetadata.fromJSON(e))
+        ? object.subpartitions.map((e: any) =>
+            TablePartitionMetadata.fromJSON(e)
+          )
         : [],
       indexes: globalThis.Array.isArray(object?.indexes)
         ? object.indexes.map((e: any) => IndexMetadata.fromJSON(e))
@@ -5152,7 +5601,9 @@ export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
       obj.useDefault = message.useDefault;
     }
     if (message.subpartitions?.length) {
-      obj.subpartitions = message.subpartitions.map((e) => TablePartitionMetadata.toJSON(e));
+      obj.subpartitions = message.subpartitions.map((e) =>
+        TablePartitionMetadata.toJSON(e)
+      );
     }
     if (message.indexes?.length) {
       obj.indexes = message.indexes.map((e) => IndexMetadata.toJSON(e));
@@ -5163,15 +5614,20 @@ export const TablePartitionMetadata: MessageFns<TablePartitionMetadata> = {
   create(base?: DeepPartial<TablePartitionMetadata>): TablePartitionMetadata {
     return TablePartitionMetadata.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<TablePartitionMetadata>): TablePartitionMetadata {
+  fromPartial(
+    object: DeepPartial<TablePartitionMetadata>
+  ): TablePartitionMetadata {
     const message = createBaseTablePartitionMetadata();
     message.name = object.name ?? "";
     message.type = object.type ?? TablePartitionMetadata_Type.TYPE_UNSPECIFIED;
     message.expression = object.expression ?? "";
     message.value = object.value ?? "";
     message.useDefault = object.useDefault ?? "";
-    message.subpartitions = object.subpartitions?.map((e) => TablePartitionMetadata.fromPartial(e)) || [];
-    message.indexes = object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
+    message.subpartitions =
+      object.subpartitions?.map((e) => TablePartitionMetadata.fromPartial(e)) ||
+      [];
+    message.indexes =
+      object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
     return message;
   },
 };
@@ -5192,12 +5648,16 @@ function createBaseColumnMetadata(): ColumnMetadata {
     comment: "",
     userComment: "",
     generation: undefined,
-    identityGeneration: ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED,
+    identityGeneration:
+      ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED,
   };
 }
 
 export const ColumnMetadata: MessageFns<ColumnMetadata> = {
-  encode(message: ColumnMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ColumnMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -5238,16 +5698,27 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
       writer.uint32(106).string(message.userComment);
     }
     if (message.generation !== undefined) {
-      GenerationMetadata.encode(message.generation, writer.uint32(130).fork()).join();
+      GenerationMetadata.encode(
+        message.generation,
+        writer.uint32(130).fork()
+      ).join();
     }
-    if (message.identityGeneration !== ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED) {
-      writer.uint32(136).int32(columnMetadata_IdentityGenerationToNumber(message.identityGeneration));
+    if (
+      message.identityGeneration !==
+      ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED
+    ) {
+      writer
+        .uint32(136)
+        .int32(
+          columnMetadata_IdentityGenerationToNumber(message.identityGeneration)
+        );
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ColumnMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseColumnMetadata();
     while (reader.pos < end) {
@@ -5362,7 +5833,10 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
             break;
           }
 
-          message.generation = GenerationMetadata.decode(reader, reader.uint32());
+          message.generation = GenerationMetadata.decode(
+            reader,
+            reader.uint32()
+          );
           continue;
         }
         case 17: {
@@ -5370,7 +5844,8 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
             break;
           }
 
-          message.identityGeneration = columnMetadata_IdentityGenerationFromJSON(reader.int32());
+          message.identityGeneration =
+            columnMetadata_IdentityGenerationFromJSON(reader.int32());
           continue;
         }
       }
@@ -5386,18 +5861,38 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       position: isSet(object.position) ? globalThis.Number(object.position) : 0,
-      hasDefault: isSet(object.hasDefault) ? globalThis.Boolean(object.hasDefault) : false,
-      defaultNull: isSet(object.defaultNull) ? globalThis.Boolean(object.defaultNull) : undefined,
-      defaultString: isSet(object.defaultString) ? globalThis.String(object.defaultString) : undefined,
-      defaultExpression: isSet(object.defaultExpression) ? globalThis.String(object.defaultExpression) : undefined,
-      onUpdate: isSet(object.onUpdate) ? globalThis.String(object.onUpdate) : "",
-      nullable: isSet(object.nullable) ? globalThis.Boolean(object.nullable) : false,
+      hasDefault: isSet(object.hasDefault)
+        ? globalThis.Boolean(object.hasDefault)
+        : false,
+      defaultNull: isSet(object.defaultNull)
+        ? globalThis.Boolean(object.defaultNull)
+        : undefined,
+      defaultString: isSet(object.defaultString)
+        ? globalThis.String(object.defaultString)
+        : undefined,
+      defaultExpression: isSet(object.defaultExpression)
+        ? globalThis.String(object.defaultExpression)
+        : undefined,
+      onUpdate: isSet(object.onUpdate)
+        ? globalThis.String(object.onUpdate)
+        : "",
+      nullable: isSet(object.nullable)
+        ? globalThis.Boolean(object.nullable)
+        : false,
       type: isSet(object.type) ? globalThis.String(object.type) : "",
-      characterSet: isSet(object.characterSet) ? globalThis.String(object.characterSet) : "",
-      collation: isSet(object.collation) ? globalThis.String(object.collation) : "",
+      characterSet: isSet(object.characterSet)
+        ? globalThis.String(object.characterSet)
+        : "",
+      collation: isSet(object.collation)
+        ? globalThis.String(object.collation)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      userComment: isSet(object.userComment) ? globalThis.String(object.userComment) : "",
-      generation: isSet(object.generation) ? GenerationMetadata.fromJSON(object.generation) : undefined,
+      userComment: isSet(object.userComment)
+        ? globalThis.String(object.userComment)
+        : "",
+      generation: isSet(object.generation)
+        ? GenerationMetadata.fromJSON(object.generation)
+        : undefined,
       identityGeneration: isSet(object.identityGeneration)
         ? columnMetadata_IdentityGenerationFromJSON(object.identityGeneration)
         : ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED,
@@ -5448,8 +5943,13 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
     if (message.generation !== undefined) {
       obj.generation = GenerationMetadata.toJSON(message.generation);
     }
-    if (message.identityGeneration !== ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED) {
-      obj.identityGeneration = columnMetadata_IdentityGenerationToJSON(message.identityGeneration);
+    if (
+      message.identityGeneration !==
+      ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED
+    ) {
+      obj.identityGeneration = columnMetadata_IdentityGenerationToJSON(
+        message.identityGeneration
+      );
     }
     return obj;
   },
@@ -5472,10 +5972,12 @@ export const ColumnMetadata: MessageFns<ColumnMetadata> = {
     message.collation = object.collation ?? "";
     message.comment = object.comment ?? "";
     message.userComment = object.userComment ?? "";
-    message.generation = (object.generation !== undefined && object.generation !== null)
-      ? GenerationMetadata.fromPartial(object.generation)
-      : undefined;
-    message.identityGeneration = object.identityGeneration ??
+    message.generation =
+      object.generation !== undefined && object.generation !== null
+        ? GenerationMetadata.fromPartial(object.generation)
+        : undefined;
+    message.identityGeneration =
+      object.identityGeneration ??
       ColumnMetadata_IdentityGeneration.IDENTITY_GENERATION_UNSPECIFIED;
     return message;
   },
@@ -5486,7 +5988,10 @@ function createBaseGenerationMetadata(): GenerationMetadata {
 }
 
 export const GenerationMetadata: MessageFns<GenerationMetadata> = {
-  encode(message: GenerationMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GenerationMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.type !== GenerationMetadata_Type.TYPE_UNSPECIFIED) {
       writer.uint32(8).int32(generationMetadata_TypeToNumber(message.type));
     }
@@ -5496,8 +6001,12 @@ export const GenerationMetadata: MessageFns<GenerationMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GenerationMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): GenerationMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGenerationMetadata();
     while (reader.pos < end) {
@@ -5533,7 +6042,9 @@ export const GenerationMetadata: MessageFns<GenerationMetadata> = {
       type: isSet(object.type)
         ? generationMetadata_TypeFromJSON(object.type)
         : GenerationMetadata_Type.TYPE_UNSPECIFIED,
-      expression: isSet(object.expression) ? globalThis.String(object.expression) : "",
+      expression: isSet(object.expression)
+        ? globalThis.String(object.expression)
+        : "",
     };
   },
 
@@ -5560,11 +6071,22 @@ export const GenerationMetadata: MessageFns<GenerationMetadata> = {
 };
 
 function createBaseViewMetadata(): ViewMetadata {
-  return { name: "", definition: "", comment: "", dependencyColumns: [], columns: [], triggers: [], skipDump: false };
+  return {
+    name: "",
+    definition: "",
+    comment: "",
+    dependencyColumns: [],
+    columns: [],
+    triggers: [],
+    skipDump: false,
+  };
 }
 
 export const ViewMetadata: MessageFns<ViewMetadata> = {
-  encode(message: ViewMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ViewMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -5590,7 +6112,8 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ViewMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseViewMetadata();
     while (reader.pos < end) {
@@ -5625,7 +6148,9 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
             break;
           }
 
-          message.dependencyColumns.push(DependencyColumn.decode(reader, reader.uint32()));
+          message.dependencyColumns.push(
+            DependencyColumn.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 5: {
@@ -5641,7 +6166,9 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
             break;
           }
 
-          message.triggers.push(TriggerMetadata.decode(reader, reader.uint32()));
+          message.triggers.push(
+            TriggerMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 7: {
@@ -5664,7 +6191,9 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
   fromJSON(object: any): ViewMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
       dependencyColumns: globalThis.Array.isArray(object?.dependencyColumns)
         ? object.dependencyColumns.map((e: any) => DependencyColumn.fromJSON(e))
@@ -5675,7 +6204,9 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
       triggers: globalThis.Array.isArray(object?.triggers)
         ? object.triggers.map((e: any) => TriggerMetadata.fromJSON(e))
         : [],
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -5691,7 +6222,9 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
       obj.comment = message.comment;
     }
     if (message.dependencyColumns?.length) {
-      obj.dependencyColumns = message.dependencyColumns.map((e) => DependencyColumn.toJSON(e));
+      obj.dependencyColumns = message.dependencyColumns.map((e) =>
+        DependencyColumn.toJSON(e)
+      );
     }
     if (message.columns?.length) {
       obj.columns = message.columns.map((e) => ColumnMetadata.toJSON(e));
@@ -5713,9 +6246,13 @@ export const ViewMetadata: MessageFns<ViewMetadata> = {
     message.name = object.name ?? "";
     message.definition = object.definition ?? "";
     message.comment = object.comment ?? "";
-    message.dependencyColumns = object.dependencyColumns?.map((e) => DependencyColumn.fromPartial(e)) || [];
-    message.columns = object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
-    message.triggers = object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
+    message.dependencyColumns =
+      object.dependencyColumns?.map((e) => DependencyColumn.fromPartial(e)) ||
+      [];
+    message.columns =
+      object.columns?.map((e) => ColumnMetadata.fromPartial(e)) || [];
+    message.triggers =
+      object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
     message.skipDump = object.skipDump ?? false;
     return message;
   },
@@ -5726,7 +6263,10 @@ function createBaseDependencyColumn(): DependencyColumn {
 }
 
 export const DependencyColumn: MessageFns<DependencyColumn> = {
-  encode(message: DependencyColumn, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DependencyColumn,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.schema !== "") {
       writer.uint32(10).string(message.schema);
     }
@@ -5740,7 +6280,8 @@ export const DependencyColumn: MessageFns<DependencyColumn> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DependencyColumn {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDependencyColumn();
     while (reader.pos < end) {
@@ -5814,11 +6355,22 @@ export const DependencyColumn: MessageFns<DependencyColumn> = {
 };
 
 function createBaseMaterializedViewMetadata(): MaterializedViewMetadata {
-  return { name: "", definition: "", comment: "", dependencyColumns: [], triggers: [], indexes: [], skipDump: false };
+  return {
+    name: "",
+    definition: "",
+    comment: "",
+    dependencyColumns: [],
+    triggers: [],
+    indexes: [],
+    skipDump: false,
+  };
 }
 
 export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
-  encode(message: MaterializedViewMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: MaterializedViewMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -5843,8 +6395,12 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): MaterializedViewMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): MaterializedViewMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseMaterializedViewMetadata();
     while (reader.pos < end) {
@@ -5879,7 +6435,9 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
             break;
           }
 
-          message.dependencyColumns.push(DependencyColumn.decode(reader, reader.uint32()));
+          message.dependencyColumns.push(
+            DependencyColumn.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 5: {
@@ -5887,7 +6445,9 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
             break;
           }
 
-          message.triggers.push(TriggerMetadata.decode(reader, reader.uint32()));
+          message.triggers.push(
+            TriggerMetadata.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 6: {
@@ -5918,7 +6478,9 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
   fromJSON(object: any): MaterializedViewMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
       dependencyColumns: globalThis.Array.isArray(object?.dependencyColumns)
         ? object.dependencyColumns.map((e: any) => DependencyColumn.fromJSON(e))
@@ -5929,7 +6491,9 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
       indexes: globalThis.Array.isArray(object?.indexes)
         ? object.indexes.map((e: any) => IndexMetadata.fromJSON(e))
         : [],
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -5945,7 +6509,9 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
       obj.comment = message.comment;
     }
     if (message.dependencyColumns?.length) {
-      obj.dependencyColumns = message.dependencyColumns.map((e) => DependencyColumn.toJSON(e));
+      obj.dependencyColumns = message.dependencyColumns.map((e) =>
+        DependencyColumn.toJSON(e)
+      );
     }
     if (message.triggers?.length) {
       obj.triggers = message.triggers.map((e) => TriggerMetadata.toJSON(e));
@@ -5959,17 +6525,25 @@ export const MaterializedViewMetadata: MessageFns<MaterializedViewMetadata> = {
     return obj;
   },
 
-  create(base?: DeepPartial<MaterializedViewMetadata>): MaterializedViewMetadata {
+  create(
+    base?: DeepPartial<MaterializedViewMetadata>
+  ): MaterializedViewMetadata {
     return MaterializedViewMetadata.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<MaterializedViewMetadata>): MaterializedViewMetadata {
+  fromPartial(
+    object: DeepPartial<MaterializedViewMetadata>
+  ): MaterializedViewMetadata {
     const message = createBaseMaterializedViewMetadata();
     message.name = object.name ?? "";
     message.definition = object.definition ?? "";
     message.comment = object.comment ?? "";
-    message.dependencyColumns = object.dependencyColumns?.map((e) => DependencyColumn.fromPartial(e)) || [];
-    message.triggers = object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
-    message.indexes = object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
+    message.dependencyColumns =
+      object.dependencyColumns?.map((e) => DependencyColumn.fromPartial(e)) ||
+      [];
+    message.triggers =
+      object.triggers?.map((e) => TriggerMetadata.fromPartial(e)) || [];
+    message.indexes =
+      object.indexes?.map((e) => IndexMetadata.fromPartial(e)) || [];
     message.skipDump = object.skipDump ?? false;
     return message;
   },
@@ -5980,7 +6554,10 @@ function createBaseDependencyTable(): DependencyTable {
 }
 
 export const DependencyTable: MessageFns<DependencyTable> = {
-  encode(message: DependencyTable, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DependencyTable,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.schema !== "") {
       writer.uint32(10).string(message.schema);
     }
@@ -5991,7 +6568,8 @@ export const DependencyTable: MessageFns<DependencyTable> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DependencyTable {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDependencyTable();
     while (reader.pos < end) {
@@ -6067,7 +6645,10 @@ function createBaseFunctionMetadata(): FunctionMetadata {
 }
 
 export const FunctionMetadata: MessageFns<FunctionMetadata> = {
-  encode(message: FunctionMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: FunctionMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6102,7 +6683,8 @@ export const FunctionMetadata: MessageFns<FunctionMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): FunctionMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseFunctionMetadata();
     while (reader.pos < end) {
@@ -6177,7 +6759,9 @@ export const FunctionMetadata: MessageFns<FunctionMetadata> = {
             break;
           }
 
-          message.dependencyTables.push(DependencyTable.decode(reader, reader.uint32()));
+          message.dependencyTables.push(
+            DependencyTable.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 10: {
@@ -6200,17 +6784,29 @@ export const FunctionMetadata: MessageFns<FunctionMetadata> = {
   fromJSON(object: any): FunctionMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
-      signature: isSet(object.signature) ? globalThis.String(object.signature) : "",
-      characterSetClient: isSet(object.characterSetClient) ? globalThis.String(object.characterSetClient) : "",
-      collationConnection: isSet(object.collationConnection) ? globalThis.String(object.collationConnection) : "",
-      databaseCollation: isSet(object.databaseCollation) ? globalThis.String(object.databaseCollation) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
+      signature: isSet(object.signature)
+        ? globalThis.String(object.signature)
+        : "",
+      characterSetClient: isSet(object.characterSetClient)
+        ? globalThis.String(object.characterSetClient)
+        : "",
+      collationConnection: isSet(object.collationConnection)
+        ? globalThis.String(object.collationConnection)
+        : "",
+      databaseCollation: isSet(object.databaseCollation)
+        ? globalThis.String(object.databaseCollation)
+        : "",
       sqlMode: isSet(object.sqlMode) ? globalThis.String(object.sqlMode) : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
       dependencyTables: globalThis.Array.isArray(object?.dependencyTables)
         ? object.dependencyTables.map((e: any) => DependencyTable.fromJSON(e))
         : [],
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -6241,7 +6837,9 @@ export const FunctionMetadata: MessageFns<FunctionMetadata> = {
       obj.comment = message.comment;
     }
     if (message.dependencyTables?.length) {
-      obj.dependencyTables = message.dependencyTables.map((e) => DependencyTable.toJSON(e));
+      obj.dependencyTables = message.dependencyTables.map((e) =>
+        DependencyTable.toJSON(e)
+      );
     }
     if (message.skipDump !== false) {
       obj.skipDump = message.skipDump;
@@ -6262,7 +6860,8 @@ export const FunctionMetadata: MessageFns<FunctionMetadata> = {
     message.databaseCollation = object.databaseCollation ?? "";
     message.sqlMode = object.sqlMode ?? "";
     message.comment = object.comment ?? "";
-    message.dependencyTables = object.dependencyTables?.map((e) => DependencyTable.fromPartial(e)) || [];
+    message.dependencyTables =
+      object.dependencyTables?.map((e) => DependencyTable.fromPartial(e)) || [];
     message.skipDump = object.skipDump ?? false;
     return message;
   },
@@ -6282,7 +6881,10 @@ function createBaseProcedureMetadata(): ProcedureMetadata {
 }
 
 export const ProcedureMetadata: MessageFns<ProcedureMetadata> = {
-  encode(message: ProcedureMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ProcedureMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6311,7 +6913,8 @@ export const ProcedureMetadata: MessageFns<ProcedureMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ProcedureMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseProcedureMetadata();
     while (reader.pos < end) {
@@ -6393,13 +6996,25 @@ export const ProcedureMetadata: MessageFns<ProcedureMetadata> = {
   fromJSON(object: any): ProcedureMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
-      signature: isSet(object.signature) ? globalThis.String(object.signature) : "",
-      characterSetClient: isSet(object.characterSetClient) ? globalThis.String(object.characterSetClient) : "",
-      collationConnection: isSet(object.collationConnection) ? globalThis.String(object.collationConnection) : "",
-      databaseCollation: isSet(object.databaseCollation) ? globalThis.String(object.databaseCollation) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
+      signature: isSet(object.signature)
+        ? globalThis.String(object.signature)
+        : "",
+      characterSetClient: isSet(object.characterSetClient)
+        ? globalThis.String(object.characterSetClient)
+        : "",
+      collationConnection: isSet(object.collationConnection)
+        ? globalThis.String(object.collationConnection)
+        : "",
+      databaseCollation: isSet(object.databaseCollation)
+        ? globalThis.String(object.databaseCollation)
+        : "",
       sqlMode: isSet(object.sqlMode) ? globalThis.String(object.sqlMode) : "",
-      skipDump: isSet(object.skipDump) ? globalThis.Boolean(object.skipDump) : false,
+      skipDump: isSet(object.skipDump)
+        ? globalThis.Boolean(object.skipDump)
+        : false,
     };
   },
 
@@ -6454,7 +7069,10 @@ function createBasePackageMetadata(): PackageMetadata {
 }
 
 export const PackageMetadata: MessageFns<PackageMetadata> = {
-  encode(message: PackageMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: PackageMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6465,7 +7083,8 @@ export const PackageMetadata: MessageFns<PackageMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): PackageMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBasePackageMetadata();
     while (reader.pos < end) {
@@ -6499,7 +7118,9 @@ export const PackageMetadata: MessageFns<PackageMetadata> = {
   fromJSON(object: any): PackageMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
     };
   },
 
@@ -6541,7 +7162,10 @@ function createBaseTaskMetadata(): TaskMetadata {
 }
 
 export const TaskMetadata: MessageFns<TaskMetadata> = {
-  encode(message: TaskMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: TaskMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6576,7 +7200,8 @@ export const TaskMetadata: MessageFns<TaskMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): TaskMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseTaskMetadata();
     while (reader.pos < end) {
@@ -6677,14 +7302,24 @@ export const TaskMetadata: MessageFns<TaskMetadata> = {
       id: isSet(object.id) ? globalThis.String(object.id) : "",
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      warehouse: isSet(object.warehouse) ? globalThis.String(object.warehouse) : "",
-      schedule: isSet(object.schedule) ? globalThis.String(object.schedule) : "",
+      warehouse: isSet(object.warehouse)
+        ? globalThis.String(object.warehouse)
+        : "",
+      schedule: isSet(object.schedule)
+        ? globalThis.String(object.schedule)
+        : "",
       predecessors: globalThis.Array.isArray(object?.predecessors)
         ? object.predecessors.map((e: any) => globalThis.String(e))
         : [],
-      state: isSet(object.state) ? taskMetadata_StateFromJSON(object.state) : TaskMetadata_State.STATE_UNSPECIFIED,
-      condition: isSet(object.condition) ? globalThis.String(object.condition) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
+      state: isSet(object.state)
+        ? taskMetadata_StateFromJSON(object.state)
+        : TaskMetadata_State.STATE_UNSPECIFIED,
+      condition: isSet(object.condition)
+        ? globalThis.String(object.condition)
+        : "",
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
     };
   },
 
@@ -6756,7 +7391,10 @@ function createBaseStreamMetadata(): StreamMetadata {
 }
 
 export const StreamMetadata: MessageFns<StreamMetadata> = {
-  encode(message: StreamMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: StreamMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6785,7 +7423,8 @@ export const StreamMetadata: MessageFns<StreamMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): StreamMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseStreamMetadata();
     while (reader.pos < end) {
@@ -6867,13 +7506,21 @@ export const StreamMetadata: MessageFns<StreamMetadata> = {
   fromJSON(object: any): StreamMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      tableName: isSet(object.tableName) ? globalThis.String(object.tableName) : "",
+      tableName: isSet(object.tableName)
+        ? globalThis.String(object.tableName)
+        : "",
       owner: isSet(object.owner) ? globalThis.String(object.owner) : "",
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      type: isSet(object.type) ? streamMetadata_TypeFromJSON(object.type) : StreamMetadata_Type.TYPE_UNSPECIFIED,
+      type: isSet(object.type)
+        ? streamMetadata_TypeFromJSON(object.type)
+        : StreamMetadata_Type.TYPE_UNSPECIFIED,
       stale: isSet(object.stale) ? globalThis.Boolean(object.stale) : false,
-      mode: isSet(object.mode) ? streamMetadata_ModeFromJSON(object.mode) : StreamMetadata_Mode.MODE_UNSPECIFIED,
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
+      mode: isSet(object.mode)
+        ? streamMetadata_ModeFromJSON(object.mode)
+        : StreamMetadata_Mode.MODE_UNSPECIFIED,
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
     };
   },
 
@@ -6943,7 +7590,10 @@ function createBaseIndexMetadata(): IndexMetadata {
 }
 
 export const IndexMetadata: MessageFns<IndexMetadata> = {
-  encode(message: IndexMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: IndexMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -6994,7 +7644,8 @@ export const IndexMetadata: MessageFns<IndexMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): IndexMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseIndexMetadata();
     while (reader.pos < end) {
@@ -7026,7 +7677,9 @@ export const IndexMetadata: MessageFns<IndexMetadata> = {
           if (tag === 74) {
             const end2 = reader.uint32() + reader.pos;
             while (reader.pos < end2) {
-              message.keyLength.push(Long.fromString(reader.int64().toString()));
+              message.keyLength.push(
+                Long.fromString(reader.int64().toString())
+              );
             }
 
             continue;
@@ -7147,20 +7800,36 @@ export const IndexMetadata: MessageFns<IndexMetadata> = {
       expressions: globalThis.Array.isArray(object?.expressions)
         ? object.expressions.map((e: any) => globalThis.String(e))
         : [],
-      keyLength: globalThis.Array.isArray(object?.keyLength) ? object.keyLength.map((e: any) => Long.fromValue(e)) : [],
+      keyLength: globalThis.Array.isArray(object?.keyLength)
+        ? object.keyLength.map((e: any) => Long.fromValue(e))
+        : [],
       descending: globalThis.Array.isArray(object?.descending)
         ? object.descending.map((e: any) => globalThis.Boolean(e))
         : [],
       type: isSet(object.type) ? globalThis.String(object.type) : "",
       unique: isSet(object.unique) ? globalThis.Boolean(object.unique) : false,
-      primary: isSet(object.primary) ? globalThis.Boolean(object.primary) : false,
-      visible: isSet(object.visible) ? globalThis.Boolean(object.visible) : false,
+      primary: isSet(object.primary)
+        ? globalThis.Boolean(object.primary)
+        : false,
+      visible: isSet(object.visible)
+        ? globalThis.Boolean(object.visible)
+        : false,
       comment: isSet(object.comment) ? globalThis.String(object.comment) : "",
-      definition: isSet(object.definition) ? globalThis.String(object.definition) : "",
-      parentIndexSchema: isSet(object.parentIndexSchema) ? globalThis.String(object.parentIndexSchema) : "",
-      parentIndexName: isSet(object.parentIndexName) ? globalThis.String(object.parentIndexName) : "",
-      granularity: isSet(object.granularity) ? Long.fromValue(object.granularity) : Long.ZERO,
-      isConstraint: isSet(object.isConstraint) ? globalThis.Boolean(object.isConstraint) : false,
+      definition: isSet(object.definition)
+        ? globalThis.String(object.definition)
+        : "",
+      parentIndexSchema: isSet(object.parentIndexSchema)
+        ? globalThis.String(object.parentIndexSchema)
+        : "",
+      parentIndexName: isSet(object.parentIndexName)
+        ? globalThis.String(object.parentIndexName)
+        : "",
+      granularity: isSet(object.granularity)
+        ? Long.fromValue(object.granularity)
+        : Long.ZERO,
+      isConstraint: isSet(object.isConstraint)
+        ? globalThis.Boolean(object.isConstraint)
+        : false,
     };
   },
 
@@ -7228,9 +7897,10 @@ export const IndexMetadata: MessageFns<IndexMetadata> = {
     message.definition = object.definition ?? "";
     message.parentIndexSchema = object.parentIndexSchema ?? "";
     message.parentIndexName = object.parentIndexName ?? "";
-    message.granularity = (object.granularity !== undefined && object.granularity !== null)
-      ? Long.fromValue(object.granularity)
-      : Long.ZERO;
+    message.granularity =
+      object.granularity !== undefined && object.granularity !== null
+        ? Long.fromValue(object.granularity)
+        : Long.ZERO;
     message.isConstraint = object.isConstraint ?? false;
     return message;
   },
@@ -7241,7 +7911,10 @@ function createBaseExtensionMetadata(): ExtensionMetadata {
 }
 
 export const ExtensionMetadata: MessageFns<ExtensionMetadata> = {
-  encode(message: ExtensionMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ExtensionMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -7258,7 +7931,8 @@ export const ExtensionMetadata: MessageFns<ExtensionMetadata> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ExtensionMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseExtensionMetadata();
     while (reader.pos < end) {
@@ -7310,7 +7984,9 @@ export const ExtensionMetadata: MessageFns<ExtensionMetadata> = {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       schema: isSet(object.schema) ? globalThis.String(object.schema) : "",
       version: isSet(object.version) ? globalThis.String(object.version) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
     };
   },
 
@@ -7358,7 +8034,10 @@ function createBaseForeignKeyMetadata(): ForeignKeyMetadata {
 }
 
 export const ForeignKeyMetadata: MessageFns<ForeignKeyMetadata> = {
-  encode(message: ForeignKeyMetadata, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ForeignKeyMetadata,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -7386,8 +8065,12 @@ export const ForeignKeyMetadata: MessageFns<ForeignKeyMetadata> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ForeignKeyMetadata {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ForeignKeyMetadata {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseForeignKeyMetadata();
     while (reader.pos < end) {
@@ -7469,15 +8152,27 @@ export const ForeignKeyMetadata: MessageFns<ForeignKeyMetadata> = {
   fromJSON(object: any): ForeignKeyMetadata {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      columns: globalThis.Array.isArray(object?.columns) ? object.columns.map((e: any) => globalThis.String(e)) : [],
-      referencedSchema: isSet(object.referencedSchema) ? globalThis.String(object.referencedSchema) : "",
-      referencedTable: isSet(object.referencedTable) ? globalThis.String(object.referencedTable) : "",
+      columns: globalThis.Array.isArray(object?.columns)
+        ? object.columns.map((e: any) => globalThis.String(e))
+        : [],
+      referencedSchema: isSet(object.referencedSchema)
+        ? globalThis.String(object.referencedSchema)
+        : "",
+      referencedTable: isSet(object.referencedTable)
+        ? globalThis.String(object.referencedTable)
+        : "",
       referencedColumns: globalThis.Array.isArray(object?.referencedColumns)
         ? object.referencedColumns.map((e: any) => globalThis.String(e))
         : [],
-      onDelete: isSet(object.onDelete) ? globalThis.String(object.onDelete) : "",
-      onUpdate: isSet(object.onUpdate) ? globalThis.String(object.onUpdate) : "",
-      matchType: isSet(object.matchType) ? globalThis.String(object.matchType) : "",
+      onDelete: isSet(object.onDelete)
+        ? globalThis.String(object.onDelete)
+        : "",
+      onUpdate: isSet(object.onUpdate)
+        ? globalThis.String(object.onUpdate)
+        : "",
+      matchType: isSet(object.matchType)
+        ? globalThis.String(object.matchType)
+        : "",
     };
   },
 
@@ -7532,7 +8227,10 @@ function createBaseDatabaseSchema(): DatabaseSchema {
 }
 
 export const DatabaseSchema: MessageFns<DatabaseSchema> = {
-  encode(message: DatabaseSchema, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DatabaseSchema,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.schema !== "") {
       writer.uint32(10).string(message.schema);
     }
@@ -7540,7 +8238,8 @@ export const DatabaseSchema: MessageFns<DatabaseSchema> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): DatabaseSchema {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDatabaseSchema();
     while (reader.pos < end) {
@@ -7564,7 +8263,9 @@ export const DatabaseSchema: MessageFns<DatabaseSchema> = {
   },
 
   fromJSON(object: any): DatabaseSchema {
-    return { schema: isSet(object.schema) ? globalThis.String(object.schema) : "" };
+    return {
+      schema: isSet(object.schema) ? globalThis.String(object.schema) : "",
+    };
   },
 
   toJSON(message: DatabaseSchema): unknown {
@@ -7590,7 +8291,10 @@ function createBaseListSlowQueriesRequest(): ListSlowQueriesRequest {
 }
 
 export const ListSlowQueriesRequest: MessageFns<ListSlowQueriesRequest> = {
-  encode(message: ListSlowQueriesRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListSlowQueriesRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -7603,8 +8307,12 @@ export const ListSlowQueriesRequest: MessageFns<ListSlowQueriesRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSlowQueriesRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListSlowQueriesRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSlowQueriesRequest();
     while (reader.pos < end) {
@@ -7668,7 +8376,9 @@ export const ListSlowQueriesRequest: MessageFns<ListSlowQueriesRequest> = {
   create(base?: DeepPartial<ListSlowQueriesRequest>): ListSlowQueriesRequest {
     return ListSlowQueriesRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListSlowQueriesRequest>): ListSlowQueriesRequest {
+  fromPartial(
+    object: DeepPartial<ListSlowQueriesRequest>
+  ): ListSlowQueriesRequest {
     const message = createBaseListSlowQueriesRequest();
     message.parent = object.parent ?? "";
     message.filter = object.filter ?? "";
@@ -7682,15 +8392,22 @@ function createBaseListSlowQueriesResponse(): ListSlowQueriesResponse {
 }
 
 export const ListSlowQueriesResponse: MessageFns<ListSlowQueriesResponse> = {
-  encode(message: ListSlowQueriesResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListSlowQueriesResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.slowQueryLogs) {
       SlowQueryLog.encode(v!, writer.uint32(10).fork()).join();
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSlowQueriesResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListSlowQueriesResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSlowQueriesResponse();
     while (reader.pos < end) {
@@ -7701,7 +8418,9 @@ export const ListSlowQueriesResponse: MessageFns<ListSlowQueriesResponse> = {
             break;
           }
 
-          message.slowQueryLogs.push(SlowQueryLog.decode(reader, reader.uint32()));
+          message.slowQueryLogs.push(
+            SlowQueryLog.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -7724,7 +8443,9 @@ export const ListSlowQueriesResponse: MessageFns<ListSlowQueriesResponse> = {
   toJSON(message: ListSlowQueriesResponse): unknown {
     const obj: any = {};
     if (message.slowQueryLogs?.length) {
-      obj.slowQueryLogs = message.slowQueryLogs.map((e) => SlowQueryLog.toJSON(e));
+      obj.slowQueryLogs = message.slowQueryLogs.map((e) =>
+        SlowQueryLog.toJSON(e)
+      );
     }
     return obj;
   },
@@ -7732,9 +8453,12 @@ export const ListSlowQueriesResponse: MessageFns<ListSlowQueriesResponse> = {
   create(base?: DeepPartial<ListSlowQueriesResponse>): ListSlowQueriesResponse {
     return ListSlowQueriesResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListSlowQueriesResponse>): ListSlowQueriesResponse {
+  fromPartial(
+    object: DeepPartial<ListSlowQueriesResponse>
+  ): ListSlowQueriesResponse {
     const message = createBaseListSlowQueriesResponse();
-    message.slowQueryLogs = object.slowQueryLogs?.map((e) => SlowQueryLog.fromPartial(e)) || [];
+    message.slowQueryLogs =
+      object.slowQueryLogs?.map((e) => SlowQueryLog.fromPartial(e)) || [];
     return message;
   },
 };
@@ -7744,7 +8468,10 @@ function createBaseSlowQueryLog(): SlowQueryLog {
 }
 
 export const SlowQueryLog: MessageFns<SlowQueryLog> = {
-  encode(message: SlowQueryLog, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SlowQueryLog,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.resource !== "") {
       writer.uint32(10).string(message.resource);
     }
@@ -7752,13 +8479,17 @@ export const SlowQueryLog: MessageFns<SlowQueryLog> = {
       writer.uint32(18).string(message.project);
     }
     if (message.statistics !== undefined) {
-      SlowQueryStatistics.encode(message.statistics, writer.uint32(26).fork()).join();
+      SlowQueryStatistics.encode(
+        message.statistics,
+        writer.uint32(26).fork()
+      ).join();
     }
     return writer;
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SlowQueryLog {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSlowQueryLog();
     while (reader.pos < end) {
@@ -7785,7 +8516,10 @@ export const SlowQueryLog: MessageFns<SlowQueryLog> = {
             break;
           }
 
-          message.statistics = SlowQueryStatistics.decode(reader, reader.uint32());
+          message.statistics = SlowQueryStatistics.decode(
+            reader,
+            reader.uint32()
+          );
           continue;
         }
       }
@@ -7799,9 +8533,13 @@ export const SlowQueryLog: MessageFns<SlowQueryLog> = {
 
   fromJSON(object: any): SlowQueryLog {
     return {
-      resource: isSet(object.resource) ? globalThis.String(object.resource) : "",
+      resource: isSet(object.resource)
+        ? globalThis.String(object.resource)
+        : "",
       project: isSet(object.project) ? globalThis.String(object.project) : "",
-      statistics: isSet(object.statistics) ? SlowQueryStatistics.fromJSON(object.statistics) : undefined,
+      statistics: isSet(object.statistics)
+        ? SlowQueryStatistics.fromJSON(object.statistics)
+        : undefined,
     };
   },
 
@@ -7826,9 +8564,10 @@ export const SlowQueryLog: MessageFns<SlowQueryLog> = {
     const message = createBaseSlowQueryLog();
     message.resource = object.resource ?? "";
     message.project = object.project ?? "";
-    message.statistics = (object.statistics !== undefined && object.statistics !== null)
-      ? SlowQueryStatistics.fromPartial(object.statistics)
-      : undefined;
+    message.statistics =
+      object.statistics !== undefined && object.statistics !== null
+        ? SlowQueryStatistics.fromPartial(object.statistics)
+        : undefined;
     return message;
   },
 };
@@ -7851,7 +8590,10 @@ function createBaseSlowQueryStatistics(): SlowQueryStatistics {
 }
 
 export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
-  encode(message: SlowQueryStatistics, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SlowQueryStatistics,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.sqlFingerprint !== "") {
       writer.uint32(10).string(message.sqlFingerprint);
     }
@@ -7862,10 +8604,16 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
       Timestamp.encode(message.latestLogTime, writer.uint32(26).fork()).join();
     }
     if (message.averageQueryTime !== undefined) {
-      Duration.encode(message.averageQueryTime, writer.uint32(34).fork()).join();
+      Duration.encode(
+        message.averageQueryTime,
+        writer.uint32(34).fork()
+      ).join();
     }
     if (message.maximumQueryTime !== undefined) {
-      Duration.encode(message.maximumQueryTime, writer.uint32(42).fork()).join();
+      Duration.encode(
+        message.maximumQueryTime,
+        writer.uint32(42).fork()
+      ).join();
     }
     if (!message.averageRowsSent.equals(Long.ZERO)) {
       writer.uint32(48).int64(message.averageRowsSent.toString());
@@ -7891,8 +8639,12 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): SlowQueryStatistics {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): SlowQueryStatistics {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSlowQueryStatistics();
     while (reader.pos < end) {
@@ -7959,7 +8711,9 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
             break;
           }
 
-          message.averageRowsExamined = Long.fromString(reader.int64().toString());
+          message.averageRowsExamined = Long.fromString(
+            reader.int64().toString()
+          );
           continue;
         }
         case 9: {
@@ -7967,7 +8721,9 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
             break;
           }
 
-          message.maximumRowsExamined = Long.fromString(reader.int64().toString());
+          message.maximumRowsExamined = Long.fromString(
+            reader.int64().toString()
+          );
           continue;
         }
         case 10: {
@@ -7991,7 +8747,9 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
             break;
           }
 
-          message.samples.push(SlowQueryDetails.decode(reader, reader.uint32()));
+          message.samples.push(
+            SlowQueryDetails.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -8005,17 +8763,37 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
 
   fromJSON(object: any): SlowQueryStatistics {
     return {
-      sqlFingerprint: isSet(object.sqlFingerprint) ? globalThis.String(object.sqlFingerprint) : "",
+      sqlFingerprint: isSet(object.sqlFingerprint)
+        ? globalThis.String(object.sqlFingerprint)
+        : "",
       count: isSet(object.count) ? Long.fromValue(object.count) : Long.ZERO,
-      latestLogTime: isSet(object.latestLogTime) ? fromJsonTimestamp(object.latestLogTime) : undefined,
-      averageQueryTime: isSet(object.averageQueryTime) ? Duration.fromJSON(object.averageQueryTime) : undefined,
-      maximumQueryTime: isSet(object.maximumQueryTime) ? Duration.fromJSON(object.maximumQueryTime) : undefined,
-      averageRowsSent: isSet(object.averageRowsSent) ? Long.fromValue(object.averageRowsSent) : Long.ZERO,
-      maximumRowsSent: isSet(object.maximumRowsSent) ? Long.fromValue(object.maximumRowsSent) : Long.ZERO,
-      averageRowsExamined: isSet(object.averageRowsExamined) ? Long.fromValue(object.averageRowsExamined) : Long.ZERO,
-      maximumRowsExamined: isSet(object.maximumRowsExamined) ? Long.fromValue(object.maximumRowsExamined) : Long.ZERO,
-      queryTimePercent: isSet(object.queryTimePercent) ? globalThis.Number(object.queryTimePercent) : 0,
-      countPercent: isSet(object.countPercent) ? globalThis.Number(object.countPercent) : 0,
+      latestLogTime: isSet(object.latestLogTime)
+        ? fromJsonTimestamp(object.latestLogTime)
+        : undefined,
+      averageQueryTime: isSet(object.averageQueryTime)
+        ? Duration.fromJSON(object.averageQueryTime)
+        : undefined,
+      maximumQueryTime: isSet(object.maximumQueryTime)
+        ? Duration.fromJSON(object.maximumQueryTime)
+        : undefined,
+      averageRowsSent: isSet(object.averageRowsSent)
+        ? Long.fromValue(object.averageRowsSent)
+        : Long.ZERO,
+      maximumRowsSent: isSet(object.maximumRowsSent)
+        ? Long.fromValue(object.maximumRowsSent)
+        : Long.ZERO,
+      averageRowsExamined: isSet(object.averageRowsExamined)
+        ? Long.fromValue(object.averageRowsExamined)
+        : Long.ZERO,
+      maximumRowsExamined: isSet(object.maximumRowsExamined)
+        ? Long.fromValue(object.maximumRowsExamined)
+        : Long.ZERO,
+      queryTimePercent: isSet(object.queryTimePercent)
+        ? globalThis.Number(object.queryTimePercent)
+        : 0,
+      countPercent: isSet(object.countPercent)
+        ? globalThis.Number(object.countPercent)
+        : 0,
       samples: globalThis.Array.isArray(object?.samples)
         ? object.samples.map((e: any) => SlowQueryDetails.fromJSON(e))
         : [],
@@ -8046,10 +8824,14 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
       obj.maximumRowsSent = (message.maximumRowsSent || Long.ZERO).toString();
     }
     if (!message.averageRowsExamined.equals(Long.ZERO)) {
-      obj.averageRowsExamined = (message.averageRowsExamined || Long.ZERO).toString();
+      obj.averageRowsExamined = (
+        message.averageRowsExamined || Long.ZERO
+      ).toString();
     }
     if (!message.maximumRowsExamined.equals(Long.ZERO)) {
-      obj.maximumRowsExamined = (message.maximumRowsExamined || Long.ZERO).toString();
+      obj.maximumRowsExamined = (
+        message.maximumRowsExamined || Long.ZERO
+      ).toString();
     }
     if (message.queryTimePercent !== 0) {
       obj.queryTimePercent = message.queryTimePercent;
@@ -8069,31 +8851,44 @@ export const SlowQueryStatistics: MessageFns<SlowQueryStatistics> = {
   fromPartial(object: DeepPartial<SlowQueryStatistics>): SlowQueryStatistics {
     const message = createBaseSlowQueryStatistics();
     message.sqlFingerprint = object.sqlFingerprint ?? "";
-    message.count = (object.count !== undefined && object.count !== null) ? Long.fromValue(object.count) : Long.ZERO;
-    message.latestLogTime = (object.latestLogTime !== undefined && object.latestLogTime !== null)
-      ? Timestamp.fromPartial(object.latestLogTime)
-      : undefined;
-    message.averageQueryTime = (object.averageQueryTime !== undefined && object.averageQueryTime !== null)
-      ? Duration.fromPartial(object.averageQueryTime)
-      : undefined;
-    message.maximumQueryTime = (object.maximumQueryTime !== undefined && object.maximumQueryTime !== null)
-      ? Duration.fromPartial(object.maximumQueryTime)
-      : undefined;
-    message.averageRowsSent = (object.averageRowsSent !== undefined && object.averageRowsSent !== null)
-      ? Long.fromValue(object.averageRowsSent)
-      : Long.ZERO;
-    message.maximumRowsSent = (object.maximumRowsSent !== undefined && object.maximumRowsSent !== null)
-      ? Long.fromValue(object.maximumRowsSent)
-      : Long.ZERO;
-    message.averageRowsExamined = (object.averageRowsExamined !== undefined && object.averageRowsExamined !== null)
-      ? Long.fromValue(object.averageRowsExamined)
-      : Long.ZERO;
-    message.maximumRowsExamined = (object.maximumRowsExamined !== undefined && object.maximumRowsExamined !== null)
-      ? Long.fromValue(object.maximumRowsExamined)
-      : Long.ZERO;
+    message.count =
+      object.count !== undefined && object.count !== null
+        ? Long.fromValue(object.count)
+        : Long.ZERO;
+    message.latestLogTime =
+      object.latestLogTime !== undefined && object.latestLogTime !== null
+        ? Timestamp.fromPartial(object.latestLogTime)
+        : undefined;
+    message.averageQueryTime =
+      object.averageQueryTime !== undefined && object.averageQueryTime !== null
+        ? Duration.fromPartial(object.averageQueryTime)
+        : undefined;
+    message.maximumQueryTime =
+      object.maximumQueryTime !== undefined && object.maximumQueryTime !== null
+        ? Duration.fromPartial(object.maximumQueryTime)
+        : undefined;
+    message.averageRowsSent =
+      object.averageRowsSent !== undefined && object.averageRowsSent !== null
+        ? Long.fromValue(object.averageRowsSent)
+        : Long.ZERO;
+    message.maximumRowsSent =
+      object.maximumRowsSent !== undefined && object.maximumRowsSent !== null
+        ? Long.fromValue(object.maximumRowsSent)
+        : Long.ZERO;
+    message.averageRowsExamined =
+      object.averageRowsExamined !== undefined &&
+      object.averageRowsExamined !== null
+        ? Long.fromValue(object.averageRowsExamined)
+        : Long.ZERO;
+    message.maximumRowsExamined =
+      object.maximumRowsExamined !== undefined &&
+      object.maximumRowsExamined !== null
+        ? Long.fromValue(object.maximumRowsExamined)
+        : Long.ZERO;
     message.queryTimePercent = object.queryTimePercent ?? 0;
     message.countPercent = object.countPercent ?? 0;
-    message.samples = object.samples?.map((e) => SlowQueryDetails.fromPartial(e)) || [];
+    message.samples =
+      object.samples?.map((e) => SlowQueryDetails.fromPartial(e)) || [];
     return message;
   },
 };
@@ -8110,7 +8905,10 @@ function createBaseSlowQueryDetails(): SlowQueryDetails {
 }
 
 export const SlowQueryDetails: MessageFns<SlowQueryDetails> = {
-  encode(message: SlowQueryDetails, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: SlowQueryDetails,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.startTime !== undefined) {
       Timestamp.encode(message.startTime, writer.uint32(10).fork()).join();
     }
@@ -8133,7 +8931,8 @@ export const SlowQueryDetails: MessageFns<SlowQueryDetails> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): SlowQueryDetails {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSlowQueryDetails();
     while (reader.pos < end) {
@@ -8198,11 +8997,21 @@ export const SlowQueryDetails: MessageFns<SlowQueryDetails> = {
 
   fromJSON(object: any): SlowQueryDetails {
     return {
-      startTime: isSet(object.startTime) ? fromJsonTimestamp(object.startTime) : undefined,
-      queryTime: isSet(object.queryTime) ? Duration.fromJSON(object.queryTime) : undefined,
-      lockTime: isSet(object.lockTime) ? Duration.fromJSON(object.lockTime) : undefined,
-      rowsSent: isSet(object.rowsSent) ? Long.fromValue(object.rowsSent) : Long.ZERO,
-      rowsExamined: isSet(object.rowsExamined) ? Long.fromValue(object.rowsExamined) : Long.ZERO,
+      startTime: isSet(object.startTime)
+        ? fromJsonTimestamp(object.startTime)
+        : undefined,
+      queryTime: isSet(object.queryTime)
+        ? Duration.fromJSON(object.queryTime)
+        : undefined,
+      lockTime: isSet(object.lockTime)
+        ? Duration.fromJSON(object.lockTime)
+        : undefined,
+      rowsSent: isSet(object.rowsSent)
+        ? Long.fromValue(object.rowsSent)
+        : Long.ZERO,
+      rowsExamined: isSet(object.rowsExamined)
+        ? Long.fromValue(object.rowsExamined)
+        : Long.ZERO,
       sqlText: isSet(object.sqlText) ? globalThis.String(object.sqlText) : "",
     };
   },
@@ -8235,21 +9044,26 @@ export const SlowQueryDetails: MessageFns<SlowQueryDetails> = {
   },
   fromPartial(object: DeepPartial<SlowQueryDetails>): SlowQueryDetails {
     const message = createBaseSlowQueryDetails();
-    message.startTime = (object.startTime !== undefined && object.startTime !== null)
-      ? Timestamp.fromPartial(object.startTime)
-      : undefined;
-    message.queryTime = (object.queryTime !== undefined && object.queryTime !== null)
-      ? Duration.fromPartial(object.queryTime)
-      : undefined;
-    message.lockTime = (object.lockTime !== undefined && object.lockTime !== null)
-      ? Duration.fromPartial(object.lockTime)
-      : undefined;
-    message.rowsSent = (object.rowsSent !== undefined && object.rowsSent !== null)
-      ? Long.fromValue(object.rowsSent)
-      : Long.ZERO;
-    message.rowsExamined = (object.rowsExamined !== undefined && object.rowsExamined !== null)
-      ? Long.fromValue(object.rowsExamined)
-      : Long.ZERO;
+    message.startTime =
+      object.startTime !== undefined && object.startTime !== null
+        ? Timestamp.fromPartial(object.startTime)
+        : undefined;
+    message.queryTime =
+      object.queryTime !== undefined && object.queryTime !== null
+        ? Duration.fromPartial(object.queryTime)
+        : undefined;
+    message.lockTime =
+      object.lockTime !== undefined && object.lockTime !== null
+        ? Duration.fromPartial(object.lockTime)
+        : undefined;
+    message.rowsSent =
+      object.rowsSent !== undefined && object.rowsSent !== null
+        ? Long.fromValue(object.rowsSent)
+        : Long.ZERO;
+    message.rowsExamined =
+      object.rowsExamined !== undefined && object.rowsExamined !== null
+        ? Long.fromValue(object.rowsExamined)
+        : Long.ZERO;
     message.sqlText = object.sqlText ?? "";
     return message;
   },
@@ -8260,7 +9074,10 @@ function createBaseListSecretsRequest(): ListSecretsRequest {
 }
 
 export const ListSecretsRequest: MessageFns<ListSecretsRequest> = {
-  encode(message: ListSecretsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListSecretsRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -8273,8 +9090,12 @@ export const ListSecretsRequest: MessageFns<ListSecretsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSecretsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListSecretsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSecretsRequest();
     while (reader.pos < end) {
@@ -8317,7 +9138,9 @@ export const ListSecretsRequest: MessageFns<ListSecretsRequest> = {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
+      pageToken: isSet(object.pageToken)
+        ? globalThis.String(object.pageToken)
+        : "",
     };
   },
 
@@ -8352,7 +9175,10 @@ function createBaseListSecretsResponse(): ListSecretsResponse {
 }
 
 export const ListSecretsResponse: MessageFns<ListSecretsResponse> = {
-  encode(message: ListSecretsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListSecretsResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.secrets) {
       Secret.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -8362,8 +9188,12 @@ export const ListSecretsResponse: MessageFns<ListSecretsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListSecretsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListSecretsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListSecretsResponse();
     while (reader.pos < end) {
@@ -8396,8 +9226,12 @@ export const ListSecretsResponse: MessageFns<ListSecretsResponse> = {
 
   fromJSON(object: any): ListSecretsResponse {
     return {
-      secrets: globalThis.Array.isArray(object?.secrets) ? object.secrets.map((e: any) => Secret.fromJSON(e)) : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
+      secrets: globalThis.Array.isArray(object?.secrets)
+        ? object.secrets.map((e: any) => Secret.fromJSON(e))
+        : [],
+      nextPageToken: isSet(object.nextPageToken)
+        ? globalThis.String(object.nextPageToken)
+        : "",
     };
   },
 
@@ -8428,12 +9262,18 @@ function createBaseUpdateSecretRequest(): UpdateSecretRequest {
 }
 
 export const UpdateSecretRequest: MessageFns<UpdateSecretRequest> = {
-  encode(message: UpdateSecretRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: UpdateSecretRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.secret !== undefined) {
       Secret.encode(message.secret, writer.uint32(10).fork()).join();
     }
     if (message.updateMask !== undefined) {
-      FieldMask.encode(FieldMask.wrap(message.updateMask), writer.uint32(18).fork()).join();
+      FieldMask.encode(
+        FieldMask.wrap(message.updateMask),
+        writer.uint32(18).fork()
+      ).join();
     }
     if (message.allowMissing !== false) {
       writer.uint32(24).bool(message.allowMissing);
@@ -8441,8 +9281,12 @@ export const UpdateSecretRequest: MessageFns<UpdateSecretRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): UpdateSecretRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): UpdateSecretRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseUpdateSecretRequest();
     while (reader.pos < end) {
@@ -8461,7 +9305,9 @@ export const UpdateSecretRequest: MessageFns<UpdateSecretRequest> = {
             break;
           }
 
-          message.updateMask = FieldMask.unwrap(FieldMask.decode(reader, reader.uint32()));
+          message.updateMask = FieldMask.unwrap(
+            FieldMask.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 3: {
@@ -8484,8 +9330,12 @@ export const UpdateSecretRequest: MessageFns<UpdateSecretRequest> = {
   fromJSON(object: any): UpdateSecretRequest {
     return {
       secret: isSet(object.secret) ? Secret.fromJSON(object.secret) : undefined,
-      updateMask: isSet(object.updateMask) ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask)) : undefined,
-      allowMissing: isSet(object.allowMissing) ? globalThis.Boolean(object.allowMissing) : false,
+      updateMask: isSet(object.updateMask)
+        ? FieldMask.unwrap(FieldMask.fromJSON(object.updateMask))
+        : undefined,
+      allowMissing: isSet(object.allowMissing)
+        ? globalThis.Boolean(object.allowMissing)
+        : false,
     };
   },
 
@@ -8508,9 +9358,10 @@ export const UpdateSecretRequest: MessageFns<UpdateSecretRequest> = {
   },
   fromPartial(object: DeepPartial<UpdateSecretRequest>): UpdateSecretRequest {
     const message = createBaseUpdateSecretRequest();
-    message.secret = (object.secret !== undefined && object.secret !== null)
-      ? Secret.fromPartial(object.secret)
-      : undefined;
+    message.secret =
+      object.secret !== undefined && object.secret !== null
+        ? Secret.fromPartial(object.secret)
+        : undefined;
     message.updateMask = object.updateMask ?? undefined;
     message.allowMissing = object.allowMissing ?? false;
     return message;
@@ -8522,15 +9373,22 @@ function createBaseDeleteSecretRequest(): DeleteSecretRequest {
 }
 
 export const DeleteSecretRequest: MessageFns<DeleteSecretRequest> = {
-  encode(message: DeleteSecretRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DeleteSecretRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteSecretRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): DeleteSecretRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteSecretRequest();
     while (reader.pos < end) {
@@ -8576,11 +9434,20 @@ export const DeleteSecretRequest: MessageFns<DeleteSecretRequest> = {
 };
 
 function createBaseSecret(): Secret {
-  return { name: "", createdTime: undefined, updatedTime: undefined, value: "", description: "" };
+  return {
+    name: "",
+    createdTime: undefined,
+    updatedTime: undefined,
+    value: "",
+    description: "",
+  };
 }
 
 export const Secret: MessageFns<Secret> = {
-  encode(message: Secret, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Secret,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -8600,7 +9467,8 @@ export const Secret: MessageFns<Secret> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Secret {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseSecret();
     while (reader.pos < end) {
@@ -8658,10 +9526,16 @@ export const Secret: MessageFns<Secret> = {
   fromJSON(object: any): Secret {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      createdTime: isSet(object.createdTime) ? fromJsonTimestamp(object.createdTime) : undefined,
-      updatedTime: isSet(object.updatedTime) ? fromJsonTimestamp(object.updatedTime) : undefined,
+      createdTime: isSet(object.createdTime)
+        ? fromJsonTimestamp(object.createdTime)
+        : undefined,
+      updatedTime: isSet(object.updatedTime)
+        ? fromJsonTimestamp(object.updatedTime)
+        : undefined,
       value: isSet(object.value) ? globalThis.String(object.value) : "",
-      description: isSet(object.description) ? globalThis.String(object.description) : "",
+      description: isSet(object.description)
+        ? globalThis.String(object.description)
+        : "",
     };
   },
 
@@ -8691,12 +9565,14 @@ export const Secret: MessageFns<Secret> = {
   fromPartial(object: DeepPartial<Secret>): Secret {
     const message = createBaseSecret();
     message.name = object.name ?? "";
-    message.createdTime = (object.createdTime !== undefined && object.createdTime !== null)
-      ? Timestamp.fromPartial(object.createdTime)
-      : undefined;
-    message.updatedTime = (object.updatedTime !== undefined && object.updatedTime !== null)
-      ? Timestamp.fromPartial(object.updatedTime)
-      : undefined;
+    message.createdTime =
+      object.createdTime !== undefined && object.createdTime !== null
+        ? Timestamp.fromPartial(object.createdTime)
+        : undefined;
+    message.updatedTime =
+      object.updatedTime !== undefined && object.updatedTime !== null
+        ? Timestamp.fromPartial(object.updatedTime)
+        : undefined;
     message.value = object.value ?? "";
     message.description = object.description ?? "";
     return message;
@@ -8708,7 +9584,10 @@ function createBaseAdviseIndexRequest(): AdviseIndexRequest {
 }
 
 export const AdviseIndexRequest: MessageFns<AdviseIndexRequest> = {
-  encode(message: AdviseIndexRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AdviseIndexRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -8718,8 +9597,12 @@ export const AdviseIndexRequest: MessageFns<AdviseIndexRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AdviseIndexRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AdviseIndexRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdviseIndexRequest();
     while (reader.pos < end) {
@@ -8753,7 +9636,9 @@ export const AdviseIndexRequest: MessageFns<AdviseIndexRequest> = {
   fromJSON(object: any): AdviseIndexRequest {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
-      statement: isSet(object.statement) ? globalThis.String(object.statement) : "",
+      statement: isSet(object.statement)
+        ? globalThis.String(object.statement)
+        : "",
     };
   },
 
@@ -8784,7 +9669,10 @@ function createBaseAdviseIndexResponse(): AdviseIndexResponse {
 }
 
 export const AdviseIndexResponse: MessageFns<AdviseIndexResponse> = {
-  encode(message: AdviseIndexResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: AdviseIndexResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.currentIndex !== "") {
       writer.uint32(10).string(message.currentIndex);
     }
@@ -8797,8 +9685,12 @@ export const AdviseIndexResponse: MessageFns<AdviseIndexResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): AdviseIndexResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): AdviseIndexResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseAdviseIndexResponse();
     while (reader.pos < end) {
@@ -8839,9 +9731,15 @@ export const AdviseIndexResponse: MessageFns<AdviseIndexResponse> = {
 
   fromJSON(object: any): AdviseIndexResponse {
     return {
-      currentIndex: isSet(object.currentIndex) ? globalThis.String(object.currentIndex) : "",
-      suggestion: isSet(object.suggestion) ? globalThis.String(object.suggestion) : "",
-      createIndexStatement: isSet(object.createIndexStatement) ? globalThis.String(object.createIndexStatement) : "",
+      currentIndex: isSet(object.currentIndex)
+        ? globalThis.String(object.currentIndex)
+        : "",
+      suggestion: isSet(object.suggestion)
+        ? globalThis.String(object.suggestion)
+        : "",
+      createIndexStatement: isSet(object.createIndexStatement)
+        ? globalThis.String(object.createIndexStatement)
+        : "",
     };
   },
 
@@ -8876,7 +9774,10 @@ function createBaseChangedResources(): ChangedResources {
 }
 
 export const ChangedResources: MessageFns<ChangedResources> = {
-  encode(message: ChangedResources, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResources,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.databases) {
       ChangedResourceDatabase.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -8884,7 +9785,8 @@ export const ChangedResources: MessageFns<ChangedResources> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): ChangedResources {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResources();
     while (reader.pos < end) {
@@ -8895,7 +9797,9 @@ export const ChangedResources: MessageFns<ChangedResources> = {
             break;
           }
 
-          message.databases.push(ChangedResourceDatabase.decode(reader, reader.uint32()));
+          message.databases.push(
+            ChangedResourceDatabase.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -8918,7 +9822,9 @@ export const ChangedResources: MessageFns<ChangedResources> = {
   toJSON(message: ChangedResources): unknown {
     const obj: any = {};
     if (message.databases?.length) {
-      obj.databases = message.databases.map((e) => ChangedResourceDatabase.toJSON(e));
+      obj.databases = message.databases.map((e) =>
+        ChangedResourceDatabase.toJSON(e)
+      );
     }
     return obj;
   },
@@ -8928,7 +9834,9 @@ export const ChangedResources: MessageFns<ChangedResources> = {
   },
   fromPartial(object: DeepPartial<ChangedResources>): ChangedResources {
     const message = createBaseChangedResources();
-    message.databases = object.databases?.map((e) => ChangedResourceDatabase.fromPartial(e)) || [];
+    message.databases =
+      object.databases?.map((e) => ChangedResourceDatabase.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -8938,7 +9846,10 @@ function createBaseChangedResourceDatabase(): ChangedResourceDatabase {
 }
 
 export const ChangedResourceDatabase: MessageFns<ChangedResourceDatabase> = {
-  encode(message: ChangedResourceDatabase, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceDatabase,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -8948,8 +9859,12 @@ export const ChangedResourceDatabase: MessageFns<ChangedResourceDatabase> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceDatabase {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceDatabase {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceDatabase();
     while (reader.pos < end) {
@@ -8968,7 +9883,9 @@ export const ChangedResourceDatabase: MessageFns<ChangedResourceDatabase> = {
             break;
           }
 
-          message.schemas.push(ChangedResourceSchema.decode(reader, reader.uint32()));
+          message.schemas.push(
+            ChangedResourceSchema.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -9003,10 +9920,13 @@ export const ChangedResourceDatabase: MessageFns<ChangedResourceDatabase> = {
   create(base?: DeepPartial<ChangedResourceDatabase>): ChangedResourceDatabase {
     return ChangedResourceDatabase.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ChangedResourceDatabase>): ChangedResourceDatabase {
+  fromPartial(
+    object: DeepPartial<ChangedResourceDatabase>
+  ): ChangedResourceDatabase {
     const message = createBaseChangedResourceDatabase();
     message.name = object.name ?? "";
-    message.schemas = object.schemas?.map((e) => ChangedResourceSchema.fromPartial(e)) || [];
+    message.schemas =
+      object.schemas?.map((e) => ChangedResourceSchema.fromPartial(e)) || [];
     return message;
   },
 };
@@ -9016,7 +9936,10 @@ function createBaseChangedResourceSchema(): ChangedResourceSchema {
 }
 
 export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
-  encode(message: ChangedResourceSchema, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceSchema,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9035,8 +9958,12 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceSchema {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceSchema {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceSchema();
     while (reader.pos < end) {
@@ -9055,7 +9982,9 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
             break;
           }
 
-          message.tables.push(ChangedResourceTable.decode(reader, reader.uint32()));
+          message.tables.push(
+            ChangedResourceTable.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 3: {
@@ -9063,7 +9992,9 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
             break;
           }
 
-          message.views.push(ChangedResourceView.decode(reader, reader.uint32()));
+          message.views.push(
+            ChangedResourceView.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 4: {
@@ -9071,7 +10002,9 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
             break;
           }
 
-          message.functions.push(ChangedResourceFunction.decode(reader, reader.uint32()));
+          message.functions.push(
+            ChangedResourceFunction.decode(reader, reader.uint32())
+          );
           continue;
         }
         case 5: {
@@ -9079,7 +10012,9 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
             break;
           }
 
-          message.procedures.push(ChangedResourceProcedure.decode(reader, reader.uint32()));
+          message.procedures.push(
+            ChangedResourceProcedure.decode(reader, reader.uint32())
+          );
           continue;
         }
       }
@@ -9104,7 +10039,9 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
         ? object.functions.map((e: any) => ChangedResourceFunction.fromJSON(e))
         : [],
       procedures: globalThis.Array.isArray(object?.procedures)
-        ? object.procedures.map((e: any) => ChangedResourceProcedure.fromJSON(e))
+        ? object.procedures.map((e: any) =>
+            ChangedResourceProcedure.fromJSON(e)
+          )
         : [],
     };
   },
@@ -9121,10 +10058,14 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
       obj.views = message.views.map((e) => ChangedResourceView.toJSON(e));
     }
     if (message.functions?.length) {
-      obj.functions = message.functions.map((e) => ChangedResourceFunction.toJSON(e));
+      obj.functions = message.functions.map((e) =>
+        ChangedResourceFunction.toJSON(e)
+      );
     }
     if (message.procedures?.length) {
-      obj.procedures = message.procedures.map((e) => ChangedResourceProcedure.toJSON(e));
+      obj.procedures = message.procedures.map((e) =>
+        ChangedResourceProcedure.toJSON(e)
+      );
     }
     return obj;
   },
@@ -9132,13 +10073,21 @@ export const ChangedResourceSchema: MessageFns<ChangedResourceSchema> = {
   create(base?: DeepPartial<ChangedResourceSchema>): ChangedResourceSchema {
     return ChangedResourceSchema.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ChangedResourceSchema>): ChangedResourceSchema {
+  fromPartial(
+    object: DeepPartial<ChangedResourceSchema>
+  ): ChangedResourceSchema {
     const message = createBaseChangedResourceSchema();
     message.name = object.name ?? "";
-    message.tables = object.tables?.map((e) => ChangedResourceTable.fromPartial(e)) || [];
-    message.views = object.views?.map((e) => ChangedResourceView.fromPartial(e)) || [];
-    message.functions = object.functions?.map((e) => ChangedResourceFunction.fromPartial(e)) || [];
-    message.procedures = object.procedures?.map((e) => ChangedResourceProcedure.fromPartial(e)) || [];
+    message.tables =
+      object.tables?.map((e) => ChangedResourceTable.fromPartial(e)) || [];
+    message.views =
+      object.views?.map((e) => ChangedResourceView.fromPartial(e)) || [];
+    message.functions =
+      object.functions?.map((e) => ChangedResourceFunction.fromPartial(e)) ||
+      [];
+    message.procedures =
+      object.procedures?.map((e) => ChangedResourceProcedure.fromPartial(e)) ||
+      [];
     return message;
   },
 };
@@ -9148,7 +10097,10 @@ function createBaseChangedResourceTable(): ChangedResourceTable {
 }
 
 export const ChangedResourceTable: MessageFns<ChangedResourceTable> = {
-  encode(message: ChangedResourceTable, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceTable,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9158,8 +10110,12 @@ export const ChangedResourceTable: MessageFns<ChangedResourceTable> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceTable {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceTable {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceTable();
     while (reader.pos < end) {
@@ -9193,7 +10149,9 @@ export const ChangedResourceTable: MessageFns<ChangedResourceTable> = {
   fromJSON(object: any): ChangedResourceTable {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      ranges: globalThis.Array.isArray(object?.ranges) ? object.ranges.map((e: any) => Range.fromJSON(e)) : [],
+      ranges: globalThis.Array.isArray(object?.ranges)
+        ? object.ranges.map((e: any) => Range.fromJSON(e))
+        : [],
     };
   },
 
@@ -9224,7 +10182,10 @@ function createBaseChangedResourceView(): ChangedResourceView {
 }
 
 export const ChangedResourceView: MessageFns<ChangedResourceView> = {
-  encode(message: ChangedResourceView, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceView,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9234,8 +10195,12 @@ export const ChangedResourceView: MessageFns<ChangedResourceView> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceView {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceView {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceView();
     while (reader.pos < end) {
@@ -9269,7 +10234,9 @@ export const ChangedResourceView: MessageFns<ChangedResourceView> = {
   fromJSON(object: any): ChangedResourceView {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      ranges: globalThis.Array.isArray(object?.ranges) ? object.ranges.map((e: any) => Range.fromJSON(e)) : [],
+      ranges: globalThis.Array.isArray(object?.ranges)
+        ? object.ranges.map((e: any) => Range.fromJSON(e))
+        : [],
     };
   },
 
@@ -9300,7 +10267,10 @@ function createBaseChangedResourceFunction(): ChangedResourceFunction {
 }
 
 export const ChangedResourceFunction: MessageFns<ChangedResourceFunction> = {
-  encode(message: ChangedResourceFunction, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceFunction,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9310,8 +10280,12 @@ export const ChangedResourceFunction: MessageFns<ChangedResourceFunction> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceFunction {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceFunction {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceFunction();
     while (reader.pos < end) {
@@ -9345,7 +10319,9 @@ export const ChangedResourceFunction: MessageFns<ChangedResourceFunction> = {
   fromJSON(object: any): ChangedResourceFunction {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      ranges: globalThis.Array.isArray(object?.ranges) ? object.ranges.map((e: any) => Range.fromJSON(e)) : [],
+      ranges: globalThis.Array.isArray(object?.ranges)
+        ? object.ranges.map((e: any) => Range.fromJSON(e))
+        : [],
     };
   },
 
@@ -9363,7 +10339,9 @@ export const ChangedResourceFunction: MessageFns<ChangedResourceFunction> = {
   create(base?: DeepPartial<ChangedResourceFunction>): ChangedResourceFunction {
     return ChangedResourceFunction.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ChangedResourceFunction>): ChangedResourceFunction {
+  fromPartial(
+    object: DeepPartial<ChangedResourceFunction>
+  ): ChangedResourceFunction {
     const message = createBaseChangedResourceFunction();
     message.name = object.name ?? "";
     message.ranges = object.ranges?.map((e) => Range.fromPartial(e)) || [];
@@ -9376,7 +10354,10 @@ function createBaseChangedResourceProcedure(): ChangedResourceProcedure {
 }
 
 export const ChangedResourceProcedure: MessageFns<ChangedResourceProcedure> = {
-  encode(message: ChangedResourceProcedure, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ChangedResourceProcedure,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9386,8 +10367,12 @@ export const ChangedResourceProcedure: MessageFns<ChangedResourceProcedure> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ChangedResourceProcedure {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ChangedResourceProcedure {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangedResourceProcedure();
     while (reader.pos < end) {
@@ -9421,7 +10406,9 @@ export const ChangedResourceProcedure: MessageFns<ChangedResourceProcedure> = {
   fromJSON(object: any): ChangedResourceProcedure {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      ranges: globalThis.Array.isArray(object?.ranges) ? object.ranges.map((e: any) => Range.fromJSON(e)) : [],
+      ranges: globalThis.Array.isArray(object?.ranges)
+        ? object.ranges.map((e: any) => Range.fromJSON(e))
+        : [],
     };
   },
 
@@ -9436,10 +10423,14 @@ export const ChangedResourceProcedure: MessageFns<ChangedResourceProcedure> = {
     return obj;
   },
 
-  create(base?: DeepPartial<ChangedResourceProcedure>): ChangedResourceProcedure {
+  create(
+    base?: DeepPartial<ChangedResourceProcedure>
+  ): ChangedResourceProcedure {
     return ChangedResourceProcedure.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ChangedResourceProcedure>): ChangedResourceProcedure {
+  fromPartial(
+    object: DeepPartial<ChangedResourceProcedure>
+  ): ChangedResourceProcedure {
     const message = createBaseChangedResourceProcedure();
     message.name = object.name ?? "";
     message.ranges = object.ranges?.map((e) => Range.fromPartial(e)) || [];
@@ -9452,7 +10443,10 @@ function createBaseListRevisionsRequest(): ListRevisionsRequest {
 }
 
 export const ListRevisionsRequest: MessageFns<ListRevisionsRequest> = {
-  encode(message: ListRevisionsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListRevisionsRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -9468,8 +10462,12 @@ export const ListRevisionsRequest: MessageFns<ListRevisionsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListRevisionsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListRevisionsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListRevisionsRequest();
     while (reader.pos < end) {
@@ -9520,8 +10518,12 @@ export const ListRevisionsRequest: MessageFns<ListRevisionsRequest> = {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
-      showDeleted: isSet(object.showDeleted) ? globalThis.Boolean(object.showDeleted) : false,
+      pageToken: isSet(object.pageToken)
+        ? globalThis.String(object.pageToken)
+        : "",
+      showDeleted: isSet(object.showDeleted)
+        ? globalThis.Boolean(object.showDeleted)
+        : false,
     };
   },
 
@@ -9560,7 +10562,10 @@ function createBaseListRevisionsResponse(): ListRevisionsResponse {
 }
 
 export const ListRevisionsResponse: MessageFns<ListRevisionsResponse> = {
-  encode(message: ListRevisionsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListRevisionsResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.revisions) {
       Revision.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -9570,8 +10575,12 @@ export const ListRevisionsResponse: MessageFns<ListRevisionsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListRevisionsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListRevisionsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListRevisionsResponse();
     while (reader.pos < end) {
@@ -9607,7 +10616,9 @@ export const ListRevisionsResponse: MessageFns<ListRevisionsResponse> = {
       revisions: globalThis.Array.isArray(object?.revisions)
         ? object.revisions.map((e: any) => Revision.fromJSON(e))
         : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
+      nextPageToken: isSet(object.nextPageToken)
+        ? globalThis.String(object.nextPageToken)
+        : "",
     };
   },
 
@@ -9625,9 +10636,12 @@ export const ListRevisionsResponse: MessageFns<ListRevisionsResponse> = {
   create(base?: DeepPartial<ListRevisionsResponse>): ListRevisionsResponse {
     return ListRevisionsResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListRevisionsResponse>): ListRevisionsResponse {
+  fromPartial(
+    object: DeepPartial<ListRevisionsResponse>
+  ): ListRevisionsResponse {
     const message = createBaseListRevisionsResponse();
-    message.revisions = object.revisions?.map((e) => Revision.fromPartial(e)) || [];
+    message.revisions =
+      object.revisions?.map((e) => Revision.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
@@ -9638,7 +10652,10 @@ function createBaseCreateRevisionRequest(): CreateRevisionRequest {
 }
 
 export const CreateRevisionRequest: MessageFns<CreateRevisionRequest> = {
-  encode(message: CreateRevisionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: CreateRevisionRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -9648,8 +10665,12 @@ export const CreateRevisionRequest: MessageFns<CreateRevisionRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): CreateRevisionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): CreateRevisionRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseCreateRevisionRequest();
     while (reader.pos < end) {
@@ -9683,7 +10704,9 @@ export const CreateRevisionRequest: MessageFns<CreateRevisionRequest> = {
   fromJSON(object: any): CreateRevisionRequest {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
-      revision: isSet(object.revision) ? Revision.fromJSON(object.revision) : undefined,
+      revision: isSet(object.revision)
+        ? Revision.fromJSON(object.revision)
+        : undefined,
     };
   },
 
@@ -9701,12 +10724,15 @@ export const CreateRevisionRequest: MessageFns<CreateRevisionRequest> = {
   create(base?: DeepPartial<CreateRevisionRequest>): CreateRevisionRequest {
     return CreateRevisionRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<CreateRevisionRequest>): CreateRevisionRequest {
+  fromPartial(
+    object: DeepPartial<CreateRevisionRequest>
+  ): CreateRevisionRequest {
     const message = createBaseCreateRevisionRequest();
     message.parent = object.parent ?? "";
-    message.revision = (object.revision !== undefined && object.revision !== null)
-      ? Revision.fromPartial(object.revision)
-      : undefined;
+    message.revision =
+      object.revision !== undefined && object.revision !== null
+        ? Revision.fromPartial(object.revision)
+        : undefined;
     return message;
   },
 };
@@ -9716,15 +10742,22 @@ function createBaseGetRevisionRequest(): GetRevisionRequest {
 }
 
 export const GetRevisionRequest: MessageFns<GetRevisionRequest> = {
-  encode(message: GetRevisionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetRevisionRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetRevisionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): GetRevisionRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetRevisionRequest();
     while (reader.pos < end) {
@@ -9774,15 +10807,22 @@ function createBaseDeleteRevisionRequest(): DeleteRevisionRequest {
 }
 
 export const DeleteRevisionRequest: MessageFns<DeleteRevisionRequest> = {
-  encode(message: DeleteRevisionRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: DeleteRevisionRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): DeleteRevisionRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): DeleteRevisionRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseDeleteRevisionRequest();
     while (reader.pos < end) {
@@ -9820,7 +10860,9 @@ export const DeleteRevisionRequest: MessageFns<DeleteRevisionRequest> = {
   create(base?: DeepPartial<DeleteRevisionRequest>): DeleteRevisionRequest {
     return DeleteRevisionRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<DeleteRevisionRequest>): DeleteRevisionRequest {
+  fromPartial(
+    object: DeepPartial<DeleteRevisionRequest>
+  ): DeleteRevisionRequest {
     const message = createBaseDeleteRevisionRequest();
     message.name = object.name ?? "";
     return message;
@@ -9846,7 +10888,10 @@ function createBaseRevision(): Revision {
 }
 
 export const Revision: MessageFns<Revision> = {
-  encode(message: Revision, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Revision,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -9890,7 +10935,8 @@ export const Revision: MessageFns<Revision> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Revision {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseRevision();
     while (reader.pos < end) {
@@ -10013,15 +11059,25 @@ export const Revision: MessageFns<Revision> = {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
       release: isSet(object.release) ? globalThis.String(object.release) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
+      createTime: isSet(object.createTime)
+        ? fromJsonTimestamp(object.createTime)
+        : undefined,
       deleter: isSet(object.deleter) ? globalThis.String(object.deleter) : "",
-      deleteTime: isSet(object.deleteTime) ? fromJsonTimestamp(object.deleteTime) : undefined,
+      deleteTime: isSet(object.deleteTime)
+        ? fromJsonTimestamp(object.deleteTime)
+        : undefined,
       file: isSet(object.file) ? globalThis.String(object.file) : "",
       version: isSet(object.version) ? globalThis.String(object.version) : "",
       sheet: isSet(object.sheet) ? globalThis.String(object.sheet) : "",
-      sheetSha256: isSet(object.sheetSha256) ? globalThis.String(object.sheetSha256) : "",
-      statement: isSet(object.statement) ? globalThis.String(object.statement) : "",
-      statementSize: isSet(object.statementSize) ? Long.fromValue(object.statementSize) : Long.ZERO,
+      sheetSha256: isSet(object.sheetSha256)
+        ? globalThis.String(object.sheetSha256)
+        : "",
+      statement: isSet(object.statement)
+        ? globalThis.String(object.statement)
+        : "",
+      statementSize: isSet(object.statementSize)
+        ? Long.fromValue(object.statementSize)
+        : Long.ZERO,
       issue: isSet(object.issue) ? globalThis.String(object.issue) : "",
       taskRun: isSet(object.taskRun) ? globalThis.String(object.taskRun) : "",
     };
@@ -10078,21 +11134,24 @@ export const Revision: MessageFns<Revision> = {
     const message = createBaseRevision();
     message.name = object.name ?? "";
     message.release = object.release ?? "";
-    message.createTime = (object.createTime !== undefined && object.createTime !== null)
-      ? Timestamp.fromPartial(object.createTime)
-      : undefined;
+    message.createTime =
+      object.createTime !== undefined && object.createTime !== null
+        ? Timestamp.fromPartial(object.createTime)
+        : undefined;
     message.deleter = object.deleter ?? "";
-    message.deleteTime = (object.deleteTime !== undefined && object.deleteTime !== null)
-      ? Timestamp.fromPartial(object.deleteTime)
-      : undefined;
+    message.deleteTime =
+      object.deleteTime !== undefined && object.deleteTime !== null
+        ? Timestamp.fromPartial(object.deleteTime)
+        : undefined;
     message.file = object.file ?? "";
     message.version = object.version ?? "";
     message.sheet = object.sheet ?? "";
     message.sheetSha256 = object.sheetSha256 ?? "";
     message.statement = object.statement ?? "";
-    message.statementSize = (object.statementSize !== undefined && object.statementSize !== null)
-      ? Long.fromValue(object.statementSize)
-      : Long.ZERO;
+    message.statementSize =
+      object.statementSize !== undefined && object.statementSize !== null
+        ? Long.fromValue(object.statementSize)
+        : Long.ZERO;
     message.issue = object.issue ?? "";
     message.taskRun = object.taskRun ?? "";
     return message;
@@ -10100,11 +11159,20 @@ export const Revision: MessageFns<Revision> = {
 };
 
 function createBaseListChangelogsRequest(): ListChangelogsRequest {
-  return { parent: "", pageSize: 0, pageToken: "", view: ChangelogView.CHANGELOG_VIEW_UNSPECIFIED, filter: "" };
+  return {
+    parent: "",
+    pageSize: 0,
+    pageToken: "",
+    view: ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
+    filter: "",
+  };
 }
 
 export const ListChangelogsRequest: MessageFns<ListChangelogsRequest> = {
-  encode(message: ListChangelogsRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListChangelogsRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.parent !== "") {
       writer.uint32(10).string(message.parent);
     }
@@ -10123,8 +11191,12 @@ export const ListChangelogsRequest: MessageFns<ListChangelogsRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListChangelogsRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListChangelogsRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListChangelogsRequest();
     while (reader.pos < end) {
@@ -10183,8 +11255,12 @@ export const ListChangelogsRequest: MessageFns<ListChangelogsRequest> = {
     return {
       parent: isSet(object.parent) ? globalThis.String(object.parent) : "",
       pageSize: isSet(object.pageSize) ? globalThis.Number(object.pageSize) : 0,
-      pageToken: isSet(object.pageToken) ? globalThis.String(object.pageToken) : "",
-      view: isSet(object.view) ? changelogViewFromJSON(object.view) : ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
+      pageToken: isSet(object.pageToken)
+        ? globalThis.String(object.pageToken)
+        : "",
+      view: isSet(object.view)
+        ? changelogViewFromJSON(object.view)
+        : ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
       filter: isSet(object.filter) ? globalThis.String(object.filter) : "",
     };
   },
@@ -10212,7 +11288,9 @@ export const ListChangelogsRequest: MessageFns<ListChangelogsRequest> = {
   create(base?: DeepPartial<ListChangelogsRequest>): ListChangelogsRequest {
     return ListChangelogsRequest.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListChangelogsRequest>): ListChangelogsRequest {
+  fromPartial(
+    object: DeepPartial<ListChangelogsRequest>
+  ): ListChangelogsRequest {
     const message = createBaseListChangelogsRequest();
     message.parent = object.parent ?? "";
     message.pageSize = object.pageSize ?? 0;
@@ -10228,7 +11306,10 @@ function createBaseListChangelogsResponse(): ListChangelogsResponse {
 }
 
 export const ListChangelogsResponse: MessageFns<ListChangelogsResponse> = {
-  encode(message: ListChangelogsResponse, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: ListChangelogsResponse,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     for (const v of message.changelogs) {
       Changelog.encode(v!, writer.uint32(10).fork()).join();
     }
@@ -10238,8 +11319,12 @@ export const ListChangelogsResponse: MessageFns<ListChangelogsResponse> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): ListChangelogsResponse {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): ListChangelogsResponse {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseListChangelogsResponse();
     while (reader.pos < end) {
@@ -10275,7 +11360,9 @@ export const ListChangelogsResponse: MessageFns<ListChangelogsResponse> = {
       changelogs: globalThis.Array.isArray(object?.changelogs)
         ? object.changelogs.map((e: any) => Changelog.fromJSON(e))
         : [],
-      nextPageToken: isSet(object.nextPageToken) ? globalThis.String(object.nextPageToken) : "",
+      nextPageToken: isSet(object.nextPageToken)
+        ? globalThis.String(object.nextPageToken)
+        : "",
     };
   },
 
@@ -10293,20 +11380,30 @@ export const ListChangelogsResponse: MessageFns<ListChangelogsResponse> = {
   create(base?: DeepPartial<ListChangelogsResponse>): ListChangelogsResponse {
     return ListChangelogsResponse.fromPartial(base ?? {});
   },
-  fromPartial(object: DeepPartial<ListChangelogsResponse>): ListChangelogsResponse {
+  fromPartial(
+    object: DeepPartial<ListChangelogsResponse>
+  ): ListChangelogsResponse {
     const message = createBaseListChangelogsResponse();
-    message.changelogs = object.changelogs?.map((e) => Changelog.fromPartial(e)) || [];
+    message.changelogs =
+      object.changelogs?.map((e) => Changelog.fromPartial(e)) || [];
     message.nextPageToken = object.nextPageToken ?? "";
     return message;
   },
 };
 
 function createBaseGetChangelogRequest(): GetChangelogRequest {
-  return { name: "", view: ChangelogView.CHANGELOG_VIEW_UNSPECIFIED, sdlFormat: false };
+  return {
+    name: "",
+    view: ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
+    sdlFormat: false,
+  };
 }
 
 export const GetChangelogRequest: MessageFns<GetChangelogRequest> = {
-  encode(message: GetChangelogRequest, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: GetChangelogRequest,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -10319,8 +11416,12 @@ export const GetChangelogRequest: MessageFns<GetChangelogRequest> = {
     return writer;
   },
 
-  decode(input: BinaryReader | Uint8Array, length?: number): GetChangelogRequest {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+  decode(
+    input: BinaryReader | Uint8Array,
+    length?: number
+  ): GetChangelogRequest {
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseGetChangelogRequest();
     while (reader.pos < end) {
@@ -10362,8 +11463,12 @@ export const GetChangelogRequest: MessageFns<GetChangelogRequest> = {
   fromJSON(object: any): GetChangelogRequest {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      view: isSet(object.view) ? changelogViewFromJSON(object.view) : ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
-      sdlFormat: isSet(object.sdlFormat) ? globalThis.Boolean(object.sdlFormat) : false,
+      view: isSet(object.view)
+        ? changelogViewFromJSON(object.view)
+        : ChangelogView.CHANGELOG_VIEW_UNSPECIFIED,
+      sdlFormat: isSet(object.sdlFormat)
+        ? globalThis.Boolean(object.sdlFormat)
+        : false,
     };
   },
 
@@ -10415,7 +11520,10 @@ function createBaseChangelog(): Changelog {
 }
 
 export const Changelog: MessageFns<Changelog> = {
-  encode(message: Changelog, writer: BinaryWriter = new BinaryWriter()): BinaryWriter {
+  encode(
+    message: Changelog,
+    writer: BinaryWriter = new BinaryWriter()
+  ): BinaryWriter {
     if (message.name !== "") {
       writer.uint32(10).string(message.name);
     }
@@ -10459,7 +11567,10 @@ export const Changelog: MessageFns<Changelog> = {
       writer.uint32(122).string(message.revision);
     }
     if (message.changedResources !== undefined) {
-      ChangedResources.encode(message.changedResources, writer.uint32(130).fork()).join();
+      ChangedResources.encode(
+        message.changedResources,
+        writer.uint32(130).fork()
+      ).join();
     }
     if (message.type !== Changelog_Type.TYPE_UNSPECIFIED) {
       writer.uint32(136).int32(changelog_TypeToNumber(message.type));
@@ -10468,7 +11579,8 @@ export const Changelog: MessageFns<Changelog> = {
   },
 
   decode(input: BinaryReader | Uint8Array, length?: number): Changelog {
-    const reader = input instanceof BinaryReader ? input : new BinaryReader(input);
+    const reader =
+      input instanceof BinaryReader ? input : new BinaryReader(input);
     let end = length === undefined ? reader.len : reader.pos + length;
     const message = createBaseChangelog();
     while (reader.pos < end) {
@@ -10591,7 +11703,10 @@ export const Changelog: MessageFns<Changelog> = {
             break;
           }
 
-          message.changedResources = ChangedResources.decode(reader, reader.uint32());
+          message.changedResources = ChangedResources.decode(
+            reader,
+            reader.uint32()
+          );
           continue;
         }
         case 17: {
@@ -10614,21 +11729,43 @@ export const Changelog: MessageFns<Changelog> = {
   fromJSON(object: any): Changelog {
     return {
       name: isSet(object.name) ? globalThis.String(object.name) : "",
-      createTime: isSet(object.createTime) ? fromJsonTimestamp(object.createTime) : undefined,
-      status: isSet(object.status) ? changelog_StatusFromJSON(object.status) : Changelog_Status.STATUS_UNSPECIFIED,
-      statement: isSet(object.statement) ? globalThis.String(object.statement) : "",
-      statementSize: isSet(object.statementSize) ? Long.fromValue(object.statementSize) : Long.ZERO,
-      statementSheet: isSet(object.statementSheet) ? globalThis.String(object.statementSheet) : "",
+      createTime: isSet(object.createTime)
+        ? fromJsonTimestamp(object.createTime)
+        : undefined,
+      status: isSet(object.status)
+        ? changelog_StatusFromJSON(object.status)
+        : Changelog_Status.STATUS_UNSPECIFIED,
+      statement: isSet(object.statement)
+        ? globalThis.String(object.statement)
+        : "",
+      statementSize: isSet(object.statementSize)
+        ? Long.fromValue(object.statementSize)
+        : Long.ZERO,
+      statementSheet: isSet(object.statementSheet)
+        ? globalThis.String(object.statementSheet)
+        : "",
       schema: isSet(object.schema) ? globalThis.String(object.schema) : "",
-      schemaSize: isSet(object.schemaSize) ? Long.fromValue(object.schemaSize) : Long.ZERO,
-      prevSchema: isSet(object.prevSchema) ? globalThis.String(object.prevSchema) : "",
-      prevSchemaSize: isSet(object.prevSchemaSize) ? Long.fromValue(object.prevSchemaSize) : Long.ZERO,
+      schemaSize: isSet(object.schemaSize)
+        ? Long.fromValue(object.schemaSize)
+        : Long.ZERO,
+      prevSchema: isSet(object.prevSchema)
+        ? globalThis.String(object.prevSchema)
+        : "",
+      prevSchemaSize: isSet(object.prevSchemaSize)
+        ? Long.fromValue(object.prevSchemaSize)
+        : Long.ZERO,
       issue: isSet(object.issue) ? globalThis.String(object.issue) : "",
       taskRun: isSet(object.taskRun) ? globalThis.String(object.taskRun) : "",
       version: isSet(object.version) ? globalThis.String(object.version) : "",
-      revision: isSet(object.revision) ? globalThis.String(object.revision) : "",
-      changedResources: isSet(object.changedResources) ? ChangedResources.fromJSON(object.changedResources) : undefined,
-      type: isSet(object.type) ? changelog_TypeFromJSON(object.type) : Changelog_Type.TYPE_UNSPECIFIED,
+      revision: isSet(object.revision)
+        ? globalThis.String(object.revision)
+        : "",
+      changedResources: isSet(object.changedResources)
+        ? ChangedResources.fromJSON(object.changedResources)
+        : undefined,
+      type: isSet(object.type)
+        ? changelog_TypeFromJSON(object.type)
+        : Changelog_Type.TYPE_UNSPECIFIED,
     };
   },
 
@@ -10691,30 +11828,35 @@ export const Changelog: MessageFns<Changelog> = {
   fromPartial(object: DeepPartial<Changelog>): Changelog {
     const message = createBaseChangelog();
     message.name = object.name ?? "";
-    message.createTime = (object.createTime !== undefined && object.createTime !== null)
-      ? Timestamp.fromPartial(object.createTime)
-      : undefined;
+    message.createTime =
+      object.createTime !== undefined && object.createTime !== null
+        ? Timestamp.fromPartial(object.createTime)
+        : undefined;
     message.status = object.status ?? Changelog_Status.STATUS_UNSPECIFIED;
     message.statement = object.statement ?? "";
-    message.statementSize = (object.statementSize !== undefined && object.statementSize !== null)
-      ? Long.fromValue(object.statementSize)
-      : Long.ZERO;
+    message.statementSize =
+      object.statementSize !== undefined && object.statementSize !== null
+        ? Long.fromValue(object.statementSize)
+        : Long.ZERO;
     message.statementSheet = object.statementSheet ?? "";
     message.schema = object.schema ?? "";
-    message.schemaSize = (object.schemaSize !== undefined && object.schemaSize !== null)
-      ? Long.fromValue(object.schemaSize)
-      : Long.ZERO;
+    message.schemaSize =
+      object.schemaSize !== undefined && object.schemaSize !== null
+        ? Long.fromValue(object.schemaSize)
+        : Long.ZERO;
     message.prevSchema = object.prevSchema ?? "";
-    message.prevSchemaSize = (object.prevSchemaSize !== undefined && object.prevSchemaSize !== null)
-      ? Long.fromValue(object.prevSchemaSize)
-      : Long.ZERO;
+    message.prevSchemaSize =
+      object.prevSchemaSize !== undefined && object.prevSchemaSize !== null
+        ? Long.fromValue(object.prevSchemaSize)
+        : Long.ZERO;
     message.issue = object.issue ?? "";
     message.taskRun = object.taskRun ?? "";
     message.version = object.version ?? "";
     message.revision = object.revision ?? "";
-    message.changedResources = (object.changedResources !== undefined && object.changedResources !== null)
-      ? ChangedResources.fromPartial(object.changedResources)
-      : undefined;
+    message.changedResources =
+      object.changedResources !== undefined && object.changedResources !== null
+        ? ChangedResources.fromPartial(object.changedResources)
+        : undefined;
     message.type = object.type ?? Changelog_Type.TYPE_UNSPECIFIED;
     return message;
   },
@@ -10734,47 +11876,18 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           8410: [new Uint8Array([4, 110, 97, 109, 101])],
-          800010: [new Uint8Array([16, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103, 101, 116])],
+          800010: [
+            new Uint8Array([
+              16, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103,
+              101, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              36,
-              18,
-              34,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
+              36, 18, 34, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -10789,47 +11902,18 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           8410: [new Uint8Array([0])],
-          800010: [new Uint8Array([16, 98, 98, 46, 105, 110, 115, 116, 97, 110, 99, 101, 115, 46, 103, 101, 116])],
+          800010: [
+            new Uint8Array([
+              16, 98, 98, 46, 105, 110, 115, 116, 97, 110, 99, 101, 115, 46,
+              103, 101, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              36,
-              18,
-              34,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
+              36, 18, 34, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 125, 47, 100,
+              97, 116, 97, 98, 97, 115, 101, 115,
             ]),
           ],
         },
@@ -10844,85 +11928,21 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           8410: [new Uint8Array([0])],
-          800010: [new Uint8Array([17, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 108, 105, 115, 116])],
+          800010: [
+            new Uint8Array([
+              17, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 108,
+              105, 115, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              74,
-              90,
-              37,
-              18,
-              35,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              119,
-              111,
-              114,
-              107,
-              115,
-              112,
-              97,
-              99,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              18,
-              33,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              112,
-              114,
-              111,
-              106,
-              101,
-              99,
-              116,
-              115,
-              47,
-              42,
-              125,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
+              74, 90, 37, 18, 35, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110,
+              116, 61, 119, 111, 114, 107, 115, 112, 97, 99, 101, 115, 47, 42,
+              125, 47, 100, 97, 116, 97, 98, 97, 115, 101, 115, 18, 33, 47, 118,
+              49, 47, 123, 112, 97, 114, 101, 110, 116, 61, 112, 114, 111, 106,
+              101, 99, 116, 115, 47, 42, 125, 47, 100, 97, 116, 97, 98, 97, 115,
+              101, 115,
             ]),
           ],
         },
@@ -10938,92 +11958,24 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           8410: [
             new Uint8Array([
-              20,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              44,
-              117,
-              112,
-              100,
-              97,
-              116,
-              101,
-              95,
-              109,
-              97,
-              115,
-              107,
+              20, 100, 97, 116, 97, 98, 97, 115, 101, 44, 117, 112, 100, 97,
+              116, 101, 95, 109, 97, 115, 107,
             ]),
           ],
           800010: [
-            new Uint8Array([19, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 117, 112, 100, 97, 116, 101]),
+            new Uint8Array([
+              19, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 117,
+              112, 100, 97, 116, 101,
+            ]),
           ],
           800016: [new Uint8Array([1])],
           800024: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              55,
-              58,
-              8,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              50,
-              43,
-              47,
-              118,
-              49,
-              47,
-              123,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              46,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
+              55, 58, 8, 100, 97, 116, 97, 98, 97, 115, 101, 50, 43, 47, 118,
+              49, 47, 123, 100, 97, 116, 97, 98, 97, 115, 101, 46, 110, 97, 109,
+              101, 61, 105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47,
+              100, 97, 116, 97, 98, 97, 115, 101, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -11038,64 +11990,19 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           800010: [
-            new Uint8Array([19, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 117, 112, 100, 97, 116, 101]),
+            new Uint8Array([
+              19, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 117,
+              112, 100, 97, 116, 101,
+            ]),
           ],
           800016: [new Uint8Array([1])],
           800024: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              51,
-              58,
-              1,
-              42,
-              34,
-              46,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              58,
-              98,
-              97,
-              116,
-              99,
-              104,
-              85,
-              112,
-              100,
-              97,
-              116,
-              101,
+              51, 58, 1, 42, 34, 46, 47, 118, 49, 47, 123, 112, 97, 114, 101,
+              110, 116, 61, 105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42,
+              125, 47, 100, 97, 116, 97, 98, 97, 115, 101, 115, 58, 98, 97, 116,
+              99, 104, 85, 112, 100, 97, 116, 101,
             ]),
           ],
         },
@@ -11109,55 +12016,19 @@ export const DatabaseServiceDefinition = {
       responseStream: false,
       options: {
         _unknownFields: {
-          800010: [new Uint8Array([17, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 115, 121, 110, 99])],
+          800010: [
+            new Uint8Array([
+              17, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 115,
+              121, 110, 99,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              44,
-              58,
-              1,
-              42,
-              34,
-              39,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              58,
-              115,
-              121,
-              110,
-              99,
+              44, 58, 1, 42, 34, 39, 47, 118, 49, 47, 123, 110, 97, 109, 101,
+              61, 105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100,
+              97, 116, 97, 98, 97, 115, 101, 115, 47, 42, 125, 58, 115, 121,
+              110, 99,
             ]),
           ],
         },
@@ -11173,80 +12044,17 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           800010: [
             new Uint8Array([
-              22,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              46,
-              103,
-              101,
-              116,
-              83,
-              99,
-              104,
-              101,
-              109,
-              97,
+              22, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103,
+              101, 116, 83, 99, 104, 101, 109, 97,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              45,
-              18,
-              43,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              109,
-              101,
-              116,
-              97,
-              100,
-              97,
-              116,
-              97,
-              125,
+              45, 18, 43, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 109, 101, 116, 97, 100, 97, 116,
+              97, 125,
             ]),
           ],
         },
@@ -11262,78 +12070,16 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           800010: [
             new Uint8Array([
-              22,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              46,
-              103,
-              101,
-              116,
-              83,
-              99,
-              104,
-              101,
-              109,
-              97,
+              22, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103,
+              101, 116, 83, 99, 104, 101, 109, 97,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              43,
-              18,
-              41,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              115,
-              99,
-              104,
-              101,
-              109,
-              97,
-              125,
+              43, 18, 41, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 115, 99, 104, 101, 109, 97, 125,
             ]),
           ],
         },
@@ -11347,126 +12093,23 @@ export const DatabaseServiceDefinition = {
       responseStream: false,
       options: {
         _unknownFields: {
-          800010: [new Uint8Array([16, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103, 101, 116])],
+          800010: [
+            new Uint8Array([
+              16, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 103,
+              101, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              115,
-              58,
-              1,
-              42,
-              90,
-              63,
-              58,
-              1,
-              42,
-              34,
-              58,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              99,
-              104,
-              97,
-              110,
-              103,
-              101,
-              108,
-              111,
-              103,
-              115,
-              47,
-              42,
-              125,
-              58,
-              100,
-              105,
-              102,
-              102,
-              83,
-              99,
-              104,
-              101,
-              109,
-              97,
-              34,
-              45,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              58,
-              100,
-              105,
-              102,
-              102,
-              83,
-              99,
-              104,
-              101,
-              109,
-              97,
+              115, 58, 1, 42, 90, 63, 58, 1, 42, 34, 58, 47, 118, 49, 47, 123,
+              110, 97, 109, 101, 61, 105, 110, 115, 116, 97, 110, 99, 101, 115,
+              47, 42, 47, 100, 97, 116, 97, 98, 97, 115, 101, 115, 47, 42, 47,
+              99, 104, 97, 110, 103, 101, 108, 111, 103, 115, 47, 42, 125, 58,
+              100, 105, 102, 102, 83, 99, 104, 101, 109, 97, 34, 45, 47, 118,
+              49, 47, 123, 110, 97, 109, 101, 61, 105, 110, 115, 116, 97, 110,
+              99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98, 97, 115, 101, 115,
+              47, 42, 125, 58, 100, 105, 102, 102, 83, 99, 104, 101, 109, 97,
             ]),
           ],
         },
@@ -11483,69 +12126,16 @@ export const DatabaseServiceDefinition = {
           8410: [new Uint8Array([6, 112, 97, 114, 101, 110, 116])],
           800010: [
             new Uint8Array([
-              19,
-              98,
-              98,
-              46,
-              115,
-              108,
-              111,
-              119,
-              81,
-              117,
-              101,
-              114,
-              105,
-              101,
-              115,
-              46,
-              108,
-              105,
-              115,
-              116,
+              19, 98, 98, 46, 115, 108, 111, 119, 81, 117, 101, 114, 105, 101,
+              115, 46, 108, 105, 115, 116,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              37,
-              18,
-              35,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              112,
-              114,
-              111,
-              106,
-              101,
-              99,
-              116,
-              115,
-              47,
-              42,
-              125,
-              47,
-              115,
-              108,
-              111,
-              119,
-              81,
-              117,
-              101,
-              114,
-              105,
-              101,
-              115,
+              37, 18, 35, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              112, 114, 111, 106, 101, 99, 116, 115, 47, 42, 125, 47, 115, 108,
+              111, 119, 81, 117, 101, 114, 105, 101, 115,
             ]),
           ],
         },
@@ -11562,82 +12152,17 @@ export const DatabaseServiceDefinition = {
           8410: [new Uint8Array([6, 112, 97, 114, 101, 110, 116])],
           800010: [
             new Uint8Array([
-              23,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              83,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
-              46,
-              108,
-              105,
-              115,
-              116,
+              23, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 83, 101, 99,
+              114, 101, 116, 115, 46, 108, 105, 115, 116,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              46,
-              18,
-              44,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              115,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
+              46, 18, 44, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97,
+              116, 97, 98, 97, 115, 101, 115, 47, 42, 125, 47, 115, 101, 99,
+              114, 101, 116, 115,
             ]),
           ],
         },
@@ -11653,100 +12178,19 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           800010: [
             new Uint8Array([
-              25,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              83,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
-              46,
-              117,
-              112,
-              100,
-              97,
-              116,
-              101,
+              25, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 83, 101, 99,
+              114, 101, 116, 115, 46, 117, 112, 100, 97, 116, 101,
             ]),
           ],
           800016: [new Uint8Array([1])],
           800024: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              61,
-              58,
-              6,
-              115,
-              101,
-              99,
-              114,
-              101,
-              116,
-              50,
-              51,
-              47,
-              118,
-              49,
-              47,
-              123,
-              115,
-              101,
-              99,
-              114,
-              101,
-              116,
-              46,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              115,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
-              47,
-              42,
-              125,
+              61, 58, 6, 115, 101, 99, 114, 101, 116, 50, 51, 47, 118, 49, 47,
+              123, 115, 101, 99, 114, 101, 116, 46, 110, 97, 109, 101, 61, 105,
+              110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116,
+              97, 98, 97, 115, 101, 115, 47, 42, 47, 115, 101, 99, 114, 101,
+              116, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -11762,85 +12206,18 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           800010: [
             new Uint8Array([
-              25,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              83,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
-              46,
-              100,
-              101,
-              108,
-              101,
-              116,
-              101,
+              25, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 83, 101, 99,
+              114, 101, 116, 115, 46, 100, 101, 108, 101, 116, 101,
             ]),
           ],
           800016: [new Uint8Array([1])],
           800024: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              46,
-              42,
-              44,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              115,
-              101,
-              99,
-              114,
-              101,
-              116,
-              115,
-              47,
-              42,
-              125,
+              46, 42, 44, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 115, 101, 99, 114, 101, 116, 115,
+              47, 42, 125,
             ]),
           ],
         },
@@ -11857,87 +12234,17 @@ export const DatabaseServiceDefinition = {
           8410: [new Uint8Array([6, 112, 97, 114, 101, 110, 116])],
           800010: [
             new Uint8Array([
-              24,
-              98,
-              98,
-              46,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              46,
-              97,
-              100,
-              118,
-              105,
-              115,
-              101,
-              73,
-              110,
-              100,
-              101,
-              120,
+              24, 98, 98, 46, 100, 97, 116, 97, 98, 97, 115, 101, 115, 46, 97,
+              100, 118, 105, 115, 101, 73, 110, 100, 101, 120,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              50,
-              34,
-              48,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              58,
-              97,
-              100,
-              118,
-              105,
-              115,
-              101,
-              73,
-              110,
-              100,
-              101,
-              120,
+              50, 34, 48, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97,
+              116, 97, 98, 97, 115, 101, 115, 47, 42, 125, 58, 97, 100, 118,
+              105, 115, 101, 73, 110, 100, 101, 120,
             ]),
           ],
         },
@@ -11953,60 +12260,18 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           8410: [new Uint8Array([6, 112, 97, 114, 101, 110, 116])],
           800010: [
-            new Uint8Array([17, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46, 108, 105, 115, 116]),
+            new Uint8Array([
+              17, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46,
+              108, 105, 115, 116,
+            ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              48,
-              18,
-              46,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
+              48, 18, 46, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97,
+              116, 97, 98, 97, 115, 101, 115, 47, 42, 125, 47, 114, 101, 118,
+              105, 115, 105, 111, 110, 115,
             ]),
           ],
         },
@@ -12021,59 +12286,19 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           8410: [new Uint8Array([4, 110, 97, 109, 101])],
-          800010: [new Uint8Array([16, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46, 103, 101, 116])],
+          800010: [
+            new Uint8Array([
+              16, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46,
+              103, 101, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              48,
-              18,
-              46,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
-              47,
-              42,
-              125,
+              48, 18, 46, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 114, 101, 118, 105, 115, 105, 111,
+              110, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -12089,90 +12314,18 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           800010: [
             new Uint8Array([
-              19,
-              98,
-              98,
-              46,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
-              46,
-              99,
-              114,
-              101,
-              97,
-              116,
-              101,
+              19, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46,
+              99, 114, 101, 97, 116, 101,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              58,
-              58,
-              8,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              34,
-              46,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
+              58, 58, 8, 114, 101, 118, 105, 115, 105, 111, 110, 34, 46, 47,
+              118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61, 105, 110, 115,
+              116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98, 97,
+              115, 101, 115, 47, 42, 125, 47, 114, 101, 118, 105, 115, 105, 111,
+              110, 115,
             ]),
           ],
         },
@@ -12189,80 +12342,17 @@ export const DatabaseServiceDefinition = {
           8410: [new Uint8Array([4, 110, 97, 109, 101])],
           800010: [
             new Uint8Array([
-              19,
-              98,
-              98,
-              46,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
-              46,
-              100,
-              101,
-              108,
-              101,
-              116,
-              101,
+              19, 98, 98, 46, 114, 101, 118, 105, 115, 105, 111, 110, 115, 46,
+              100, 101, 108, 101, 116, 101,
             ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              48,
-              42,
-              46,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              114,
-              101,
-              118,
-              105,
-              115,
-              105,
-              111,
-              110,
-              115,
-              47,
-              42,
-              125,
+              48, 42, 46, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 114, 101, 118, 105, 115, 105, 111,
+              110, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -12278,61 +12368,18 @@ export const DatabaseServiceDefinition = {
         _unknownFields: {
           8410: [new Uint8Array([6, 112, 97, 114, 101, 110, 116])],
           800010: [
-            new Uint8Array([18, 98, 98, 46, 99, 104, 97, 110, 103, 101, 108, 111, 103, 115, 46, 108, 105, 115, 116]),
+            new Uint8Array([
+              18, 98, 98, 46, 99, 104, 97, 110, 103, 101, 108, 111, 103, 115,
+              46, 108, 105, 115, 116,
+            ]),
           ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              49,
-              18,
-              47,
-              47,
-              118,
-              49,
-              47,
-              123,
-              112,
-              97,
-              114,
-              101,
-              110,
-              116,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              125,
-              47,
-              99,
-              104,
-              97,
-              110,
-              103,
-              101,
-              108,
-              111,
-              103,
-              115,
+              49, 18, 47, 47, 118, 49, 47, 123, 112, 97, 114, 101, 110, 116, 61,
+              105, 110, 115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97,
+              116, 97, 98, 97, 115, 101, 115, 47, 42, 125, 47, 99, 104, 97, 110,
+              103, 101, 108, 111, 103, 115,
             ]),
           ],
         },
@@ -12347,60 +12394,19 @@ export const DatabaseServiceDefinition = {
       options: {
         _unknownFields: {
           8410: [new Uint8Array([4, 110, 97, 109, 101])],
-          800010: [new Uint8Array([17, 98, 98, 46, 99, 104, 97, 110, 103, 101, 108, 111, 103, 115, 46, 103, 101, 116])],
+          800010: [
+            new Uint8Array([
+              17, 98, 98, 46, 99, 104, 97, 110, 103, 101, 108, 111, 103, 115,
+              46, 103, 101, 116,
+            ]),
+          ],
           800016: [new Uint8Array([1])],
           578365826: [
             new Uint8Array([
-              49,
-              18,
-              47,
-              47,
-              118,
-              49,
-              47,
-              123,
-              110,
-              97,
-              109,
-              101,
-              61,
-              105,
-              110,
-              115,
-              116,
-              97,
-              110,
-              99,
-              101,
-              115,
-              47,
-              42,
-              47,
-              100,
-              97,
-              116,
-              97,
-              98,
-              97,
-              115,
-              101,
-              115,
-              47,
-              42,
-              47,
-              99,
-              104,
-              97,
-              110,
-              103,
-              101,
-              108,
-              111,
-              103,
-              115,
-              47,
-              42,
-              125,
+              49, 18, 47, 47, 118, 49, 47, 123, 110, 97, 109, 101, 61, 105, 110,
+              115, 116, 97, 110, 99, 101, 115, 47, 42, 47, 100, 97, 116, 97, 98,
+              97, 115, 101, 115, 47, 42, 47, 99, 104, 97, 110, 103, 101, 108,
+              111, 103, 115, 47, 42, 125,
             ]),
           ],
         },
@@ -12409,13 +12415,26 @@ export const DatabaseServiceDefinition = {
   },
 } as const;
 
-type Builtin = Date | Function | Uint8Array | string | number | boolean | undefined;
+type Builtin =
+  | Date
+  | Function
+  | Uint8Array
+  | string
+  | number
+  | boolean
+  | undefined;
 
-export type DeepPartial<T> = T extends Builtin ? T
-  : T extends Long ? string | number | Long : T extends globalThis.Array<infer U> ? globalThis.Array<DeepPartial<U>>
-  : T extends ReadonlyArray<infer U> ? ReadonlyArray<DeepPartial<U>>
-  : T extends {} ? { [K in keyof T]?: DeepPartial<T[K]> }
-  : Partial<T>;
+export type DeepPartial<T> = T extends Builtin
+  ? T
+  : T extends Long
+    ? string | number | Long
+    : T extends globalThis.Array<infer U>
+      ? globalThis.Array<DeepPartial<U>>
+      : T extends ReadonlyArray<infer U>
+        ? ReadonlyArray<DeepPartial<U>>
+        : T extends {}
+          ? { [K in keyof T]?: DeepPartial<T[K]> }
+          : Partial<T>;
 
 function toTimestamp(date: Date): Timestamp {
   const seconds = numberToLong(Math.trunc(date.getTime() / 1_000));

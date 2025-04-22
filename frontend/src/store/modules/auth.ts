@@ -14,8 +14,8 @@ import { useAppFeature, useUserStore, useSettingV1Store } from "@/store";
 import { unknownUser } from "@/types";
 import type { LoginRequest } from "@/types/proto/v1/auth_service";
 import { LoginResponse } from "@/types/proto/v1/auth_service";
-import { User, UserType } from "@/types/proto/v1/user_service";
 import { DatabaseChangeMode } from "@/types/proto/v1/setting_service";
+import { User, UserType } from "@/types/proto/v1/user_service";
 import { getIntCookie } from "@/utils";
 
 export const useAuthStore = defineStore("auth_v1", () => {
@@ -79,7 +79,7 @@ export const useAuthStore = defineStore("auth_v1", () => {
         },
       });
     }
-
+    debugger;
     await restoreUser();
     setRequireResetPassword(data.requireResetPassword);
 

@@ -1,4 +1,5 @@
 import { useTitle } from "@vueuse/core";
+import { qiankunWindow } from "vite-plugin-qiankun/dist/helper";
 import { nextTick, ref } from "vue";
 import { createRouter, createWebHistory } from "vue-router";
 import {
@@ -38,7 +39,10 @@ import setupRoutes from "./setup";
 import sqlEditorRoutes from "./sqlEditor";
 
 export const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory(
+    qiankunWindow.__POWERED_BY_QIANKUN__ ? "app/cloud-vue3/" : "/"
+  ),
   routes: [
     ...authRoutes,
     ...setupRoutes,

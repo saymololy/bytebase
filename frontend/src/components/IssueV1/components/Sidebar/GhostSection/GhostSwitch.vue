@@ -3,16 +3,15 @@
     <template #trigger>
       <NSwitch
         :value="checked"
-        :disabled="!allowChange"
         :loading="isUpdating"
         class="bb-ghost-switch"
         @update:value="toggleChecked"
       >
         <template #checked>
-          <span style="font-size: 10px">{{ $t("common.on") }}</span>
+          <span style="font-size: 10px">{{ $t("common.on") }}22</span>
         </template>
         <template #unchecked>
-          <span style="font-size: 10px">{{ $t("common.off") }}</span>
+          <span style="font-size: 10px">{{ $t("common.off") }}11</span>
         </template>
       </NSwitch>
     </template>

@@ -10,10 +10,11 @@ import IconsResolver from "unplugin-icons/resolver";
 import Icons from "unplugin-icons/vite";
 import Components from "unplugin-vue-components/vite";
 import { defineConfig } from "vite";
+import qiankun from "vite-plugin-qiankun";
 
 const SERVER_PORT = parseInt(process.env.PORT ?? "3000", 10) ?? 3000;
 const HTTPS_PORT = 443;
-const LOCAL_ENDPOINT = "http://localhost:8080";
+const LOCAL_ENDPOINT = "http://172.30.247.96:8080";
 
 // NOTE: the following lines is to solve https://github.com/gitpod-io/gitpod/issues/6719
 // tl;dr : the HMR(hot module replacement) will behave differently when VPN is on, and by manually set its port to 443 should prevent this issue.
@@ -33,6 +34,7 @@ export default defineConfig({
       additionalLegacyPolyfills: ["regenerator-runtime/runtime"],
     }),
     vue(),
+    qiankun("app/web-dmmp-application", { useDevMode: true }),
     vueJsx(),
     // https://github.com/intlify/vite-plugin-vue-i18n
     VueI18nPlugin({
@@ -110,5 +112,19 @@ export default defineConfig({
   envPrefix: "BB_",
   define: {
     _global: {},
+  },
+  optimizeDeps: {
+    include: [
+      "vue",
+      "vue-router",
+      "element-plus/es/locale/lang/zh-cn",
+      "element-plus/es/locale/lang/en",
+      "axios",
+      "monaco-editor/esm/vs/editor/editor.worker.js",
+      "monaco-editor/esm/vs/language/json/json.worker.js",
+      "monaco-editor/esm/vs/language/css/css.worker.js",
+      "monaco-editor/esm/vs/language/html/html.worker.js",
+      "monaco-editor/esm/vs/language/typescript/ts.worker.js",
+    ],
   },
 });
