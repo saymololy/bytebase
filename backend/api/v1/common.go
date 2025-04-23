@@ -30,7 +30,7 @@ const (
 )
 
 var (
-	resourceIDMatcher = regexp.MustCompile("^[a-z]([a-z0-9-]{0,61}[a-z0-9])?$")
+	resourceIDMatcher = regexp.MustCompile("^[a-zA-Z]([a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?$")
 	deletePatch       = true
 	undeletePatch     = false
 )

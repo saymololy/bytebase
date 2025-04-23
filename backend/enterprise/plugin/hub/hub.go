@@ -79,7 +79,7 @@ func (p *Provider) LoadSubscription(ctx context.Context) *enterprise.Subscriptio
 			// -1 means not expire, just for free plan
 			ExpiresTs: -1,
 			// Instance license count.
-			InstanceCount: 0,
+			InstanceCount: 9999,
 			Seat:          0,
 		}
 	}
