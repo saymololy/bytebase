@@ -2,14 +2,12 @@ FROM artifacts.iflytek.com/docker-private/cloudnative/node:22.12.0 as frontend
 
 ARG RELEASE="release"
 
-RUN npm i -g pnpm
-
 WORKDIR /frontend-build
 
 COPY . .
 
-RUN pnpm --dir ./frontend i
-RUN pnpm --dir ./frontend release-docker
+RUN npm --prefix ./frontend i
+RUN npm --prefix ./frontend run release-docker
 
 FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as backend
 
