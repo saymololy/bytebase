@@ -20,9 +20,9 @@ import { name } from "./package.json";
 //   writeHeapSnapshot(); // 构建过程中定期生成堆快照
 // }, 20000);
 
-const SERVER_PORT = parseInt(process.env.PORT ?? "3008", 10) ?? 3008;
+const SERVER_PORT = parseInt(process.env.PORT ?? "3000", 10) ?? 3000;
 const HTTPS_PORT = 443;
-const LOCAL_ENDPOINT = "http://172.30.130.130:8082";
+const LOCAL_ENDPOINT = "http://localhost:8080";
 
 // NOTE: the following lines is to solve https://github.com/gitpod-io/gitpod/issues/6719
 // tl;dr : the HMR(hot module replacement) will behave differently when VPN is on, and by manually set its port to 443 should prevent this issue.
