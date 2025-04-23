@@ -6,8 +6,8 @@ WORKDIR /frontend-build
 
 COPY . .
 
-RUN npm --dir ./frontend i
-RUN npm --dir ./frontend release-docker
+RUN npm --prefix ./frontend i
+RUN npm --prefix ./frontend release-docker
 
 FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as backend
 
