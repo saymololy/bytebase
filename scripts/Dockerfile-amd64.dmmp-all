@@ -1,0 +1,83 @@
+FROM artifacts.iflytek.com/docker-private/cloudnative/node:22.12.0 as frontend
+
+ARG RELEASE="release"
+
+RUN npm i -g pnpm
+
+WORKDIR /frontend-build
+
+COPY . .
+
+RUN pnpm --dir ./frontend i
+RUN pnpm --dir ./frontend release-docker
+
+FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as backend
+
+RUN apt-get update -y -q && apt-get upgrade -y -q
+RUN DEBIAN_FRONTEND=noninteractive apt-get install --no-install-recommends -y -q curl build-essential ca-certificates git
+RUN curl -sSL https://studygolang.com/dl/golang/go1.24.0.linux-amd64.tar.gz | tar -C /usr/local -xzf -
+ENV PATH $PATH:/usr/local/go/bin
+ENV GOPROXY https://goproxy.cn,direct
+
+ADD go.mod go.sum /
+RUN go mod download
+
+RUN apt-get install -y gcc && apt-get update && apt-get install -y libkrb5-dev
+
+WORKDIR /backend-build
+
+COPY . .
+
+COPY --from=frontend /frontend-build/frontend/dist ./backend/server/dist
+
+COPY ./scripts/VERSION .
+
+RUN CGO_ENABLED=1 GOOS=linux GOARCH=amd64 go build -o bytebase ./backend/bin/server/main.go
+
+FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as decompressor
+
+RUN apt-get update && apt-get install -y xz-utils
+COPY ./backend/resources /tmp/bytebase/resources/
+RUN mkdir -p /var/opt/bytebase/resources/mongoutil-1.6.1-linux-amd64/
+RUN tar -Jxf /tmp/bytebase/resources/mongoutil/mongoutil-1.6.1-linux-amd64.txz -C /var/opt/bytebase/resources/mongoutil-1.6.1-linux-amd64/
+RUN mkdir -p /var/opt/bytebase/resources/postgres-linux-amd64-16
+RUN tar -Jxf /tmp/bytebase/resources/postgres/postgres-linux-amd64.txz -C /var/opt/bytebase/resources/postgres-linux-amd64-16/
+
+
+FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as monolithic
+
+ARG VERSION="development"
+ARG GIT_COMMIT="unknown"
+ARG BUILD_TIME="unknown"
+ARG BUILD_USER="unknown"
+
+LABEL org.opencontainers.image.version=${VERSION}
+LABEL org.opencontainers.image.revision=${GIT_COMMIT}
+LABEL org.opencontainers.image.created=${BUILD_TIME}
+LABEL org.opencontainers.image.authors=${BUILD_USER}
+
+RUN addgroup --gid 113 --system bytebase && adduser --uid 113 --system bytebase && adduser bytebase bytebase
+
+RUN mkdir -p /var/opt/bytebase
+
+RUN mkdir -p /var/opt/bytebase/pgdata-demo
+
+RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y locales curl psmisc procps libncurses5 krb5-user libkrb5-dev
+
+RUN echo "en_US.UTF-8 UTF-8" > /etc/locale.gen && locale-gen
+ENV PATH="${PATH}:/var/opt/bytebase/resources/postgres-linux-amd64-16/bin"
+
+COPY ./scripts /usr/local/bin/
+COPY ./scripts/.psqlrc /root/.psqlrc
+RUN touch /etc/bb.env
+COPY --from=backend /backend-build/bytebase /usr/local/bin/
+COPY --from=backend /etc/ssl/certs /etc/ssl/certs
+COPY --from=decompressor /var/opt/bytebase/resources /bytebase/resources
+
+ENV OPENSSL_CONF /etc/ssl/
+
+CMD ["--port", "8080", "--data", "/var/opt/bytebase"]
+
+HEALTHCHECK --interval=5m --timeout=60s CMD curl -f http://localhost:8080/healthz || exit 1
+
+ENTRYPOINT ["bytebase"]
