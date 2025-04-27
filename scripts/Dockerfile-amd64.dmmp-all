@@ -15,7 +15,7 @@ WORKDIR /backend-build
 
 COPY . .
 
-COPY --from=frontend /frontend/dist ./backend/server/dist
+COPY /frontend/dist ./backend/server/dist
 
 COPY ./scripts/VERSION .
 
