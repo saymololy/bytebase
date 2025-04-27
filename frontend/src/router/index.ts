@@ -41,7 +41,7 @@ import sqlEditorRoutes from "./sqlEditor";
 export const router = createRouter({
   // history: createWebHistory(import.meta.env.BASE_URL),
   history: createWebHistory(
-    qiankunWindow.__POWERED_BY_QIANKUN__ ? "app/cloud-vue3/" : "/"
+    qiankunWindow.__POWERED_BY_QIANKUN__ ? "app/cloud-vue3/" : "/bytebase/"
   ),
   routes: [
     ...authRoutes,

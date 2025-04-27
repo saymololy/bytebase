@@ -22,7 +22,7 @@ import { name } from "./package.json";
 
 const SERVER_PORT = parseInt(process.env.PORT ?? "3000", 10) ?? 3000;
 const HTTPS_PORT = 443;
-const LOCAL_ENDPOINT = "http://localhost:8080";
+const LOCAL_ENDPOINT = "http://172.30.239.49";
 
 // NOTE: the following lines is to solve https://github.com/gitpod-io/gitpod/issues/6719
 // tl;dr : the HMR(hot module replacement) will behave differently when VPN is on, and by manually set its port to 443 should prevent this issue.
@@ -36,6 +36,7 @@ const extractHostPort = (url: string) => {
 };
 
 export default defineConfig({
+  base: "/bytebase/",
   plugins: [
     legacy({
       targets: ["> 0.08%, not dead"],
