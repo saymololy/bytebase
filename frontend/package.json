@@ -8,7 +8,7 @@
     "dev": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192 --optimize-for-size\" && npm run copy:all && vite --mode dev-local",
     "release": "cross-env NODE_OPTIONS=\"--max-old-space-size=8192 --optimize-for-size\" && npm run copy:all && vite build --mode release --outDir=../backend/server/dist --emptyOutDir",
     "dev-embed": "cross-env BB_GIT_COMMIT_ID_FE=$(git rev-parse HEAD) && export NODE_OPTIONS=--max_old_space_size=8000 && npm run copy:all && vite build --mode dev --outDir=../backend/server/dist --emptyOutDir",
-    "release-docker": "cross-env NODE_OPTIONS=--max_old_space_size=8192 && npm run copy:all && vite build --mode release",
+    "release-docker": "node --max_old_space_size=8192 node_modules/vite/bin/vite.js build --mode release &&vue-tsc --noEmit && npm run copy:all",
     "build:test": "cross-env NODE_OPTIONS=\"--max-old-space-size=12288 --optimize-for-size --max-semi-space-size=512\" && vite build --debug --mode production",
     "build": "node --max_old_space_size=8192 node_modules/vite/bin/vite.js build --mode release && vue-tsc --noEmit",
     "release-aws": "export NODE_OPTIONS=--max_old_space_size=8192 && npm run copy:all && vite build --mode release-aws",
