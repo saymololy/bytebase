@@ -1,16 +1,3 @@
-FROM artifacts.iflytek.com/docker-private/cloudnative/node:22.12.0 as frontend
-
-ARG RELEASE="release"
-
-RUN npm i -g pnpm
-
-WORKDIR /frontend-build
-
-COPY . .
-
-RUN pnpm --dir ./frontend i
-RUN pnpm --dir ./frontend release-docker
-
 FROM artifacts.iflytek.com/docker-private/cloudnative/ubuntu:20.04 as backend
 
 RUN apt-get update -y -q && apt-get upgrade -y -q
@@ -28,7 +15,7 @@ WORKDIR /backend-build
 
 COPY . .
 
-COPY --from=frontend /frontend-build/frontend/dist ./backend/server/dist
+COPY --from=frontend /frontend/dist ./backend/server/dist
 
 COPY ./scripts/VERSION .
 
