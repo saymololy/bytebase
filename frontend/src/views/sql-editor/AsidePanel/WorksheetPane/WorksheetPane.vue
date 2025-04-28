@@ -23,7 +23,7 @@
         <NCollapseItem name="my" :title="$t('sheet.mine')">
           <SheetList view="my" :keyword="keyword" @ready="setReady('my')" />
         </NCollapseItem>
-        <NCollapseItem name="starred" :title="$t('sheet.starred')">
+        <!-- <NCollapseItem name="starred" :title="$t('sheet.starred')">
           <SheetList
             view="starred"
             :keyword="keyword"
@@ -40,7 +40,7 @@
             :keyword="keyword"
             @ready="setReady('shared')"
           />
-        </NCollapseItem>
+        </NCollapseItem> -->
         <NCollapseItem name="draft" :title="$t('sheet.draft')">
           <DraftList :keyword="keyword" @ready="setReady('draft')" />
         </NCollapseItem>

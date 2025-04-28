@@ -51,7 +51,7 @@
       </Pane>
     </Splitpanes>
 
-    <Quickstart v-if="!hideQuickStart" />
+    <!-- <Quickstart v-if="!hideQuickStart" /> -->
 
     <Drawer v-model:show="showSheetPanel">
       <DrawerContent :title="$t('sql-editor.sheet.self')">
