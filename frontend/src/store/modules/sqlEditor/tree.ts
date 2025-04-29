@@ -48,7 +48,8 @@ export const useSQLEditorTreeStore = defineStore("sqlEditorTree", () => {
     if (hideEnvironments.value) {
       return [defaultInstanceFactor];
     }
-    return [defaultEnvironmentFactor];
+    // return [defaultEnvironmentFactor];
+    return [defaultInstanceFactor];
   };
 
   const factorListInLocalStorage = useLocalStorage<StatefulFactor[]>(
@@ -86,8 +87,7 @@ export const useSQLEditorTreeStore = defineStore("sqlEditorTree", () => {
   const nodeListMapById = reactive(new Map<string, TreeNode[]>());
   // states
   // re-expose `databaseList`, `project`, `currentProject` from sqlEditor store for shortcuts
-  const { databaseList, project } =
-    storeToRefs(useSQLEditorStore());
+  const { databaseList, project } = storeToRefs(useSQLEditorStore());
   const factorList = ref<StatefulFactor[]>(
     cloneDeep(factorListInLocalStorage.value)
   );

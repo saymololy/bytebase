@@ -210,6 +210,7 @@ const canQueryDatabase = (database: ComposedDatabase): boolean => {
 // dynamic render the highlight keywords
 const renderLabel = ({ option }: { option: TreeOption }) => {
   const node = option as any as SQLEditorTreeNode;
+  debugger;
   return h(Label, {
     node,
     factors: treeStore.filteredFactorList,

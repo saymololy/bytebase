@@ -43,6 +43,7 @@ import { useSQLEditorContext } from "@/views/sql-editor/context";
 import AddFactorButton from "./AddFactorButton.vue";
 import FactorTag from "./FactorTag.vue";
 
+debugger;
 const treeStore = useSQLEditorTreeStore();
 const { events } = useSQLEditorContext();
 const { factorList } = storeToRefs(treeStore);

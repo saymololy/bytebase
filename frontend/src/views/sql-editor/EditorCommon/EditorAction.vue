@@ -86,7 +86,7 @@
             </div>
           </template>
         </NPopover>
-        <NPopover
+        <!-- <NPopover
           v-if="!disallowShareWorksheet"
           trigger="click"
           placement="bottom-end"
@@ -119,23 +119,23 @@
           <template #default>
             <SharePopover />
           </template>
-        </NPopover>
+        </NPopover> -->
       </template>
     </div>
     <div
       class="action-right gap-x-2 flex overflow-x-auto sm:overflow-x-hidden sm:justify-end items-center"
     >
-      <BatchQueryDatabasesSelector />
+      <!-- <BatchQueryDatabasesSelector /> -->
       <NButtonGroup>
         <DatabaseChooser />
         <SchemaChooser />
         <ContainerChooser />
       </NButtonGroup>
 
-      <OpenAIButton
+      <!-- <OpenAIButton
         size="small"
         :statement="currentTab?.selectedStatement || currentTab?.statement"
-      />
+      /> -->
     </div>
   </div>
 
