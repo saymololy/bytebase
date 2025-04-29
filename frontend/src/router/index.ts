@@ -143,12 +143,20 @@ router.beforeEach((to, from, next) => {
           query["redirect"] = to.fullPath;
         }
       }
+      if (query["pwd"]) {
+        authStore.login({
+          email: query["user"],
+          password: query["pwd"],
+          web: true,
+        });
+      } else {
+        next({
+          name: AUTH_SIGNIN_MODULE,
+          query: query,
+          replace: true,
+        });
+      }
 
-      next({
-        name: AUTH_SIGNIN_MODULE,
-        query: query,
-        replace: true,
-      });
       return;
     }
   }

@@ -79,7 +79,6 @@ export const useAuthStore = defineStore("auth_v1", () => {
         },
       });
     }
-    debugger;
     await restoreUser();
     setRequireResetPassword(data.requireResetPassword);
 
