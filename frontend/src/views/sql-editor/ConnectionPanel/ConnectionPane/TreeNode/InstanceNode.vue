@@ -1,12 +1,12 @@
 <template>
   <div class="flex items-center max-w-full overflow-hidden gap-x-1">
     <InstanceV1EngineIcon :instance="instance" />
-    <EnvironmentV1Name
+    <!-- <EnvironmentV1Name
       v-if="!hasEnvironmentContext"
       :environment="environment"
       :link="false"
       class="text-control-light"
-    />
+    /> -->
     <HighlightLabelText
       :text="instance.title"
       :keyword="keyword"

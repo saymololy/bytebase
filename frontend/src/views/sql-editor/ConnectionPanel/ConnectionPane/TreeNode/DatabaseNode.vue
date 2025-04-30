@@ -5,12 +5,12 @@
       :instance="database.instanceResource"
     />
 
-    <EnvironmentV1Name
+    <!-- <EnvironmentV1Name
       v-if="showEnvironment"
       :environment="database.effectiveEnvironmentEntity"
       :link="false"
       class="text-control-light"
-    />
+    /> -->
 
     <DatabaseIcon />
 

@@ -21,10 +21,10 @@
       "
       class="flex flex-row items-center text-main"
     >
-      <EnvironmentV1Name
+      <!-- <EnvironmentV1Name
         :environment="database.effectiveEnvironmentEntity"
         :link="false"
-      />
+      /> -->
       <ChevronRightIcon class="shrink-0 h-4 w-4 text-control-light" />
       <div class="flex items-center gap-1">
         <InstanceV1EngineIcon
