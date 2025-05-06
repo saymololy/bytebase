@@ -27,6 +27,7 @@ const extractHostPort = (url: string) => {
 };
 
 export default defineConfig({
+  base: "/bytebase/",
   plugins: [
     legacy({
       targets: ["> 0.08%, not dead"],
@@ -67,6 +68,14 @@ export default defineConfig({
   server: {
     port: SERVER_PORT,
     host: "0.0.0.0",
+    allowedHosts: ["bytebase.iflytek.com"],
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+    },
     proxy: {
       "/v1:adminExecute": {
         target: `ws://${extractHostPort(LOCAL_ENDPOINT)}/`,
