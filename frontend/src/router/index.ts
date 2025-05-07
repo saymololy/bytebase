@@ -38,8 +38,8 @@ import setupRoutes from "./setup";
 import sqlEditorRoutes from "./sqlEditor";
 
 export const router = createRouter({
-  history: createWebHistory(import.meta.env.BASE_URL),
-  // history: createWebHistory("/bytebase"),
+  // history: createWebHistory(import.meta.env.BASE_URL),
+  history: createWebHistory("/bytebase"),
   routes: [
     ...authRoutes,
     ...setupRoutes,

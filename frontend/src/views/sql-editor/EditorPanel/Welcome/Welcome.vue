@@ -3,7 +3,7 @@
     class="w-full flex-1 flex flex-col items-center justify-start gap-y-4"
     style="padding-top: calc(clamp(40px, 15vh, 200px))"
   >
-    <BytebaseLogo v-if="!hideLogo" />
+    <!-- <BytebaseLogo v-if="!hideLogo" /> -->
 
     <div
       class="hidden lg:grid items-center gap-4"
@@ -17,9 +17,9 @@
         <template #icon>
           <LayersIcon :stroke-width="1.5" class="w-8 h-8" />
         </template>
-        {{ $t("sql-editor.add-a-new-instance") }}
+        {{ $t("sql-editor.cc") }}
       </Button>
-      <Button type="primary" secondary @click="changeConnection">
+      <!-- <Button type="primary" secondary @click="changeConnection">
         <template #icon>
           <LinkIcon :stroke-width="1.5" class="w-8 h-8" />
         </template>
@@ -30,7 +30,7 @@
           <SquarePenIcon :stroke-width="1.5" class="w-8 h-8" />
         </template>
         {{ $t("sql-editor.create-a-worksheet") }}
-      </Button>
+      </Button> -->
     </div>
     <div class="flex lg:hidden flex-col items-start gap-y-2 w-max">
       <NButton

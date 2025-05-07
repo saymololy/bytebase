@@ -27,6 +27,7 @@ const extractHostPort = (url: string) => {
 };
 
 export default defineConfig({
+  base: "/bytebase/",
   plugins: [
     legacy({
       targets: ["> 0.08%, not dead"],

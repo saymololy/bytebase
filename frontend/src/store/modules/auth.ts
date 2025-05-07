@@ -137,14 +137,16 @@ export const useAuthStore = defineStore("auth_v1", () => {
     } finally {
       const pathname = location.pathname;
       // Replace and reload the page to clear frontend state directly.
-      window.location.href = router.resolve({
-        name: AUTH_SIGNIN_MODULE,
-        query: {
-          redirect:
-            getRedirectQuery() ||
-            (pathname.startsWith("/auth") ? undefined : pathname),
-        },
-      }).fullPath;
+      window.location.href =
+        "/bytebase" +
+        router.resolve({
+          name: AUTH_SIGNIN_MODULE,
+          query: {
+            redirect:
+              getRedirectQuery() ||
+              (pathname.startsWith("/auth") ? undefined : pathname),
+          },
+        }).fullPath;
     }
   };
 
