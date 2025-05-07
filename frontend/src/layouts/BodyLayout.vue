@@ -81,9 +81,9 @@
           class="bg-white border-b border-block-border"
           data-label="bb-dashboard-header"
         >
-          <div class="max-w-full mx-auto">
+          <!-- <div class="max-w-full mx-auto">
             <DashboardHeader :show-logo="false" />
-          </div>
+          </div> -->
         </nav>
 
         <aside v-if="!hideSidebar && !isRootPath" class="md:hidden">
@@ -182,7 +182,8 @@ const isRootPath = computed(() => {
 });
 
 const sidebarView = computed(() => {
-  return windowWidth.value >= 768 ? "DESKTOP" : "MOBILE";
+  return "MOBILE";
+  // return windowWidth.value >= 768 ? "DESKTOP" : "MOBILE";
 });
 
 const hideSidebar = useAppFeature("bb.feature.console.hide-sidebar");
