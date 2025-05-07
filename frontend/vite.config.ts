@@ -13,6 +13,7 @@ import { defineConfig } from "vite";
 
 const SERVER_PORT = parseInt(process.env.PORT ?? "3000", 10) ?? 3000;
 const HTTPS_PORT = 443;
+// const LOCAL_ENDPOINT = "http://bytebase.iflytek.com";
 const LOCAL_ENDPOINT = "http://localhost:8080";
 
 // NOTE: the following lines is to solve https://github.com/gitpod-io/gitpod/issues/6719
@@ -68,6 +69,14 @@ export default defineConfig({
   server: {
     port: SERVER_PORT,
     host: "0.0.0.0",
+    // allowedHosts: ["bytebase.iflytek.com"],
+    // headers: {
+    //   "Access-Control-Allow-Origin": "*",
+    //   "Access-Control-Allow-Credentials": "true",
+    //   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+    //   "Access-Control-Allow-Headers":
+    //     "X-Requested-With, content-type, Authorization",
+    // },
     proxy: {
       "/v1:adminExecute": {
         target: `ws://${extractHostPort(LOCAL_ENDPOINT)}/`,
