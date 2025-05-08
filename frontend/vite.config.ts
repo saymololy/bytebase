@@ -64,19 +64,24 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         "explain-visualizer": resolve(__dirname, "explain-visualizer.html"),
       },
+      output: {
+        manualChunks: {
+          "monaco-editor": ["monaco-editor"],
+        },
+      },
     },
   },
   server: {
     port: SERVER_PORT,
     host: "0.0.0.0",
-    // allowedHosts: ["bytebase.iflytek.com"],
-    // headers: {
-    //   "Access-Control-Allow-Origin": "*",
-    //   "Access-Control-Allow-Credentials": "true",
-    //   "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-    //   "Access-Control-Allow-Headers":
-    //     "X-Requested-With, content-type, Authorization",
-    // },
+    allowedHosts: ["bytebase.iflytek.com"],
+    headers: {
+      "Access-Control-Allow-Origin": "*",
+      "Access-Control-Allow-Credentials": "true",
+      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
+      "Access-Control-Allow-Headers":
+        "X-Requested-With, content-type, Authorization",
+    },
     proxy: {
       "/v1:adminExecute": {
         target: `ws://${extractHostPort(LOCAL_ENDPOINT)}/`,
@@ -116,9 +121,20 @@ export default defineConfig({
       "@public": fileURLToPath(new URL("./public", import.meta.url)),
     },
     dedupe: ["vscode"],
+    preserveSymlinks: true,
   },
   envPrefix: "BB_",
   define: {
     _global: {},
+  },
+  optimizeDeps: {
+    include: [
+      "monaco-editor/esm/vs/platform/product/common/productService.js",
+      "monaco-editor/esm/vs/editor/editor.worker.js",
+      "monaco-editor/esm/vs/language/json/json.worker.js",
+      "monaco-editor/esm/vs/language/css/css.worker.js",
+      "monaco-editor/esm/vs/language/html/html.worker.js",
+      "monaco-editor/esm/vs/language/typescript/ts.worker.js",
+    ],
   },
 });
