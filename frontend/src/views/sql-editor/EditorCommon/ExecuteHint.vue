@@ -12,7 +12,8 @@
             </template>
           </i18n-t>
         </p>
-        <p v-if="database">
+        <p>如果您想要变更 schema或者变更数据，请使用平台SQL审核功能</p>
+        <!-- <p v-if="database">
           <i18n-t keypath="sql-editor.enable-ddl-for-environment">
             <template #environment>
               <EnvironmentV1Name
@@ -35,7 +36,7 @@
               {{ descriptions.reaction }}
             </template>
           </i18n-t>
-        </p>
+        </p> -->
       </section>
     </NAlert>
 
@@ -48,14 +49,14 @@
       </div>
       <div class="flex flex-1 justify-end items-center space-x-2">
         <NButton @click="handleClose">{{ $t("common.close") }}</NButton>
-        <NButton
+        <!-- <NButton
           v-if="actions.issue"
           type="primary"
           @click="handleClickCreateIssue"
         >
           {{ descriptions.action }}
-        </NButton>
-        <AdminModeButton v-else @enter="$emit('close')" />
+        </NButton> -->
+        <!-- <AdminModeButton v-else @enter="$emit('close')" /> -->
       </div>
     </div>
   </div>

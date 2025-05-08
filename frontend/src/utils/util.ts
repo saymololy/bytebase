@@ -155,12 +155,19 @@ export function randomString(
   return result;
 }
 
-export function getIntCookie(name: string): number | undefined {
+export function getIntCookie(
+  name: string,
+  isInt: boolean = true
+): number | string | undefined {
   const list = document.cookie.split(";");
   for (let i = 0; i < list.length; i++) {
     const parts = list[i].split("=");
     if (parts[0].trim() == name) {
-      return parts.length > 1 ? parseInt(parts[1]) : undefined;
+      if (isInt) {
+        return parts.length > 1 ? parseInt(parts[1]) : undefined;
+      } else {
+        return parts.length > 1 ? parts[1] : undefined;
+      }
     }
   }
 

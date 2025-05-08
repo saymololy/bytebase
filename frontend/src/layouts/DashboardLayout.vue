@@ -53,7 +53,7 @@ watch(
     helpStore.exitHelp();
 
     if (!state.RouteMapList) {
-      const res = await fetch("/help/routeMapList.json");
+      const res = await fetch("/bytebase/help/routeMapList.json");
       state.RouteMapList = await res.json();
     }
 

@@ -13,6 +13,7 @@ import {
   useSQLEditorTabStore,
   useAppFeature,
 } from "@/store";
+import { getIntCookie } from "@/utils";
 import authRoutes, {
   AUTH_2FA_SETUP_MODULE,
   AUTH_MFA_MODULE,
@@ -74,7 +75,6 @@ router.beforeEach((to, from, next) => {
   const authStore = useAuthStore();
   const routerStore = useRouterStore();
   const isLoggedIn = authStore.isLoggedIn();
-
   const fromModule = from.name
     ? from.name.toString().split(".")[0]
     : WORKSPACE_ROOT_MODULE;
@@ -105,7 +105,6 @@ router.beforeEach((to, from, next) => {
     next();
     return;
   }
-
   if (
     to.name === AUTH_SIGNIN_MODULE ||
     to.name === AUTH_SIGNIN_ADMIN_MODULE ||
@@ -145,6 +144,7 @@ router.beforeEach((to, from, next) => {
         }
       }
       if (query["pwd"]) {
+        document.cookie = `bb.user=${query["user"]}; path=/`;
         authStore.login({
           email: query["user"],
           password: query["pwd"],
@@ -161,7 +161,16 @@ router.beforeEach((to, from, next) => {
       return;
     }
   }
-
+  const query: any = {
+    ...(to.query || {}),
+  };
+  if (query["user"]) {
+    const user = getIntCookie("bb.user", false);
+    if (user && user != query["user"]) {
+      document.cookie = `bb.user=${query["user"]}; path=/`;
+      authStore.logout();
+    }
+  }
   // If there is a `redirect` in query param and prev page is signin or signup, redirect to the target route
   if (
     (from.name === AUTH_SIGNIN_MODULE || from.name === AUTH_SIGNUP_MODULE) &&

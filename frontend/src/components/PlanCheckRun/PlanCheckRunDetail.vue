@@ -447,11 +447,12 @@ const errorCodeLink = (
       const path = `/docs/reference/error-code/${errorCodeNamespace}/`;
       const query = `source=console#${code}`;
       const url = `${domain}${path}?${query}`;
-      return {
-        title: t("common.view-doc"),
-        target: "__blank",
-        url: url,
-      };
+      // return {
+      //   title: t("common.view-doc"),
+      //   target: "__blank",
+      //   url: url,
+      // };
+      return {};
     }
   }
 };

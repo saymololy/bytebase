@@ -8,10 +8,10 @@
         @update:value="toggleChecked"
       >
         <template #checked>
-          <span style="font-size: 10px">{{ $t("common.on") }}22</span>
+          <span style="font-size: 10px">{{ $t("common.on") }}</span>
         </template>
         <template #unchecked>
-          <span style="font-size: 10px">{{ $t("common.off") }}11</span>
+          <span style="font-size: 10px">{{ $t("common.off") }}</span>
         </template>
       </NSwitch>
     </template>
