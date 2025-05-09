@@ -67,9 +67,12 @@ export default defineConfig({
       output: {
         manualChunks: {
           "monaco-editor": ["monaco-editor"],
+          "vue-query": ["@tanstack/vue-query", "@tanstack/query-core"],
         },
       },
+      external: ["@tanstack/query-core", "@tanstack/vue-query"],
     },
+    target: "es2020",
   },
   server: {
     port: SERVER_PORT,
@@ -135,6 +138,11 @@ export default defineConfig({
       "monaco-editor/esm/vs/language/css/css.worker.js",
       "monaco-editor/esm/vs/language/html/html.worker.js",
       "monaco-editor/esm/vs/language/typescript/ts.worker.js",
+      "@tanstack/query-core",
+      "@tanstack/vue-query",
     ],
+    esbuildOptions: {
+      target: "es2020",
+    },
   },
 });
