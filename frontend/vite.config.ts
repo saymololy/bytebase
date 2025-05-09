@@ -13,7 +13,6 @@ import { defineConfig } from "vite";
 
 const SERVER_PORT = parseInt(process.env.PORT ?? "3000", 10) ?? 3000;
 const HTTPS_PORT = 443;
-// const LOCAL_ENDPOINT = "http://bytebase.iflytek.com";
 const LOCAL_ENDPOINT = "http://localhost:8080";
 
 // NOTE: the following lines is to solve https://github.com/gitpod-io/gitpod/issues/6719
@@ -64,27 +63,11 @@ export default defineConfig({
         main: resolve(__dirname, "index.html"),
         "explain-visualizer": resolve(__dirname, "explain-visualizer.html"),
       },
-      output: {
-        manualChunks: {
-          "monaco-editor": ["monaco-editor"],
-          "vue-query": ["@tanstack/vue-query", "@tanstack/query-core"],
-        },
-      },
-      external: ["@tanstack/query-core", "@tanstack/vue-query"],
     },
-    target: "es2020",
   },
   server: {
     port: SERVER_PORT,
     host: "0.0.0.0",
-    allowedHosts: ["bytebase.iflytek.com"],
-    headers: {
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Allow-Credentials": "true",
-      "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, PATCH, OPTIONS",
-      "Access-Control-Allow-Headers":
-        "X-Requested-With, content-type, Authorization",
-    },
     proxy: {
       "/v1:adminExecute": {
         target: `ws://${extractHostPort(LOCAL_ENDPOINT)}/`,
@@ -124,25 +107,9 @@ export default defineConfig({
       "@public": fileURLToPath(new URL("./public", import.meta.url)),
     },
     dedupe: ["vscode"],
-    preserveSymlinks: true,
   },
   envPrefix: "BB_",
   define: {
     _global: {},
-  },
-  optimizeDeps: {
-    include: [
-      "monaco-editor/esm/vs/platform/product/common/productService.js",
-      "monaco-editor/esm/vs/editor/editor.worker.js",
-      "monaco-editor/esm/vs/language/json/json.worker.js",
-      "monaco-editor/esm/vs/language/css/css.worker.js",
-      "monaco-editor/esm/vs/language/html/html.worker.js",
-      "monaco-editor/esm/vs/language/typescript/ts.worker.js",
-      "@tanstack/query-core",
-      "@tanstack/vue-query",
-    ],
-    esbuildOptions: {
-      target: "es2020",
-    },
   },
 });
